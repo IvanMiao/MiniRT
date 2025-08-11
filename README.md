@@ -1,0 +1,2 @@
+# MiniRT
+Ray tracing projet
