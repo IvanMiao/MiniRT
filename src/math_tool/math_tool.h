@@ -1,31 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vector.c                                           :+:      :+:    :+:   */
+/*   vector.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/12 16:36:01 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/12 19:53:36 by ymiao            ###   ########.fr       */
+/*   Created: 2025/08/12 16:33:28 by ymiao             #+#    #+#             */
+/*   Updated: 2025/08/12 18:24:56 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "math_tool.h"
+#ifndef VECTOR_H
+# define VECTOR_H
 
-t_vector	add_vec(t_vector v1, t_vector v2)
+# include <math.h>
+
+typedef struct s_vector
 {
-	t_vector	res;
+	float	x;
+	float	y;
+	float	z;
+}	t_vector;
 
-	res.x = v1.x + v2.x;
-	res.y = v1.y + v2.y;
-	res.z = v1.z + v2.z;
-	return (res);
-}
-
-t_vector	multiple_vec(t_vector v1, t_vector v2)
-{
-	t_vector	res;
-
-	// Impl...
-	return (res);
-}
+#endif

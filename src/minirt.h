@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vector.c                                           :+:      :+:    :+:   */
+/*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/12 16:36:01 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/12 19:53:36 by ymiao            ###   ########.fr       */
+/*   Created: 2025/08/12 16:56:13 by ymiao             #+#    #+#             */
+/*   Updated: 2025/08/12 19:55:44 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "math_tool.h"
+#ifndef MINIRT_H
+# define MINIRT_H
 
-t_vector	add_vec(t_vector v1, t_vector v2)
-{
-	t_vector	res;
+# include <unistd.h>
+# include <stdlib.h>
+# include <stdio.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <fcntl.h>
+# include <string.h>
 
-	res.x = v1.x + v2.x;
-	res.y = v1.y + v2.y;
-	res.z = v1.z + v2.z;
-	return (res);
-}
+# include "math_tool/math_tool.h"
+# include "objects/objects.h"
 
-t_vector	multiple_vec(t_vector v1, t_vector v2)
-{
-	t_vector	res;
-
-	// Impl...
-	return (res);
-}
+#endif
