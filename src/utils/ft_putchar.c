@@ -1,27 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putchar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/12 00:19:30 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/12 03:29:49 by ymiao            ###   ########.fr       */
+/*   Created: 2025/08/12 00:48:28 by ymiao             #+#    #+#             */
+/*   Updated: 2025/08/12 02:44:48 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../mlx_linux/mlx.h"
-
-int	main(void)
+void	ft_putchar(void)
 {
-	void	*mlx;
-	void	*mlx_win;
-
-	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, 800, 800, "Hello world!");
-	mlx_loop(mlx);
-
-	(void) mlx_win;
-
-	return (0);
+	
 }
