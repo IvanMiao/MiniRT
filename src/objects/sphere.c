@@ -1,0 +1,50 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sphere.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/13 18:07:27 by ymiao             #+#    #+#             */
+/*   Updated: 2025/08/13 18:52:51 by ymiao            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "objects.h"
+
+/**
+ * @brief Calculates the intersection of a ray with a sphere.
+ * 
+ * @param sp A pointer to the sphere struct to check for intersection.
+ * @param ray A pointer to the ray srtuct being cast.
+ * @return	If the ray intersects the sphere, 
+ * 			it returns the smallest positive 't', representing the distance 
+ * 			from the ray's origin to the closest intersection point.
+ * 			If no intersection, it returns -1.0.
+*/
+double	hit_sphere(const t_sphere *sp, const t_ray *ray)
+{
+	t_vector	oc;
+	double		a;
+	double		b;
+	double		c;
+	double		discriment;
+
+	oc = vector_sub(ray->origin, sp->center);
+	a = vector_dot(ray->direction, ray->direction);
+	b = 2.0 * vector_dot(oc, ray->direction);
+	c = vector_dot(oc, oc) - sp->radius * sp->radius;
+	discriment = b * b - 4 * a * c;
+	if (discriment < 0)
+		return (-1.0);
+	else
+		return ((-b - sqrt(discriment)) / (2.0 * a));
+}
+
+t_vector	sphere_normal_at(t_sphere *sp, t_vector p)
+{
+	t_vector	normal;
+
+	normal = vector_sub(p, sp->center);
+	return (vector_normalize(normal));
+}

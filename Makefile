@@ -6,7 +6,7 @@
 #    By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/11 21:57:02 by ymiao             #+#    #+#              #
-#    Updated: 2025/08/13 02:09:31 by ymiao            ###   ########.fr        #
+#    Updated: 2025/08/13 18:43:12 by ymiao            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,9 @@ CFLAG	= -Wall -Werror -Wextra
 NAME	= miniRT
 
 SRC_DIR	= src/
-SRC		= main.c \
-			math_tool/vector_part1.c math_tool/vector_part2.c
+SRC		= main.c test_sphere.c\
+			math_tool/vector_part1.c math_tool/vector_part2.c \
+			objects/sphere.c
 
 OBJ_DIR	= obj/
 OBJ		= $(addprefix $(OBJ_DIR),$(SRC:.c=.o))

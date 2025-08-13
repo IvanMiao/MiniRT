@@ -6,22 +6,22 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/12 00:19:30 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/12 03:29:49 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/08/13 18:36:26 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../mlx_linux/mlx.h"
+#include "minirt.h"
+
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+{
+	char	*dst;
+
+	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+	*(unsigned int*)dst = color;
+}
 
 int	main(void)
 {
-	void	*mlx;
-	void	*mlx_win;
-
-	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, 800, 800, "Hello world!");
-	mlx_loop(mlx);
-
-	(void) mlx_win;
-
+	test_sphere();
 	return (0);
 }

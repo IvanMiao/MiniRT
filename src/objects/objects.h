@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 02:13:08 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/13 02:22:41 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/08/13 18:52:12 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,7 @@ typedef struct s_sphere
 	double		radius;
 }	t_sphere;
 
+double		hit_sphere(const t_sphere *sp, const t_ray *ray);
+t_vector	sphere_normal_at(t_sphere *sp, t_vector p);
 
 #endif
