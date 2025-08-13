@@ -6,18 +6,18 @@
 #    By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/11 21:57:02 by ymiao             #+#    #+#              #
-#    Updated: 2025/08/12 16:54:46 by ymiao            ###   ########.fr        #
+#    Updated: 2025/08/13 02:09:31 by ymiao            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC		= cc
+CC		= clang
 CFLAG	= -Wall -Werror -Wextra
 
 NAME	= miniRT
 
 SRC_DIR	= src/
 SRC		= main.c \
-			utils/ft_putchar.c
+			math_tool/vector_part1.c math_tool/vector_part2.c
 
 OBJ_DIR	= obj/
 OBJ		= $(addprefix $(OBJ_DIR),$(SRC:.c=.o))
