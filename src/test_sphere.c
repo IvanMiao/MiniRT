@@ -2,18 +2,16 @@
 
 int	color_mult(int color, double factor)
 {
-	int r;
-	int g;
-	int b;
+	t_color	res;
 
 	if (factor < 0)
 		factor = 0;
 	if (factor > 1)
 		factor = 1;
-	r = (int)(((color >> 16) & 0xFF) * factor);
-	g = (int)(((color >> 8) & 0xFF) * factor);
-	b = (int)((color & 0xFF) * factor);
-	return ((r << 16) | (g << 8) | b);
+	res.r = (int)(((color >> 16) & 0xFF) * factor);
+	res.g = (int)(((color >> 8) & 0xFF) * factor);
+	res.b = (int)((color & 0xFF) * factor);
+	return ((res.r << 16) | (res.g << 8) | res.b);
 }
 
 void	test_sphere(void)
@@ -71,10 +69,10 @@ void	test_sphere(void)
 				double	ambient = 0.1;
 				light_intensity = ambient + (1.0 - ambient) * light.brightness * light_intensity;
 
-				my_mlx_pixel_put(&img, x, y, color_mult(color_red, light_intensity));
+				put_pixel(&img, x, y, color_mult(color_red, light_intensity));
 			}
 			else
-				my_mlx_pixel_put(&img, x, y, 0x000000);
+				put_pixel(&img, x, y, 0x000000);
 			x++;
 		}
 		y++;

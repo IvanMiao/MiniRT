@@ -1,34 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   objects.h                                          :+:      :+:    :+:   */
+/*   scene.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/13 02:13:08 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/14 18:16:02 by ymiao            ###   ########.fr       */
+/*   Created: 2025/08/14 17:42:25 by ymiao             #+#    #+#             */
+/*   Updated: 2025/08/14 18:16:39 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef OBJECTS_H
-# define OBJECTS_H
+#ifndef SCENE_H
+# define SCENE_H
 
 # include "../math_tool/math_tool.h"
 
-typedef enum e_obj_type
+// struct for the ambient lighting
+typedef struct s_ambient
 {
-	SPHERE,
-	PLANE,
-	CYLINDER
-}	t_obj_type;
+	double		ratio;
+	t_color		color;
+}	t_ambient;
 
-typedef struct s_sphere
+// struct for the camera
+// fov: Horizontal field of view in degrees in the range [0, 180]
+typedef struct s_camera
 {
-	t_vector	center;
-	double		radius;
-}	t_sphere;
+	t_vector	viewpoint;
+	t_vector	norm_orient;
+	int			fov;
+}	t_camera;
 
-double		hit_sphere(const t_sphere *sp, const t_ray *ray);
-t_vector	sphere_normal_at(t_sphere *sp, t_vector p);
+// srtuct for the light
+typedef struct s_light
+{
+	t_vector	position;
+	double		brightness;
+}	t_light;
 
 #endif
