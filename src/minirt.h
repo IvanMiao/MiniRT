@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/12 16:56:13 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/13 18:51:20 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/08/13 23:10:51 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 
 # include "math_tool/math_tool.h"
 # include "objects/objects.h"
+# include "utils/utils.h"
 
 typedef struct s_data
 {

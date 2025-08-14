@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 18:07:27 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/13 18:52:51 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/08/13 21:02:16 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,14 @@ double	hit_sphere(const t_sphere *sp, const t_ray *ray)
 		return ((-b - sqrt(discriment)) / (2.0 * a));
 }
 
+/**
+ * @brief Calculates the surface normal vector at a given point on a sphere.
+ * 
+ * @param sp A pointer to the sphere struct.
+ * @param p The point on the sphere's surface where the noraml is calculated.
+ * @return	A normalized vector representing the surface normal at point p,
+ * 			pointint outward from the sphere's center.
+ */
 t_vector	sphere_normal_at(t_sphere *sp, t_vector p)
 {
 	t_vector	normal;

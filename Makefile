@@ -6,7 +6,7 @@
 #    By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/11 21:57:02 by ymiao             #+#    #+#              #
-#    Updated: 2025/08/13 18:43:12 by ymiao            ###   ########.fr        #
+#    Updated: 2025/08/13 20:51:10 by ymiao            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,10 +23,25 @@ SRC		= main.c test_sphere.c\
 OBJ_DIR	= obj/
 OBJ		= $(addprefix $(OBJ_DIR),$(SRC:.c=.o))
 
-all : $(NAME)
+MLX_URL	= https://cdn.intra.42.fr/document/document/34994/minilibx-linux.tgz
+MLX_TAR	= mlx.tar.gz
+
+all : check_mlx $(NAME)
+
+check_mlx:
+	@if [ ! -d "mlx_linux" ]; then \
+		echo "Mlx library not found. Downloading..."; \
+		wget $(MLX_URL) -O $(MLX_TAR); \
+		echo "Extracting Mlx library..."; \
+		tar -xzf $(MLX_TAR); \
+		mv minilibx-linux mlx_linux; \
+		echo "Configuring mlx library..."; \
+		cd mlx_linux && bash configure; \
+		rm -f ../$(MLX_TAR); \
+	fi
 
 $(NAME): $(OBJ)
-	$(CC) $(OBJ) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
+	$(CC) $(CFLAG) $(OBJ) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@mkdir -p $(dir $@)
@@ -40,4 +55,4 @@ fclean : clean
 
 re : fclean all
 
-.PHONY : all clean fclean re
+.PHONY : all clean fclean re check_mlx
