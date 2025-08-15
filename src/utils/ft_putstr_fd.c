@@ -1,38 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/13 23:04:30 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/15 19:34:20 by ymiao            ###   ########.fr       */
+/*   Created: 2025/08/15 19:33:16 by ymiao             #+#    #+#             */
+/*   Updated: 2025/08/15 19:34:31 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#include "utils.h"
 
-# include <unistd.h>
-# include <string.h>
-# include <stddef.h>
-# include <stdlib.h>
-# include <stdio.h>
-
-# define MALLOC		1
-# define FREE		2
-# define FREEALL	3
-
-typedef struct s_node
+void	ft_putchar_fd(int c, int fd)
 {
-	void			*ptr;
-	struct s_node	*next;
-}	t_node;
+	write(fd, &c, 1);
+}
 
-void	ft_putstr_fd(char *s, int fd);
-char	**ft_split(char const *s, char c);
+void	ft_putstr_fd(char *s, int fd)
+{
+	int	i;
 
-void	*mem_manager(int mode, size_t size, void *ptr);
-
-
-#endif
+	i = 0;
+	if (!s)
+		s = "(null)";
+	while (s[i])
+	{
+		ft_putchar_fd(s[i], fd);
+		i++;
+	}
+}

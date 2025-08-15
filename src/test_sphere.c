@@ -16,11 +16,9 @@ int	color_mult(int color, double factor)
 
 void	test_sphere(void)
 {
-	void	*mlx;
-	void	*mlx_win;
-	t_data	img;
-	int		x;
-	int		y;
+	t_minirt	rt;
+	int			x;
+	int			y;
 
 	t_sphere	sp;
 	sp.center = new_vector(0, 0, -5);
@@ -29,7 +27,6 @@ void	test_sphere(void)
 	int	color_red;
 	color_red = (255 << 16) | (0 << 8) | 0;
 
-
 	t_light	light;
 	light.position = new_vector(-5, 0, 0);
 	light.brightness = 1.0;
@@ -37,23 +34,21 @@ void	test_sphere(void)
 	t_ray	r;
 	r.origin = new_vector(0, 0, 0);
 
-	int		image_width = 800;
-	int		image_height = 800;
-
-	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, image_width, image_height, "MiniRT");
-	img.img = mlx_new_image(mlx, image_width, image_height);
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
+	rt.mlx = mlx_init();
+	rt.mlx_win = mlx_new_window(rt.mlx, WIDTH, HEIGHT, "MiniRT");
+	rt.data.img = mlx_new_image(rt.mlx, WIDTH, HEIGHT);
+	rt.data.addr = mlx_get_data_addr(rt.data.img,
+		&rt.data.bits_per_pixel, &rt.data.line_length, &rt.data.endian);
 
 	y = 0;
 	x = 0;
-	while (y < image_height)
+	while (y < HEIGHT)
 	{
 		x = 0;
-		while (x < image_width)
+		while (x < WIDTH)
 		{
-			double u = (double)x / (image_width - 1);
-			double v = (double)y / (image_height - 1);
+			double u = (double)x / (WIDTH - 1);
+			double v = (double)y / (HEIGHT - 1);
 			r.direction = new_vector(u * 2.0 - 1.0, v * -2.0 + 1.0, -1.0);
 			r.direction = vector_normalize(r.direction);
 
@@ -69,14 +64,14 @@ void	test_sphere(void)
 				double	ambient = 0.1;
 				light_intensity = ambient + (1.0 - ambient) * light.brightness * light_intensity;
 
-				put_pixel(&img, x, y, color_mult(color_red, light_intensity));
+				put_pixel(&rt.data, x, y, color_mult(color_red, light_intensity));
 			}
 			else
-				put_pixel(&img, x, y, 0x000000);
+				put_pixel(&rt.data, x, y, 0x000000);
 			x++;
 		}
 		y++;
 	}
-	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
-	mlx_loop(mlx);
+	mlx_put_image_to_window(rt.mlx, rt.mlx_win, rt.data.img, 0, 0);
+	mlx_loop(rt.mlx);
 }

@@ -6,7 +6,7 @@
 #    By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/11 21:57:02 by ymiao             #+#    #+#              #
-#    Updated: 2025/08/14 17:38:52 by ymiao            ###   ########.fr        #
+#    Updated: 2025/08/15 19:35:19 by ymiao            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,10 @@ NAME	= miniRT
 SRC_DIR	= src/
 SRC		= main.c test_sphere.c\
 			math_tool/vector_part1.c math_tool/vector_part2.c \
-			objects/sphere.c
+			objects/sphere.c \
+			utils/mem_manager.c \
+			utils/ft_split.c \
+			utils/ft_putstr_fd.c \
 
 OBJ_DIR	= obj/
 OBJ		= $(addprefix $(OBJ_DIR),$(SRC:.c=.o))
@@ -41,7 +44,7 @@ check_mlx:
 	fi
 
 $(NAME): $(OBJ)
-	$(CC) $(CFLAG) $(OBJ) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
+	$(CC) $(CFLAG) $(OBJ) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -O3 -o $(NAME)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@mkdir -p $(dir $@)
