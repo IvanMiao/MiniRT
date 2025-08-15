@@ -6,14 +6,14 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/12 16:36:01 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/13 01:50:38 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/08/15 23:45:14 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "math_tool.h"
 #include <unistd.h>
 
-t_vector	new_vector(double x, double y, double z)
+t_vector	vector_init(double x, double y, double z)
 {
 	t_vector	res;
 

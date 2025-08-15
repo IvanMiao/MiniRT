@@ -21,24 +21,24 @@ void	test_sphere(void)
 	int			y;
 
 	t_sphere	sp;
-	sp.center = new_vector(0, 0, -5);
+	sp.center = vector_init(0, 0, -5);
 	sp.radius = 1.0;
 
 	int	color_red;
 	color_red = (255 << 16) | (0 << 8) | 0;
 
 	t_light	light;
-	light.position = new_vector(-5, 0, 0);
-	light.brightness = 1.0;
+	light.position = vector_init(-5, 0, 0);
+	light.ratio = 1.0;
 
 	t_ray	r;
-	r.origin = new_vector(0, 0, 0);
+	r.origin = vector_init(0, 0, 0);
 
 	rt.mlx = mlx_init();
 	rt.mlx_win = mlx_new_window(rt.mlx, WIDTH, HEIGHT, "MiniRT");
-	rt.data.img = mlx_new_image(rt.mlx, WIDTH, HEIGHT);
-	rt.data.addr = mlx_get_data_addr(rt.data.img,
-		&rt.data.bits_per_pixel, &rt.data.line_length, &rt.data.endian);
+	rt.img.img = mlx_new_image(rt.mlx, WIDTH, HEIGHT);
+	rt.img.addr = mlx_get_data_addr(rt.img.img,
+		&rt.img.bits_per_pixel, &rt.img.line_length, &rt.img.endian);
 
 	y = 0;
 	x = 0;
@@ -49,7 +49,7 @@ void	test_sphere(void)
 		{
 			double u = (double)x / (WIDTH - 1);
 			double v = (double)y / (HEIGHT - 1);
-			r.direction = new_vector(u * 2.0 - 1.0, v * -2.0 + 1.0, -1.0);
+			r.direction = vector_init(u * 2.0 - 1.0, v * -2.0 + 1.0, -1.0);
 			r.direction = vector_normalize(r.direction);
 
 			double t = hit_sphere(&sp, &r);
@@ -62,16 +62,16 @@ void	test_sphere(void)
 				double	light_intensity = fmax(0.0, vector_dot(normal, light_dir));
 
 				double	ambient = 0.1;
-				light_intensity = ambient + (1.0 - ambient) * light.brightness * light_intensity;
+				light_intensity = ambient + (1.0 - ambient) * light.ratio * light_intensity;
 
-				put_pixel(&rt.data, x, y, color_mult(color_red, light_intensity));
+				put_pixel(&rt.img, x, y, color_mult(color_red, light_intensity));
 			}
 			else
-				put_pixel(&rt.data, x, y, 0x000000);
+				put_pixel(&rt.img, x, y, 0x000000);
 			x++;
 		}
 		y++;
 	}
-	mlx_put_image_to_window(rt.mlx, rt.mlx_win, rt.data.img, 0, 0);
+	mlx_put_image_to_window(rt.mlx, rt.mlx_win, rt.img.img, 0, 0);
 	mlx_loop(rt.mlx);
 }

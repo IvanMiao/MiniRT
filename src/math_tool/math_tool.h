@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/12 16:33:28 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/14 17:45:54 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/08/15 23:45:29 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ typedef struct s_ray
 	t_vector	direction;
 }	t_ray;
 
-t_vector	new_vector(double x, double y, double z);
+t_vector	vector_init(double x, double y, double z);
 t_vector	vector_add(t_vector v1, t_vector v2);
 t_vector	vector_sub(t_vector v1, t_vector v2);
 t_vector	vector_mult(t_vector v, double scalar);

@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 23:04:30 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/15 19:34:20 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/08/16 00:25:35 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,5 @@ void	ft_putstr_fd(char *s, int fd);
 char	**ft_split(char const *s, char c);
 
 void	*mem_manager(int mode, size_t size, void *ptr);
-
 
 #endif
