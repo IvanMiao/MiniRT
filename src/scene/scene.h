@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 17:42:25 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/16 00:20:53 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/08/16 04:53:34 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,5 @@ typedef struct s_light
 	t_vector	position;
 	double		ratio;
 }	t_light;
-
-typedef struct s_scene
-{
-	t_ambient	ambient;
-	t_camera	camera;
-	t_node		*light;
-	t_node		*objects;
-}	t_scene;
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/12 16:56:13 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/15 23:48:50 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/08/16 05:37:13 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,13 @@ typedef struct s_img
 
 typedef struct s_minirt
 {
-	void	*mlx;
-	void	*mlx_win;
-	t_img	img;
+	void		*mlx;
+	void		*mlx_win;
+	t_img		img;
+	t_ambient	ambient;
+	t_camera	camera;
+	t_light		*light;
+	t_node		*objects;
 }	t_minirt;
 
 // mlx helper function

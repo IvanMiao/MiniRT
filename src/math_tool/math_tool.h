@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/12 16:33:28 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/15 23:45:29 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/08/16 05:42:49 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,10 @@ typedef struct s_vector
 
 typedef struct s_color
 {
-	int	r;
-	int	g;
-	int	b;
+	// double or int?
+	double	r;
+	double	g;
+	double	b;
 }	t_color;
 
 typedef struct s_ray
@@ -42,6 +43,7 @@ t_vector	vector_mult(t_vector v, double scalar);
 t_vector	vector_div(t_vector v, double scalar);
 
 double		vector_length(t_vector v);
+double		vector_length_square(t_vector v);
 t_vector	vector_normalize(t_vector v);
 double		vector_dot(t_vector v1, t_vector v2);
 t_vector	vector_cross(t_vector v1, t_vector v2);

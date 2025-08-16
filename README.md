@@ -1,6 +1,9 @@
 # MiniRT
 Ray tracing projet
 
+## TODO
+
+1. t_color: double or int?
 
 ## Architecture
 

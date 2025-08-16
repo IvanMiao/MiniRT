@@ -2,16 +2,18 @@
 
 int	color_mult(int color, double factor)
 {
-	t_color	res;
+	int	r;
+	int	g;
+	int	b;
 
 	if (factor < 0)
 		factor = 0;
 	if (factor > 1)
 		factor = 1;
-	res.r = (int)(((color >> 16) & 0xFF) * factor);
-	res.g = (int)(((color >> 8) & 0xFF) * factor);
-	res.b = (int)((color & 0xFF) * factor);
-	return ((res.r << 16) | (res.g << 8) | res.b);
+	r = (int)(((color >> 16) & 0xFF) * factor);
+	g = (int)(((color >> 8) & 0xFF) * factor);
+	b = (int)((color & 0xFF) * factor);
+	return ((r << 16) | (g << 8) | b);
 }
 
 void	test_sphere(void)

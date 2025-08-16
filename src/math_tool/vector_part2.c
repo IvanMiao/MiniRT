@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 01:42:45 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/13 02:10:51 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/08/16 05:15:54 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,14 @@ double	vector_length(t_vector v)
 	return (res);
 }
 
+double	vector_length_square(t_vector v)
+{
+	double	res;
+
+	res = v.x * v.x + v.y * v.y + v.z * v.z;
+	return (res);
+}
+
 // normalize: transform the vector to a unit vector
 t_vector	vector_normalize(t_vector v)
 {
@@ -28,6 +36,8 @@ t_vector	vector_normalize(t_vector v)
 	double		v_length;
 
 	v_length = vector_length(v);
+	if (v_length == 0)
+		return (vector_init(0, 0, 0));
 	res = vector_div(v, v_length);
 	return (res);
 }
