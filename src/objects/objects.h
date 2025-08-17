@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 02:13:08 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/16 05:35:49 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/08/17 03:08:49 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 # define OBJECTS_H
 
 # include "../math_tool/math_tool.h"
-# include "../utils/utils.h"
+# include "../render/scene.h"
+# include <stdbool.h>
 
 typedef enum e_obj_type
 {
@@ -31,13 +32,29 @@ typedef struct s_sphere
 	t_color		color;
 }	t_sphere;
 
+typedef struct s_plane
+{
+	t_vector	point;
+	t_vector	normal;
+	t_color		color;
+}	t_plane;
+
+// intersection record
+typedef struct s_hit_record
+{
+	bool		hit;
+	double		t;
+	t_vector	point;
+	t_vector	normal;
+	t_color		color;
+}	t_hit_record;
+
 typedef struct s_object
 {
-	t_obj_type	type;
-	void		*obj;
-	t_color		color;
+	t_obj_type		type;
+	void			*obj;
+	struct s_object	*next;
 }	t_object;
-
 
 double		hit_sphere(const t_sphere *sp, const t_ray *ray);
 t_vector	sphere_normal_at(t_sphere *sp, t_vector p);

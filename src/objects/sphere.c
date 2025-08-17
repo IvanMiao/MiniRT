@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 18:07:27 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/16 01:57:46 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/08/17 04:20:39 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,17 @@ double	hit_sphere(const t_sphere *sp, const t_ray *ray)
 	double		a;
 	double		b;
 	double		c;
-	double		discriment;
+	double		discriminant;
 
 	oc = vector_sub(ray->origin, sp->center);
 	a = vector_dot(ray->direction, ray->direction);
 	b = 2.0 * vector_dot(oc, ray->direction);
 	c = vector_dot(oc, oc) - sp->radius * sp->radius;
-	discriment = b * b - 4 * a * c;
-	if (discriment < 0)
+	discriminant = b * b - 4 * a * c;
+	if (discriminant < 0)
 		return (-1.0);
 	else
-		return ((-b - sqrt(discriment)) / (2.0 * a));
+		return ((-b - sqrt(discriminant)) / (2.0 * a));
 }
 
 /**

@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/12 00:19:30 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/15 23:47:54 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/08/17 03:53:32 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void	put_pixel(t_img *img, int x, int y, int color)
 
 int	main(void)
 {
-	test_sphere();
+	t_minirt	rt;
+
+	test_sphere(&rt);
 	return (0);
 }

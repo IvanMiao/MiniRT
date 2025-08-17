@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/12 16:56:13 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/16 05:37:13 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/08/17 03:53:23 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,8 @@
 
 # include "math_tool/math_tool.h"
 # include "objects/objects.h"
-# include "scene/scene.h"
+# include "render/scene.h"
 # include "utils/utils.h"
-
-# define WIDTH 800
-# define HEIGHT 800
 
 typedef struct s_img
 {
@@ -47,14 +44,23 @@ typedef struct s_minirt
 	t_img		img;
 	t_ambient	ambient;
 	t_camera	camera;
-	t_light		*light;
-	t_node		*objects;
+	t_light		light;
+	t_object	*object;
 }	t_minirt;
 
 // mlx helper function
 void	put_pixel(t_img *img, int x, int y, int color);
 
 // test
-void	test_sphere(void);
+// camera projection
+void	setup_scene(t_minirt *rt, t_sphere *sphere);
+
+void	setup_cam_coords(t_camera *camera);
+t_ray	gen_cam_ray(t_camera *camera, int x, int y);
+
+t_color	calculate_combined_light(t_minirt *rt,
+			t_vector hit_point, t_vector normal, t_color obj_color);
+
+void	test_sphere(t_minirt *rt);
 
 #endif
