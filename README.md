@@ -4,9 +4,20 @@ Ray tracing projet
 ## TODO
 
 1. t_color: double or int?
+2. t_object: linked list?
 
 ## Architecture
 
+
+## Phases
+
+1. parsing
+2. init mlx, init events
+3. setup scene
+4. Main loop: Calculate ray (camera -> ray)
+5. Main loop: Calculate hit points
+6. Main loop: Calculate lighting (ambiant color + diffuse color)
+7. Main loop: put pixel
 
 ## Math
 
