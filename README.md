@@ -101,6 +101,69 @@ Normal = p - C
 计算机图形学中，法线向量常被要求是单位向量，这能极大简化后续运算。
 
 
+### func `setup_cam_coords`
+
+相机的定位、定向和镜头选择
+
+**问题**：建立虚拟摄像机 (The Virtual Camera) —— 如何从一个数学点（摄像机位置）向一个二维像素网格（屏幕）发射精确的光线。
+
+该函数为虚拟摄像机建立一个**局部坐标系**，并定义好它的视锥体 (View Frustum)。
+
+建立一个以摄像机为中心的坐标系。在这个坐标系里，我们永远知道摄像机的右边、上边、后边(u, v, w)这三个摄像机局部坐标系的基向量。
+
+1. 设置宽高比
+2. 定义“世界”的上方 world_up，假设为Y轴正方面，用来确定摄像机的右和上方
+3. 计算摄像机的后方 w: 计算机图形学约定摄像机朝其局部坐标系的-Z轴“看”，因此其后方为摄像机朝向方向的取反
+4. 计算摄像机的右方 u: 向量叉乘 cross product，根据右手定则， (世界向上) × (摄像机后方) 得到摄像机右方向量，它同时垂直于world_up 和 w
+5. 计算摄像机的右方 v: 再用cross product, (后方) × (右方) 就会得到指向摄像机“真正上方”的向量v。
+6. FOV为摄像机的“镜头”，决定视野宽窄。假设在camera前有一个虚拟的成像平面，通过三角函数，tan(半个FOV角度) = (半个成像平面的高度) / (到平面的距离)。假设成像平面离camera距离为1,所以half_height就直接等于 tan(theta / 2.0)。
+7. 根据宽高比算出宽度 half_width。
+
+
+### func `gen_cam_ray`
+
+为屏幕上的每一个像素 (x, y) 发射一条独一无二的光线。这条光线从摄像机原点出发，穿过这个像素在虚拟成像平面上对应的那个点。
+
+
+```c
+screen_x = (2.0 * (x + 0.5) / WIDTH - 1.0) * camera->half_width;
+screen_y = -(2.0 * (y + 0.5) / HEIGHT - 1.0) * camera->half_height;
+```
+1. 将像素坐标 (x, y)映射到虚拟成像平面坐标
+	- 像素坐标 x 的范围是 [0, WIDTH-1]。
+	- (x + 0.5) 是为了让光线穿过像素中心，而不是左上角。
+	- (x + 0.5) / WIDTH 将其归一化到 [0, 1] 范围。
+	- 2.0 * ... - 1.0 将其映射到 [-1, 1] 的标准范围。
+	- 乘以 half_width/half_height 将其缩放到之前计算的虚拟成像平面的实际大小。
+	- screen_y 前的负号是因为屏幕坐标y通常向下为正，而我们的3D世界坐标y向上为正。
+
+```c
+t_vector	screen_point;
+
+screen_point = camera->viewpoint;
+screen_point = vector_add(screen_point, vector_mult(camera->u, screen_x));
+screen_point = vector_add(screen_point, vector_mult(camera->v, screen_y));
+screen_point = vector_add(screen_point, vector_mult(camera->w, -1.0));
+```
+
+2. 计算该点在世界坐标系中的确切位置 (screen_point)：
+	- 从摄像机的位置 (viewpoint) 开始。
+	- 沿着摄像机的“右方”(u) 移动 screen_x 个单位。
+	- 再沿着摄像机的“上方”(v) 移动 screen_y 个单位。
+	- 最后，沿着摄像机的“前方”移动1个单位（即沿着“后方”w移动-1个单位）。这样，我们就定位到了虚拟成像平面上那个精确的点。
+
+
+```c
+ray.origin = camera->viewpoint;
+ray.direction = vector_sub(screen_point, camera->viewpoint);
+ray.direction = vector_normalize(ray.direction);
+```
+
+3. 生成最终的光线：
+	- 光线的起点 (origin) 就是摄像机的位置。
+	- 光线的方向 (direction) 就是从起点指向我们刚刚计算的 screen_point 的向量。
+	- 最后将方向向量单位化。
+
 ## Structs
 
 ### `t_camera`
@@ -110,8 +173,12 @@ Normal = p - C
 - `t_vector viewpoint`: 摄像机的位置，是所有初始光线的共同出发点
 - `t_vector direction`: 摄像机的朝向。不是某条具体光线的方向，而是整个视野的中心轴线方向。即摄像机“正对着”哪里。
 - `int fov`: 视场角。摄像机独有的属性。它定义了视野的宽度。
+- `u`: 规定摄像机的右边方向
+- `v`: 规定摄像机的上边方向
+- `w`: 规定摄像机的后边方向，以上三个相互垂直的单位向量(u, v ,w)构成摄像机的局部坐标系基向量
 
-**任务**： 根据屏幕上每一个像素的位置，结合自身的属性，计算出一条应该穿过该像素的光线t_ray。
+
+**任务**： 根据屏幕上每一个像素的位置，结合自身的属性，计算出一条从camera原点射出、穿过该像素的光线t_ray。
 
 ### `t_ray`
 

@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 23:05:09 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/17 03:38:29 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/08/18 21:01:19 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 
 /**
  * @param camera Struct for camera
- * @param u right
- * @param v up
- * @param w behind
+ * @var world_up "up" direciton of the world 
+ * @var u right
+ * @var v up
+ * @var w behind
  */
 void	setup_cam_coords(t_camera *camera)
 {
