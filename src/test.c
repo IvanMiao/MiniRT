@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 03:53:08 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/17 04:30:21 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/08/18 20:19:15 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,10 @@ void	test_sphere(t_minirt *rt)
 	t_color		final_color;
 	int			pixel_color;
 
-	rt->mlx = mlx_init();
-	rt->mlx_win = mlx_new_window(rt->mlx, WIDTH, HEIGHT, "MiniRT");
-	rt->img.img = mlx_new_image(rt->mlx, WIDTH, HEIGHT);
-	rt->img.addr = mlx_get_data_addr(rt->img.img,
-		&rt->img.bits_per_pixel, &rt->img.line_length, &rt->img.endian);
-
 	setup_scene(rt, &sphere);
 	setup_cam_coords(&rt->camera);
 
-	int	background_color = color_to_int(color_scale(rt->ambient.color, rt->ambient.ratio));
+	// int	background_color = color_to_int(color_scale(rt->ambient.color, rt->ambient.ratio));
 	
 	y = 0;
 	while (y < HEIGHT)
@@ -55,7 +49,7 @@ void	test_sphere(t_minirt *rt)
 				put_pixel(&rt->img, x, y, pixel_color);
 			}
 			else
-				put_pixel(&rt->img, x, y, background_color); // black or this?
+				put_pixel(&rt->img, x, y, 0x000000); // black or this?
 			x++;
 		}
 		y++;

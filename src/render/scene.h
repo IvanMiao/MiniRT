@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 17:42:25 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/17 03:31:49 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/08/18 20:31:20 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,11 @@ typedef struct s_camera
 	t_vector	viewpoint;
 	t_vector	direction;
 	int			fov;
-	// add
+
 	t_vector	u;
 	t_vector	v;
 	t_vector	w;
+
 	double		aspect_ratio;
 	double		half_width;
 	double		half_height;

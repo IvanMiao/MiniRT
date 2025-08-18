@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/12 16:56:13 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/17 03:53:23 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/08/18 20:28:43 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 # include <string.h>
+# include <X11/X.h>
+# include <X11/keysym.h>
 
 # include "../mlx_linux/mlx.h"
 
@@ -48,7 +50,10 @@ typedef struct s_minirt
 	t_object	*object;
 }	t_minirt;
 
-// mlx helper function
+//event
+void	init_event(t_minirt *rt);
+
+// render - mlx helper function
 void	put_pixel(t_img *img, int x, int y, int color);
 
 // test

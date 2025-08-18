@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 02:13:08 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/17 03:08:49 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/08/18 20:29:19 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ typedef enum e_obj_type
 
 typedef struct s_sphere
 {
-	t_vector	center;
-	double		diameter;
-	double		radius;
-	t_color		color;
+	t_vector		center;
+	double			diameter;
+	double			radius;
+	t_color			color;
 }	t_sphere;
 
 typedef struct s_plane
@@ -46,7 +46,7 @@ typedef struct s_hit_record
 	double		t;
 	t_vector	point;
 	t_vector	normal;
-	t_color		color;
+	t_color		final_color;
 }	t_hit_record;
 
 typedef struct s_object
