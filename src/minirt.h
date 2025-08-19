@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/12 16:56:13 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/18 20:28:43 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/08/20 01:56:44 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	put_pixel(t_img *img, int x, int y, int color);
 
 // test
 // camera projection
-void	setup_scene(t_minirt *rt, t_sphere *sphere);
+void	setup_scene(t_minirt *rt);
 
 void	setup_cam_coords(t_camera *camera);
 t_ray	gen_cam_ray(t_camera *camera, int x, int y);

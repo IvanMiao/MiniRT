@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 20:24:38 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/18 20:28:47 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/08/20 01:31:20 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static int	f_close(t_minirt *rt)
 	mlx_destroy_window(rt->mlx, rt->mlx_win);
 	mlx_destroy_display(rt->mlx);
 	free(rt->mlx);
+	mem_manager(FREEALL, 0, NULL);
 	exit(EXIT_SUCCESS);
 }
 

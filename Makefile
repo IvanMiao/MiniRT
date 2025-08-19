@@ -6,7 +6,7 @@
 #    By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/11 21:57:02 by ymiao             #+#    #+#              #
-#    Updated: 2025/08/18 20:29:01 by ymiao            ###   ########.fr        #
+#    Updated: 2025/08/20 01:06:34 by ymiao            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,8 @@ SRC		= main.c test.c \
 			math_tool/vector_part1.c math_tool/vector_part2.c \
 			math_tool/color.c \
 			objects/sphere.c \
+			objects/plane.c \
+			objects/hit.c \
 			event/event.c \
 			render/setup.c \
 			render/camera.c \

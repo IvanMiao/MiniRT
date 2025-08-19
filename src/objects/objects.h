@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 02:13:08 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/18 20:29:19 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/08/20 01:55:35 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,24 +39,30 @@ typedef struct s_plane
 	t_color		color;
 }	t_plane;
 
-// intersection record
-typedef struct s_hit_record
-{
-	bool		hit;
-	double		t;
-	t_vector	point;
-	t_vector	normal;
-	t_color		final_color;
-}	t_hit_record;
-
 typedef struct s_object
 {
 	t_obj_type		type;
 	void			*obj;
+	t_color			color;
 	struct s_object	*next;
 }	t_object;
 
-double		hit_sphere(const t_sphere *sp, const t_ray *ray);
-t_vector	sphere_normal_at(t_sphere *sp, t_vector p);
+// intersection record
+typedef struct s_hit_record
+{
+	bool		hit;
+	t_object	*obj_ptr;
+	double		t;
+	t_vector	point;
+	t_vector	normal;
+	t_color		obj_color;
+}	t_hit_record;
+
+double			hit_sphere(const t_sphere *sp, const t_ray *ray);
+t_vector		sphere_normal_at(t_sphere *sp, t_vector p);
+
+double			hit_plane(t_plane *plane, t_ray *ray);
+
+t_hit_record	trace_ray(t_object *objs, t_ray *ray);
 
 #endif
