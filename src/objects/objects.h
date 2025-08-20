@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 02:13:08 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/20 03:05:11 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/08/20 20:38:50 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,15 @@ typedef struct s_plane
 	t_vector	normal;
 	t_color		color;
 }	t_plane;
+
+typedef struct s_cylinder
+{
+	t_vector	center;
+	t_vector	normal;
+	double		diameter;
+	double		height;
+	t_color		color;
+}	t_cylinder;
 
 typedef struct s_object
 {
