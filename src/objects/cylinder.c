@@ -1,28 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   objects_list.c                                     :+:      :+:    :+:   */
+/*   cylinder.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/20 01:57:04 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/20 20:23:33 by ymiao            ###   ########.fr       */
+/*   Created: 2025/08/20 20:36:39 by ymiao             #+#    #+#             */
+/*   Updated: 2025/08/20 20:36:43 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "objects.h"
 
-t_object	*obj_lstnew(void *obj, t_obj_type type, t_color color)
-{
-	
-}
-
-t_object	*obj_lstlsat(t_object *lst)
-{
-	
-}
-
-t_object	*obj_lstadd_back(t_object **lst, t_object *new)
-{
-	
-}

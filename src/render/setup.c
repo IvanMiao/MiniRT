@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 02:47:32 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/20 03:26:51 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/08/20 20:35:54 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
  */
 // 设置相机：位于原点，看向负Z方向，FOV=60度
 // 设置球体
-// 设置环境光：20% 白色环境光
-// 设置点光源：80% 光源强度
+// 设置环境光
+// 设置点光源
 void	setup_scene(t_minirt *rt)
 {
 	t_sphere	*sphere;
@@ -26,20 +26,20 @@ void	setup_scene(t_minirt *rt)
 
 	sphere = mem_manager(MALLOC, sizeof(t_sphere), NULL);
 	plane = mem_manager(MALLOC, sizeof(t_plane), NULL);
-	sphere->center = vector_init(0, 0, 20);
+	sphere->center = vector_init(0, 0, -40);
 	sphere->radius = 10;
 	sphere->color = color_init_d(1, 0, 0);
 	plane->point = vector_init(0, -10, 0);
 	plane->normal = vector_init(0, 1, 0);
 	plane->color = color_init_d(0.4, 0.6, 0.8);
 
-	rt->camera.viewpoint = vector_init(-50, 0, 20);
-	rt->camera.direction = vector_init(1, 0, 0);
+	rt->camera.viewpoint = vector_init(0, 0, 0);
+	rt->camera.direction = vector_init(0, 0, -1);
 	rt->camera.fov = 70;
 	rt->ambient.ratio = 0.15;
 	rt->ambient.color = color_init_d(1.0, 1.0, 1.0);
-	rt->light.position = vector_init(-15, 5, 5);
-	rt->light.ratio = 0.8;
+	rt->light.position = vector_init(-80, 80, 10);
+	rt->light.ratio = 0.7;
 
 	rt->object = mem_manager(MALLOC, sizeof(t_object), NULL);
 	rt->object->obj = sphere;
