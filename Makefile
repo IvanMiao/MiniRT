@@ -6,7 +6,7 @@
 #    By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/11 21:57:02 by ymiao             #+#    #+#              #
-#    Updated: 2025/08/20 01:06:34 by ymiao            ###   ########.fr        #
+#    Updated: 2025/08/20 03:24:01 by ymiao            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ SRC		= main.c test.c \
 			render/setup.c \
 			render/camera.c \
 			render/ray.c \
+			render/shadow.c \
 			render/all_lights.c \
 			render/render.c \
 			utils/mem_manager.c \

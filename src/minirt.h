@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/12 16:56:13 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/20 01:56:44 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/08/20 03:19:17 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ void	setup_scene(t_minirt *rt);
 
 void	setup_cam_coords(t_camera *camera);
 t_ray	gen_cam_ray(t_camera *camera, int x, int y);
+
+bool	is_in_shadow(t_object *objs, t_vector hit_point, t_vector light_pos);
 
 t_color	calculate_combined_light(t_minirt *rt,
 			t_vector hit_point, t_vector normal, t_color obj_color);

@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 00:11:02 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/17 02:26:07 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/08/20 03:23:11 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,11 @@ t_color	calculate_combined_light(t_minirt *rt,
 	t_color	final_color;
 
 	ambient_color = calculate_ambient_light(rt->ambient, obj_color);
-	diffuse_color = calculate_diffuse_light(rt->light, hit_point,
-			normal, obj_color);
+	if (!is_in_shadow(rt->object, hit_point, rt->light.position))
+		diffuse_color = calculate_diffuse_light(rt->light, hit_point,
+				normal, obj_color);
+	else
+		diffuse_color = color_init_d(0, 0, 0);
 	final_color.r = ambient_color.r + diffuse_color.r;
 	final_color.g = ambient_color.g + diffuse_color.g;
 	final_color.b = ambient_color.b + diffuse_color.b;
