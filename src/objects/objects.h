@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 02:13:08 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/20 20:38:50 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/08/21 22:27:14 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,25 @@ typedef struct s_hit_record
 	t_color		obj_color;
 }	t_hit_record;
 
+// helper struct, just for cylinder.c
+typedef struct s_cy_info
+{
+	t_vector	oc;
+	double		a;
+	double		b;
+	double		c;
+	double		discri;
+	double		radius;
+	t_vector	normal;
+}	t_cy_info;
+
 double			hit_sphere(const t_sphere *sp, const t_ray *ray);
 t_vector		sphere_normal_at(t_sphere *sp, t_vector p);
 
 double			hit_plane(t_plane *plane, t_ray *ray);
+
+double			hit_cylinder(t_cylinder *cy, t_ray *ray);
+t_vector		cylinder_normal_at(t_cylinder *cy, t_vector point);
 
 t_hit_record	trace_ray(t_object *objs, t_ray *ray);
 

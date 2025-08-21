@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 00:55:02 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/20 01:54:39 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/08/21 22:29:59 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ static double	hit_obj(t_object *obj, t_ray *ray)
 		return (hit_sphere((t_sphere *)obj->obj, ray));
 	if (obj->type == PLANE)
 		return (hit_plane((t_plane *)obj->obj, ray));
+	if (obj->type == CYLINDER)
+		return (hit_cylinder((t_cylinder *)obj->obj, ray));
 	return (INFINITY);
 }
 
@@ -30,6 +32,9 @@ static void	cal_point_and_normal(t_hit_record *record, t_ray *ray)
 				record->point);
 	else if (record->obj_ptr->type == PLANE)
 		record->normal = ((t_plane *)record->obj_ptr->obj)->normal;
+	else if (record->obj_ptr->type == CYLINDER)
+		record->normal = cylinder_normal_at((t_cylinder *)record->obj_ptr->obj,
+				record->point);
 }
 
 t_hit_record	trace_ray(t_object *objs, t_ray *ray)

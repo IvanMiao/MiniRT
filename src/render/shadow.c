@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 03:07:10 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/20 03:36:01 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/08/21 22:31:08 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ static double	hit_for_shadow(t_object *obj, t_ray *ray)
 		return (hit_sphere((t_sphere *)obj->obj, ray));
 	if (obj->type == PLANE)
 		return (hit_plane((t_plane *)obj->obj, ray));
+	if (obj->type == CYLINDER)
+		return (hit_cylinder((t_cylinder *)obj->obj, ray));
 	return (INFINITY);
 }
 

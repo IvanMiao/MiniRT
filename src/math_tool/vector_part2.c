@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 01:42:45 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/16 05:15:54 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/08/21 22:18:31 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ double	vector_length(t_vector v)
 	return (res);
 }
 
-double	vector_length_square(t_vector v)
+double	vector_length_sq(t_vector v)
 {
 	double	res;
 
