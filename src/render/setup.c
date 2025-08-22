@@ -6,11 +6,33 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 02:47:32 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/22 20:59:29 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/08/22 21:19:32 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minirt.h"
+
+
+#include <time.h>
+static double	random_double(double min, double max)
+{
+	return (min + ((double)rand() / RAND_MAX) * (max - min));
+}
+
+static void	add_sphere(t_object **objs)
+{
+	t_sphere	*sp;
+	
+	sp = mem_manager(MALLOC, sizeof(t_sphere), NULL);
+	sp->center = vector_init(random_double(-50, 30),
+							random_double(-20, 20),
+							random_double(-100, -30));
+	sp->radius = random_double(1, 9);
+	sp->color = color_init_d(random_double(0, 1),
+							random_double(0, 1),
+							random_double(0, 1));
+	obj_lstadd_back(objs, obj_lstnew(sp, SPHERE, sp->color));
+}
 
 /**
  * @brief 设置场景的所有元素
@@ -21,6 +43,7 @@
 // 设置点光源
 void	setup_scene(t_minirt *rt)
 {
+	srand(time(NULL));
 	t_sphere	*sphere;
 	t_plane		*plane;
 	t_cylinder	*cylinder;
@@ -57,5 +80,10 @@ void	setup_scene(t_minirt *rt)
 	obj_lstadd_back(&objs, obj_lstnew(sphere, SPHERE, sphere->color));
 	obj_lstadd_back(&objs, obj_lstnew(plane, PLANE, plane->color));
 	obj_lstadd_back(&objs, obj_lstnew(cylinder, CYLINDER, cylinder->color));
+	add_sphere(&objs);
+	add_sphere(&objs);
+	add_sphere(&objs);
+	add_sphere(&objs);
+	add_sphere(&objs);
 	rt->object = objs;
 }
