@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 20:36:39 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/21 22:58:05 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/08/22 20:43:02 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,8 @@ double	hit_cylinder(t_cylinder *cy, t_ray *ray)
 	info.a = vector_dot(ray->direction, ray->direction)
 		- pow(vector_dot(ray->direction, info.normal), 2);
 	info.b = 2 * (vector_dot(ray->direction, info.oc)
-		- (vector_dot(ray->direction, info.normal)
-			* vector_dot(info.oc, info.normal)));
+			- (vector_dot(ray->direction, info.normal)
+				* vector_dot(info.oc, info.normal)));
 	info.c = vector_dot(info.oc, info.oc)
 		- pow(vector_dot(info.oc, info.normal), 2)
 		- info.radius * info.radius;

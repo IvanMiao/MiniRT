@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 02:13:08 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/21 22:27:14 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/08/22 20:58:47 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ typedef struct s_cy_info
 	t_vector	normal;
 }	t_cy_info;
 
+// Calculate object hit/normal
 double			hit_sphere(const t_sphere *sp, const t_ray *ray);
 t_vector		sphere_normal_at(t_sphere *sp, t_vector p);
 
@@ -87,6 +88,12 @@ double			hit_plane(t_plane *plane, t_ray *ray);
 double			hit_cylinder(t_cylinder *cy, t_ray *ray);
 t_vector		cylinder_normal_at(t_cylinder *cy, t_vector point);
 
+// Stores hit stats
 t_hit_record	trace_ray(t_object *objs, t_ray *ray);
+
+// object linked list
+t_object		*obj_lstnew(void *obj, t_obj_type type, t_color color);
+t_object		*obj_lstlsat(t_object *lst);
+void			obj_lstadd_back(t_object **lst, t_object *new);
 
 #endif

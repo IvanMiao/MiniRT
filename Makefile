@@ -6,7 +6,7 @@
 #    By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/11 21:57:02 by ymiao             #+#    #+#              #
-#    Updated: 2025/08/21 22:31:33 by ymiao            ###   ########.fr        #
+#    Updated: 2025/08/22 20:42:40 by ymiao            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ SRC_DIR	= src/
 SRC		= main.c test.c \
 			math_tool/vector_part1.c math_tool/vector_part2.c \
 			math_tool/color.c \
+			objects/objects_list.c \
 			objects/sphere.c \
 			objects/plane.c \
 			objects/cylinder.c \
