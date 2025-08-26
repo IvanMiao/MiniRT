@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 20:36:39 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/22 20:43:02 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/08/26 20:26:30 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static double	hit_main(t_cylinder *cy, t_ray *ray, t_cy_info *info)
 	return (-1.0);
 }
 
-static	double	hit_caps(t_cylinder *cy, t_ray *ray, t_cy_info *info)
+static double	hit_caps(t_cylinder *cy, t_ray *ray, t_cy_info *info)
 {
 	t_plane		cap;
 	double		t;

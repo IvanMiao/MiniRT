@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 00:11:02 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/20 03:23:11 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/08/26 20:23:43 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,14 +60,13 @@ static t_color	calculate_diffuse_light(t_light light, t_vector hit_point,
 /**
  * @brief Calculates all lighting effects
  * 
- * @param ambient
- * @param light
+ * @param t_minirt including ambient and light
  * @param hit_point
  * @param normal
  * @param object_color
  * @return The final combined color
  */
-t_color	calculate_combined_light(t_minirt *rt,
+t_color	combine_light(t_minirt *rt,
 						t_vector hit_point, t_vector normal, t_color obj_color)
 {
 	t_color	ambient_color;

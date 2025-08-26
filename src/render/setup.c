@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 02:47:32 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/22 21:19:32 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/08/26 20:25:52 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ static void	add_sphere(t_object **objs)
 	
 	sp = mem_manager(MALLOC, sizeof(t_sphere), NULL);
 	sp->center = vector_init(random_double(-50, 30),
-							random_double(-20, 20),
+							random_double(-5, 20),
 							random_double(-100, -30));
-	sp->radius = random_double(1, 9);
+	sp->radius = random_double(2, 7);
 	sp->color = color_init_d(random_double(0, 1),
 							random_double(0, 1),
 							random_double(0, 1));
@@ -43,6 +43,7 @@ static void	add_sphere(t_object **objs)
 // 设置点光源
 void	setup_scene(t_minirt *rt)
 {
+	// 测试文件，待修改
 	srand(time(NULL));
 	t_sphere	*sphere;
 	t_plane		*plane;
@@ -53,7 +54,7 @@ void	setup_scene(t_minirt *rt)
 	cylinder = mem_manager(MALLOC, sizeof(t_cylinder), NULL);
 
 	sphere->center = vector_init(-10, 0, -40);
-	sphere->radius = 10;
+	sphere->radius = 5;
 	sphere->color = color_init_d(1, 0, 0);
 
 	plane->point = vector_init(0, -10, 0);

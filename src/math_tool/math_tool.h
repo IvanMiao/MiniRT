@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/12 16:33:28 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/21 22:18:37 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/08/26 20:09:22 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,6 @@ t_vector	vector_cross(t_vector v1, t_vector v2);
 
 t_color		color_init(int r, int g, int b);
 t_color		color_init_d(double r, double g, double b);
-t_color		color_add(t_color c1, t_color c2);
-t_color		color_scale(t_color c, double scalar);
-t_color		color_mult(t_color c1, t_color c2);
 int			color_to_int(t_color color);
 
 #endif

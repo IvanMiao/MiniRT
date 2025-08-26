@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/12 16:56:13 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/20 03:19:17 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/08/26 20:33:43 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,18 +56,22 @@ void	init_event(t_minirt *rt);
 // render - mlx helper function
 void	put_pixel(t_img *img, int x, int y, int color);
 
-// test
-// camera projection
+// (render -- parser )setup the whole scene
+// (this func should be replaced by parser)
 void	setup_scene(t_minirt *rt);
 
+// render - camera projection
 void	setup_cam_coords(t_camera *camera);
 t_ray	gen_cam_ray(t_camera *camera, int x, int y);
 
+// render - calculate shadows
 bool	is_in_shadow(t_object *objs, t_vector hit_point, t_vector light_pos);
 
-t_color	calculate_combined_light(t_minirt *rt,
+// render - calculate final color(light)
+t_color	combine_light(t_minirt *rt,
 			t_vector hit_point, t_vector normal, t_color obj_color);
 
+// test for the entry point
 void	test_sphere(t_minirt *rt);
 
 #endif

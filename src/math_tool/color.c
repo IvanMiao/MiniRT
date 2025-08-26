@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 17:54:58 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/16 19:22:43 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/08/26 20:09:16 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,36 +33,6 @@ t_color	color_init_d(double r, double g, double b)
 	res.r = r;
 	res.g = g;
 	res.b = b;
-	return (res);
-}
-
-t_color	color_add(t_color c1, t_color c2)
-{
-	t_color	res;
-
-	res.r = c1.r + c2.r;
-	res.g = c1.g + c2.g;
-	res.b = c1.b + c2.b;
-	return (res);
-}
-
-t_color	color_scale(t_color c, double scalar)
-{
-	t_color	res;
-
-	res.r = c.r * scalar;
-	res.g = c.g * scalar;
-	res.b = c.b * scalar;
-	return (res);
-}
-
-t_color	color_mult(t_color c1, t_color c2)
-{
-	t_color	res;
-
-	res.r = c1.r * c2.r;
-	res.g = c1.g * c2.g;
-	res.b = c1.b * c2.b;
 	return (res);
 }
 
