@@ -134,7 +134,7 @@ screen_y = -(2.0 * (y + 0.5) / HEIGHT - 1.0) * camera->half_height;
 	- (x + 0.5) 是为了让光线穿过像素中心，而不是左上角。
 	- (x + 0.5) / WIDTH 将其归一化到 [0, 1] 范围。
 	- 2.0 * ... - 1.0 将其映射到 [-1, 1] 的标准范围。
-	- 乘以 half_width/half_height 将其缩放到之前计算的虚拟成像平面的实际大小。
+	- 乘以 half_width/half_height 将其缩放到之前计算的(由FOV确定的)虚拟成像平面的实际大小。
 	- screen_y 前的负号是因为屏幕坐标y通常向下为正，而我们的3D世界坐标y向上为正。
 
 ```c
@@ -163,6 +163,23 @@ ray.direction = vector_normalize(ray.direction);
 	- 光线的起点 (origin) 就是摄像机的位置。
 	- 光线的方向 (direction) 就是从起点指向我们刚刚计算的 screen_point 的向量。
 	- 最后将方向向量单位化。
+
+### func `is_in_shadow`
+
+计算阴影：判断一个点是否处于阴影之中。
+
+从物体表面的某一点 `hit_point` 向光源 `light_pos` 发射一条新的光线（称为**阴影光线shadow ray**）。如果这条光线在到达光源之前，撞到了场景中的**任何其他物体**，那么 `hit_point` 就被遮挡了，处于阴影中。
+
+1. 构建一条从物体表面指向光源的“阴影光线”，并设定一个最大有效距离（到光源的距离）
+2. 遍历场景中的所有物体
+3. 每一个物体，调用 `hit_for_shadow` 
+4. `hit_for_shadow` 根据物体的具体类型，调用正确的数学函数来计算阴影光线是否与该物体相交
+5. `is_in_shadow` 检查返回的相交距离 `t`，如果发现一个有效的遮挡物（`0 < t < dist_to_light`），就判定该点在阴影中
+
+
+### func `combine_light`
+
+
 
 ## Structs
 
