@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/12 00:19:30 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/18 20:32:12 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/08/27 19:00:17 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,16 @@ static void	init_minirt(t_minirt *rt)
 	init_event(rt);
 }
 
-int	main(void)
+int	main(int ac, char **av)
 {
 	t_minirt	rt;
 
+	(void)av;
+	if (ac != 2)
+	{
+		ft_putstr_fd("Error\nusage: ./miniRT file.rt", 2);
+		exit(EXIT_FAILURE);
+	}
 	init_minirt(&rt);
 	test_sphere(&rt);
 	return (0);

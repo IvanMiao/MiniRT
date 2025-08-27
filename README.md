@@ -3,8 +3,8 @@ Ray tracing projet
 
 ## TODO
 
-1. t_color: double or int?
-2. t_object: linked list?
+1. parsing
+2. bonus: specular reflection ?
 
 ## Architecture
 
