@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 02:47:32 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/26 20:25:52 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/08/27 18:44:53 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,26 @@ static void	add_sphere(t_object **objs)
 							random_double(0, 1),
 							random_double(0, 1));
 	obj_lstadd_back(objs, obj_lstnew(sp, SPHERE, sp->color));
+}
+
+
+static void	add_plane(t_object **objs)
+{
+	t_plane	*pl;
+	
+	pl = mem_manager(MALLOC, sizeof(t_plane), NULL);
+	// pl->point = vector_init(random_double(-50, 30),
+	// 						random_double(10, 40),
+	// 						random_double(-100, -30));
+	// pl->normal = vector_init(random_double(0, 0.5),
+	// 						random_double(0, 1),
+	// 						random_double(0, 0.5));
+	pl->point = vector_init(30, -10, 0);
+	pl->normal = vector_init(-1, 0.5, 0);
+	pl->color = color_init_d(random_double(0, 1),
+							random_double(0, 1),
+							random_double(0, 1));
+	obj_lstadd_back(objs, obj_lstnew(pl, PLANE, pl->color));
 }
 
 /**
@@ -73,7 +93,7 @@ void	setup_scene(t_minirt *rt)
 	rt->ambient.ratio = 0.15;
 	rt->ambient.color = color_init_d(1.0, 1.0, 1.0);
 	rt->light.position = vector_init(-80, 80, 10);
-	rt->light.ratio = 0.7;
+	rt->light.ratio = 0.6;
 
 	t_object	*objs;
 	objs = NULL;
@@ -83,8 +103,9 @@ void	setup_scene(t_minirt *rt)
 	obj_lstadd_back(&objs, obj_lstnew(cylinder, CYLINDER, cylinder->color));
 	add_sphere(&objs);
 	add_sphere(&objs);
-	add_sphere(&objs);
-	add_sphere(&objs);
-	add_sphere(&objs);
+	add_plane(&objs);
+	// add_sphere(&objs);
+	// add_sphere(&objs);
+	// add_sphere(&objs);
 	rt->object = objs;
 }
