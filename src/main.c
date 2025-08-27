@@ -22,10 +22,23 @@ static void	init_minirt(t_minirt *rt)
 	init_event(rt);
 }
 
-int	main(void)
+// int	main(void)
+// {
+// 	t_minirt	rt;
+
+
+// 	init_minirt(&rt);
+// 	test_sphere(&rt);
+// 	return (0);
+// }
+
+int	main(int argc, char **argv)
 {
 	t_minirt	rt;
 
+	if (argc != 2)
+		ft_printf("ERROR: input error");
+	parsing_rt(argv[1], &rt);
 	init_minirt(&rt);
 	test_sphere(&rt);
 	return (0);

@@ -22,6 +22,7 @@
 # include <string.h>
 # include <X11/X.h>
 # include <X11/keysym.h>
+# include <ctype.h>
 
 # include "../mlx_linux/mlx.h"
 

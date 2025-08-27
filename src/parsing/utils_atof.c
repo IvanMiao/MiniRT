@@ -1,0 +1,72 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_atof.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jinhuang <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/27 20:54:23 by jinhuang          #+#    #+#             */
+/*   Updated: 2025/08/27 20:59:24 by jinhuang         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "minirt.h"
+
+static const char	*skip_whitespace_and_sign(const char *str, int *sign)
+{
+	*sign = 1;
+	while (*str == ' ' || *str == '\t' || *str == '\n')
+		str++;
+	if (*str == '-' || *str == '+')
+	{
+		if (*str == '-')
+			*sign = -1;
+		str++;
+	}
+	return (str);
+}
+
+static double	parse_integer_part(const char **str)
+{
+	double	res;
+
+	res = 0.0;
+	while (**str >= '0' && **str <= '9')
+	{
+		res = res * 10.0 + (**str - '0');
+		(*res)++;
+	}
+	return (res);
+}
+
+static double	parse_fraction_part(const char **str)
+{
+	double	res;
+	double	div;
+
+	res = 0.0;
+	div = 10.0;
+	if (**str == '.')
+	{
+		(*str)++;
+		while (*str >= '0' && **str <= '9')
+		{
+			res += (*str - '0') / div;
+			div *= 10.0;
+			(*str)++;
+		}
+	}
+	return (res);
+}
+
+double	ft_atof(const char *str)
+{
+	int	sign;
+	double	int_part;
+	double	frac_part;
+
+	str = skip_whitespace_and_sign(str, &sign);
+	int_part = parse_integer_part(&str);
+	frac_part = parse_fraction_part(&str);
+	return (sign * (int_part + frac_part));
+}
