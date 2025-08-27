@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/12 16:33:28 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/27 23:33:26 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/08/27 20:36:11 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include <math.h>
 # define WIDTH 1200
 # define HEIGHT 900
+
+# define SAMPELS_PER_PIXEL	32
 
 # define M_PI 3.14159265358979323846
 
