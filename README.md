@@ -4,12 +4,17 @@ Ray tracing projet
 ## TODO
 
 1. parsing
+	- fix: empty .rt file
+	- fix: .rt file has no ACL elements
+	- fix: .rt file has several A/C/L elements
 	- fix: includes space like `\t`
 	- fix: light's color is optional
-	- .rt files for test
+	- add more .rt files for test
 
-2. bonus: shader - specular reflection [shininess -> calculate spec_light(all_lights.c)]
-3. bonus: anti-aliasing
+2. NORM! 
+
+3. bonus: shader - specular reflection [shininess -> calculate spec_light(all_lights.c)]
+4. bonus: anti-aliasing
 
 ## Architecture
 
