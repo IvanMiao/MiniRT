@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_atof.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jinhuang <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 20:54:23 by jinhuang          #+#    #+#             */
-/*   Updated: 2025/08/27 20:59:24 by jinhuang         ###   ########.fr       */
+/*   Updated: 2025/08/29 23:39:55 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static double	parse_fraction_part(const char **str)
 		(*str)++;
 		while (**str >= '0' && **str <= '9')
 		{
-			res += (**str - '0') / div; 
+			res += (**str - '0') / div;
 			div *= 10.0;
 			(*str)++;
 		}
@@ -61,7 +61,7 @@ static double	parse_fraction_part(const char **str)
 
 double	ft_atof(const char *str)
 {
-	int	sign;
+	int		sign;
 	double	int_part;
 	double	frac_part;
 

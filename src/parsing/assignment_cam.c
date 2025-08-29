@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   assgniment.c                                       :+:      :+:    :+:   */
+/*   assignment_cam.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jinhuang <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 19:27:21 by jinhuang          #+#    #+#             */
-/*   Updated: 2025/08/27 19:46:06 by jinhuang         ###   ########.fr       */
+/*   Updated: 2025/08/29 23:50:41 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,13 @@
 t_vector	parse_vector(char *str)
 {
 	t_vector	v;
-	char	**coords;
+	char		**coords;
 
 	coords = ft_split(str, ',');
 	if (!coords)
 		ft_error("failed to allocate memory");
 	if (count_tokens(coords) != 3)
-	{
-		//free_tokens(coords);
 		ft_error("wrong vector");
-	}
 	v.x = ft_atof(coords[0]);
 	v.y = ft_atof(coords[1]);
 	v.z = ft_atof(coords[2]);
@@ -66,5 +63,3 @@ void	parse_camera(char **tokens, t_minirt *rt)
 	rt->camera.initialized = 1;
 	setup_cam_coords(&rt->camera);
 }
-
-

@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 15:15:54 by ymiao             #+#    #+#             */
-/*   Updated: 2024/12/06 16:32:00 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/08/29 23:44:21 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,46 +88,3 @@ char	*get_next_line(int fd)
 	buf = check_buf(buf);
 	return (line);
 }
-
-/*
-  int    main(void)
-{
-    char *line;
-    char *name = "read_error.txt";
-    int fd = open(name, O_RDONLY);
-    line = get_next_line(fd);
-    printf("%s\n", line);
-    free(line);
-    line = get_next_line(fd);
-    printf("%s\n", line);
-    free(line);
-    line = get_next_line(80);
-    printf("%s\n", line);
-    free(line);
-    close(fd);
-    fd = open(name, O_RDONLY);
-    line = get_next_line(fd);
-    printf("%s\n", line);
-    free(line);
-    return (0);
-}
-
-
-int	main(void)
-{
-	char	*s;
-	int		fd;
-	int		i;
-
-	fd = open("test.txt", O_RDONLY);
-	i = -1;
-	while (++i < 500)
-	{
-		s = get_next_line(fd);
-		printf("Find the next line [%d]: %s\n", i, s);
-		free(s);
-	}
-	close(fd);
-	return (0);
-}
-*/

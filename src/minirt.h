@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/12 16:56:13 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/29 17:49:37 by jinhuang         ###   ########.fr       */
+/*   Updated: 2025/08/29 23:56:56 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@
 # include "objects/objects.h"
 # include "render/scene.h"
 # include "utils/utils.h"
+
+# define EPSILON 1e-6
 
 typedef struct s_img
 {

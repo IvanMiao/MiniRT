@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jinhuang <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 18:57:45 by jinhuang          #+#    #+#             */
-/*   Updated: 2025/08/27 19:25:41 by jinhuang         ###   ########.fr       */
+/*   Updated: 2025/08/29 23:46:42 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void	loading_file(char *filename, t_minirt *rt)
 {
-	int	fd;
+	int		fd;
 	char	*line;
 
 	fd = open(filename, O_RDONLY);
@@ -26,12 +26,10 @@ void	loading_file(char *filename, t_minirt *rt)
 	{
 		if (!is_empty_or_comment(line))
 			parse_line(line, rt);
-		//printf("finished");
 		//free(line);
 		line = get_next_line(fd);
 	}
 	close(fd);
-	printf("finished");
 }
 
 bool	is_empty_or_comment(char *line)
@@ -85,10 +83,7 @@ void	parse_line(char *line, t_minirt *rt)
 		parse_plane(tokens, rt);
 	else if (ft_strcmp(tokens[0], "cy") == 0)
 		parse_cylinder(tokens, rt);
-	// else
-	// {
-	// 	fprintf(stderr, "Invalid identifier: %s\n", tokens[0]);
-	// 	ft_error("invalid type");
-	// }
+	else
+		ft_error("invalid type");
 	//free_tokens(tokens);
 }

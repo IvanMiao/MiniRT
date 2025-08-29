@@ -1,43 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   assgniment_amb.c                                   :+:      :+:    :+:   */
+/*   assignment_amb.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jinhuang <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 19:47:41 by jinhuang          #+#    #+#             */
-/*   Updated: 2025/08/27 20:26:28 by jinhuang         ###   ########.fr       */
+/*   Updated: 2025/08/29 23:51:14 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minirt.h"
 
-t_color    parse_color(char *str)
+t_color	parse_color(char *str)
 {
-        char    **comp;
-        int     r;
-        int     g;
-        int     b;
+	char	**comp;
+	int		r;
+	int		g;
+	int		b;
 
-        comp = ft_split(str, ',');
-        if (count_tokens(comp) != 3)
-        {
-                //free_tokens(comp);
-                ft_error("wrong format of color");
-        }
-        r = ft_atoi(comp[0]);
-        g = ft_atoi(comp[1]);
-        b = ft_atoi(comp[2]);
-        if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
-        {
-                //free_tokens(comp);
-                ft_error("out of range of RGB color");
-        }
-        //free_tokens(comp);
-        return (color_init(r,g,b));
+	comp = ft_split(str, ',');
+	if (count_tokens(comp) != 3)
+		ft_error("wrong format of color");
+	r = ft_atoi(comp[0]);
+	g = ft_atoi(comp[1]);
+	b = ft_atoi(comp[2]);
+	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
+		ft_error("out of range of RGB color");
+	//free_tokens(comp);
+	return (color_init(r, g, b));
 }
 
-void 	parse_ambient(char **tokens, t_minirt *rt)
+void	parse_ambient(char **tokens, t_minirt *rt)
 {
 	if (count_tokens(tokens) != 3)
 		ft_error("wrong elements");
@@ -52,7 +46,7 @@ void 	parse_ambient(char **tokens, t_minirt *rt)
 void	parse_light(char **tokens, t_minirt *rt)
 {
 	t_vector	position;
-	double	ratio;
+	double		ratio;
 
 	if (count_tokens(tokens) != 4)
 		ft_error("wrong format of light");
@@ -66,5 +60,3 @@ void	parse_light(char **tokens, t_minirt *rt)
 	rt->light.ratio = ratio;
 	rt->light.initialized = 1;
 }
-	
-

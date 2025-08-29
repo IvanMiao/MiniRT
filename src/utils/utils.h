@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 23:04:30 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/29 17:55:13 by jinhuang         ###   ########.fr       */
+/*   Updated: 2025/08/29 23:45:21 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,6 @@
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 10
 # endif
-
-
-typedef struct s_list
-{
-	char			*str_buf;
-	struct s_list	*next;
-}				t_list;
-
 
 typedef struct s_node
 {
