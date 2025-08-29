@@ -4,7 +4,11 @@ Ray tracing projet
 ## TODO
 
 1. parsing
-2. bonus: specular reflection ?
+	- code in src/parsing/
+	- add tools in src/utils/
+	- .rt files for test
+2. bonus: shader - specular reflection [shininess -> calculate spec_light(all_lights.c)]
+3. bonus: anti-aliasing
 
 ## Architecture
 
@@ -55,7 +59,7 @@ Ray tracing projet
 利用向量点积的特性， v · v = |v|^2, 球体公式可以写成：
 `(P - C) · (P - C) = r^2`
 
-#### func `hit_sphere()`
+#### sphere hit func `hit_sphere()`
 
 判断一条给定的光线是否与一个给定的球体相交。若相交，找出最近的交点。
 
@@ -88,7 +92,7 @@ Ray tracing projet
 - `c = vector_dot(oc, oc) - sp->radius * sp->radius`： C = oc · oc - r^2
 - `discriment = b * b - 4 * a * c`
 
-#### func `sphere_normal_at`
+#### sphere normal func `sphere_normal_at`
 
 给定球体上一个点 p，计算该点的法线向量。获取球体(sphere)的法线(normal)在(at)[某个点]
 
@@ -99,6 +103,69 @@ Ray tracing projet
 Normal = p - C
 
 计算机图形学中，法线向量常被要求是单位向量，这能极大简化后续运算。
+
+
+### Cylinder
+
+一个有限高度的圆柱体，在3D空间中可以由以下几个参数定义：
+
+- 基底圆心 (Center): 我们通常将其定义为底部圆盘的中心点，记作 C。
+- 轴向向量 (Normal/Axis): 一个从基底圆心 C 指向顶部圆心的单位向量，记作 V。这个向量定义了圆柱体的朝向和中心轴。
+- 半径 (Radius): 圆柱体的半径，记作 r。
+- 高度 (Height): 圆柱体的高度，记作 h。
+
+圆柱体的侧面是所有到中心轴的垂直距离等于半径 r 的点的集合。
+
+想象空间中任意一点 P。我们想知道它是否在无限延伸的圆柱体侧面上。
+
+1.  从圆柱体基底圆心 `C` 到点 `P` 有一个向量 `oc = P - C`。
+2.  这个向量 `oc` 可以被分解为两个相互垂直的分量：
+    *   一个**平行于**轴向 `V` 的分量。
+    *   一个**垂直于**轴向 `V` 的分量。
+3.  这个垂直分量的长度，就是点 `P` 到中心轴的垂直距离。
+4.  利用向量投影，`oc` 在轴向 `V` 上的投影向量是 `(oc · V) * V`。
+5.  根据向量减法，从 `oc` 中减去它的平行分量，剩下的就是垂直分量：`oc_perp = oc - (oc · V) * V`。
+6.  点 `P` 在圆柱体侧面上的条件是，这个垂直分量的长度等于半径 `r`，即 `|oc_perp| = r`。
+7.  为了避免开方，我们使用平方形式：`|oc_perp|^2 = r^2`。 即 `|oc - (oc · V) * V|^2 = r^2`
+
+根据向量的勾股定理 `|a|^2 = |a_parallel|^2 + |a_perp|^2`，可以把上式简化为：
+
+`|oc_perp|^2 = |oc|^2 - |oc_parallel|^2`
+
+`|oc_perp|^2 = (oc · oc) - ((oc · V) * V · (oc · V) * V)`
+
+`V` 是单位向量，`V · V = 1`，因此：
+
+`|oc_perp|^2 = (oc · oc) - (oc · V)^2`
+
+所以，无限圆柱体侧面的方程为：**(P - C) · (P - C) - ((P - C) · V)^2 = r^2**
+
+#### cylinder hit func `hit_cylinder`
+
+1. 计算光线与**无限圆柱体侧面**的交点。
+2. 计算光线与**两个顶/底盖**的交点。
+3. 在所有有效的交点中，找出离光线起点最近的那个。
+
+将光线方程 `P(t) = O + t*D` 代入上面推导出的无限圆柱体方程，可得：
+
+ `P - C = (O + t*D) - C`
+
+ 令光线起点到圆柱体基底中心的向量为 oc_ray,则 `oc_ray = O - C`
+
+ 代入方程：
+
+ `((oc_ray + t*D) · (oc_ray + t*D)) - ((oc_ray + t*D) · V)^2 - r^2 = 0`
+
+ 又是一个关于 `t` 的一元二次方程。三个系数分别为：
+
+ - A： `A = (D · D) - (D · V)^2`
+ - B： `B = 2 * ((D · oc_ray) - (D · V) * (oc_ray · V))`
+ - C： `C = (oc_ray · oc_ray) - (oc_ray · V)^2 - r^2`
+
+ 
+#### cylinder normal func `cylinder_normal_at`
+
+
 
 
 ### func `setup_cam_coords`
@@ -204,4 +271,14 @@ ray.direction = vector_normalize(ray.direction);
 - `t_vector origin`: 光线的起点。
 - `t_vector direction`: 光线的方向。
 
+
+### `t_cylinder`
+
+定义圆柱体的结构体。
+
+- `t_vector center`: 中心点
+- `t_vector normal`: 轴线方向
+- `double	diameter`: 直径
+- `double	height`: 高度
+- `t_color	color`: 颜色
 
