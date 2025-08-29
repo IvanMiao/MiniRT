@@ -42,7 +42,7 @@ static void	main_loop(t_minirt *rt)
 
 void	test_sphere(t_minirt *rt)
 {
-	setup_scene(rt);
+	//setup_scene(rt);
 	setup_cam_coords(&rt->camera);
 	main_loop(rt);
 	mlx_put_image_to_window(rt->mlx, rt->mlx_win, rt->img.img, 0, 0);

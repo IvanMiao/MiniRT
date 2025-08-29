@@ -36,6 +36,7 @@ static void	add_sphere(t_object **objs)
 	obj_lstadd_back(objs, obj_lstnew(sp, SPHERE, sp->color));
 }
 
+
 static void	add_plane(t_object **objs)
 {
 	t_plane	*pl;

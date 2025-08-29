@@ -32,6 +32,7 @@ typedef struct s_camera
 	t_vector	viewpoint;
 	t_vector	direction;
 	int			fov;
+	int			initialized;
 
 	t_vector	u;
 	t_vector	v;
@@ -48,6 +49,7 @@ typedef struct s_light
 {
 	t_vector	position;
 	double		ratio;
+	int			initialized;
 }	t_light;
 
 typedef struct s_ray
