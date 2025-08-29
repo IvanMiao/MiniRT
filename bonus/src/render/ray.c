@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 23:12:07 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/29 17:29:36 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/08/27 21:18:15 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,12 @@ t_ray	gen_cam_ray(t_camera *camera, int x, int y)
 	double		screen_y;
 	t_vector	screen_point;
 
+	//test maas begin
+	// double rand_x = (double)rand() / (RAND_MAX + 1.0);
+    // double rand_y = (double)rand() / (RAND_MAX + 1.0);
+	// screen_x = (2.0 * (x + rand_x) / WIDTH - 1.0) * camera->half_width;
+	// screen_y = -(2.0 * (y + rand_y) / HEIGHT - 1.0) * camera->half_height;
+	//end
 	screen_x = (2.0 * (x + 0.5) / WIDTH - 1.0) * camera->half_width;
 	screen_y = -(2.0 * (y + 0.5) / HEIGHT - 1.0) * camera->half_height;
 	screen_point = camera->viewpoint;
