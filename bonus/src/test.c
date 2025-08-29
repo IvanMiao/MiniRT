@@ -6,11 +6,29 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 03:53:08 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/27 23:31:04 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/08/27 21:18:11 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+/* test for Multisampling anti-aliasing(maas)
+
+	t_color	pixel_color;
+
+	pixel_color = color_init_d(0, 0, 0);
+	int s = 0;
+	while (s < SAMPELS_PER_PIXEL)
+	{
+		ray = gen_cam_ray(&rt->camera, x, y);
+		hit = trace_ray(rt->object, &ray);
+		if (hit.hit)
+			pixel_color = color_add(pixel_color, combine_light
+					(rt, hit.point, hit.normal, hit.obj_ptr->color));
+		s++;
+	}
+
+*/
 
 static void	main_loop(t_minirt *rt)
 {
@@ -42,7 +60,7 @@ static void	main_loop(t_minirt *rt)
 
 void	test_sphere(t_minirt *rt)
 {
-	//setup_scene(rt);
+	setup_scene(rt);
 	setup_cam_coords(&rt->camera);
 	main_loop(rt);
 	mlx_put_image_to_window(rt->mlx, rt->mlx_win, rt->img.img, 0, 0);

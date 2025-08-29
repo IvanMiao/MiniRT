@@ -45,15 +45,6 @@ static void	init_rt(t_minirt *rt)
 	rt->object = NULL;
 }
 
-// int	main(void)
-// {
-// 	t_minirt	rt;
-
-
-// 	init_minirt(&rt);
-// 	test_sphere(&rt);
-// 	return (0);
-// }
 
 #include <stdio.h>
 
@@ -154,7 +145,6 @@ int	main(int argc, char **argv)
 	loading_file(argv[1], &rt);
 	print_rt_status(&rt);
 	print_objects(rt.object);
-	init_minirt(&rt);
 	test_sphere(&rt);
 	return (0);
 }
