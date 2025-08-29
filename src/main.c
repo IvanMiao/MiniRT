@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/12 00:19:30 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/29 18:30:04 by jinhuang         ###   ########.fr       */
+/*   Updated: 2025/08/29 20:31:38 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,12 +139,15 @@ int	main(int argc, char **argv)
 {
 	t_minirt	rt;
 
+    // (void)argv;
+
 	if (argc != 2)
 		ft_error("input error");
 	init_rt(&rt);
 	loading_file(argv[1], &rt);
 	print_rt_status(&rt);
 	print_objects(rt.object);
+    init_minirt(&rt);
 	test_sphere(&rt);
 	return (0);
 }
