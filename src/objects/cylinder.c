@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 20:36:39 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/26 20:26:30 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/08/29 16:45:09 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,34 +34,38 @@ static double	hit_main(t_cylinder *cy, t_ray *ray, t_cy_info *info)
 	return (-1.0);
 }
 
+static double	hit_caps2(t_plane *cap, t_ray *ray, t_cy_info *info)
+{
+	double		t;
+	t_vector	p;
+	double		radius_sq;
+
+	radius_sq = info->radius * info->radius;
+	t = hit_plane(cap, ray);
+	if (t > 0)
+	{
+		p = vector_add(ray->origin, vector_mult(ray->direction, t));
+		if (vector_length_sq(vector_sub(p, cap->point)) <= radius_sq)
+			return (t);
+	}
+	return (-1.0);
+}
+
 static double	hit_caps(t_cylinder *cy, t_ray *ray, t_cy_info *info)
 {
 	t_plane		cap;
-	double		t;
-	double		closest_t;
-	t_vector	p;
+	double		t1;
+	double		t2;
 
-	closest_t = -1.0;
 	cap.point = vector_add(cy->center, vector_mult(info->normal, cy->height));
 	cap.normal = info->normal;
-	t = hit_plane(&cap, ray);
-	if (t > 0)
-	{
-		p = vector_add(ray->origin, vector_mult(ray->direction, t));
-		if (vector_length_sq(vector_sub(p, cap.point)) <= pow(info->radius, 2))
-			closest_t = t;
-	}
+	t1 = hit_caps2(&cap, ray, info);
 	cap.point = cy->center;
 	cap.normal = vector_mult(info->normal, -1);
-	t = hit_plane(&cap, ray);
-	if (t > 0)
-	{
-		p = vector_add(ray->origin, vector_mult(ray->direction, t));
-		if (vector_length_sq(vector_sub(p, cap.point)) <= pow(info->radius, 2)
-			&& (closest_t < 0 || t < closest_t))
-			closest_t = t;
-	}
-	return (closest_t);
+	t2 = hit_caps2(&cap, ray, info);
+	if (t1 > 0 && (t2 < 0 || t1 < t2))
+		return (t1);
+	return (t2);
 }
 
 double	hit_cylinder(t_cylinder *cy, t_ray *ray)
