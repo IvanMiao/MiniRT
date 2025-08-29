@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/12 16:56:13 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/26 20:33:43 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/08/29 17:49:37 by jinhuang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,25 @@ t_color	combine_light(t_minirt *rt,
 
 // test for the entry point
 void	test_sphere(t_minirt *rt);
+
+//parsing
+t_color	parse_color(char *str);
+void	parse_ambient(char **tokens, t_minirt *rt);
+void	parse_light(char **tokens, t_minirt *rt);
+t_vector	parse_vector(char *str);
+bool	in_range(double val, double min, double max);
+t_vector	normalize_vector(t_vector v);
+void	parse_camera(char **tokens, t_minirt *rt);
+void	parse_sphere(char **tokens, t_minirt *rt);
+void	parse_plane(char **tokens, t_minirt *rt);
+void	parse_cylinder(char **tokens, t_minirt *rt);
+void	loading_file(char *filename, t_minirt *rt);
+bool	is_empty_or_comment(char *line);
+void	free_tokens(char **tokens);
+void	parse_line(char *line, t_minirt *rt);
+double	ft_atof(const char *str);
+void	ft_error(const char *msg);
+int	count_tokens(char **tokens);
+bool	is_normalized_vector(t_vector v);
 
 #endif

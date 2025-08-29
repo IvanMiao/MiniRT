@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "../minirt.h"
 
 #define EPSILON 1e-6
 
@@ -20,6 +20,7 @@ void	ft_error(const char *msg)
 	while (*msg)
 		write(2, msg++, 1);
 	write(2, "\n", 1);
+	mem_manager(FREEALL, 0, NULL);
 	exit(EXIT_FAILURE);
 }
 

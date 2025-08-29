@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "../minirt.h"
 
 void	parse_sphere(char **tokens, t_minirt *rt)
 {
@@ -29,6 +29,7 @@ void	parse_sphere(char **tokens, t_minirt *rt)
 	sphere =  mem_manager(MALLOC, sizeof(t_sphere), NULL);
 	sphere->center = center;
 	sphere->radius = diameter / 2.0;
+	sphere->diameter = diameter;
 	sphere->color = color;
 	obj_lstadd_back(&rt->object, obj_lstnew(sphere, SPHERE, color));
 }
@@ -48,25 +49,25 @@ void	parse_plane(char **tokens, t_minirt *rt)
 		ft_error("wrong input of plane");
 	normal = vector_normalize(normal);
 	color = parse_color(tokens[3]);
-	plane = malloc(sizeof(t_object));
+	plane = mem_manager(MALLOC, sizeof(t_plane), NULL);
 	if (!plane)
 		ft_error("failed to allocate memory");
-	plane->point = point;
+	plane->point = pos;
 	plane->normal = normal;
 	plane->color = color;
-	add_object(&rt->object, plane);
+	obj_lstadd_back(&rt->object, obj_lstnew(plane, PLANE, color));
 }
 
 void	parse_cylinder(char **tokens, t_minirt *rt)
 {
 	t_cylinder	*cyl;
 	t_vector	center;
-	t_vecyor	normal;
+	t_vector	normal;
 	double	diameter;
 	double	height;
-	t_clor	color;
+	t_color	color;
 
-	 if (count_tokens(tokens) != 4)
+	 if (count_tokens(tokens) != 6)
 		 ft_error("Wrong format of cylinder");
 	 center = parse_vector(tokens[1]);
 	 normal = parse_vector(tokens[2]);

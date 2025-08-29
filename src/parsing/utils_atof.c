@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "../minirt.h"
 
 static const char	*skip_whitespace_and_sign(const char *str, int *sign)
 {
@@ -34,7 +34,7 @@ static double	parse_integer_part(const char **str)
 	while (**str >= '0' && **str <= '9')
 	{
 		res = res * 10.0 + (**str - '0');
-		(*res)++;
+		(*str)++;
 	}
 	return (res);
 }
@@ -49,9 +49,9 @@ static double	parse_fraction_part(const char **str)
 	if (**str == '.')
 	{
 		(*str)++;
-		while (*str >= '0' && **str <= '9')
+		while (**str >= '0' && **str <= '9')
 		{
-			res += (*str - '0') / div;
+			res += (**str - '0') / div; 
 			div *= 10.0;
 			(*str)++;
 		}

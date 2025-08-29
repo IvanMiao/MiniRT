@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "../minirt.h"
 
-void    parse_color(char *str)
+t_color    parse_color(char *str)
 {
         char    **comp;
         int     r;
@@ -22,7 +22,7 @@ void    parse_color(char *str)
         comp = ft_split(str, ',');
         if (count_tokens(comp) != 3)
         {
-                free_tokens(comp);
+                //free_tokens(comp);
                 ft_error("wrong format of color");
         }
         r = ft_atoi(comp[0]);
@@ -30,10 +30,10 @@ void    parse_color(char *str)
         b = ft_atoi(comp[2]);
         if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
         {
-                free_tokens(comp);
+                //free_tokens(comp);
                 ft_error("out of range of RGB color");
         }
-        free_tokens(comp);
+        //free_tokens(comp);
         return (color_init(r,g,b));
 }
 
@@ -53,18 +53,18 @@ void	parse_light(char **tokens, t_minirt *rt)
 {
 	t_vector	position;
 	double	ratio;
-	t_color	color;
 
 	if (count_tokens(tokens) != 4)
 		ft_error("wrong format of light");
-	if (rt->light)
+	if (rt->light.initialized)
 		ft_error("Repeated elements");
 	position = parse_vector(tokens[1]);
 	ratio = ft_atof(tokens[2]);
-	if (ratio < 0.0 || ration > 1.0)
+	if (ratio < 0.0 || ratio > 1.0)
 		ft_error("Light ratio out of range");
 	rt->light.position = position;
 	rt->light.ratio = ratio;
+	rt->light.initialized = 1;
 }
 	
 
