@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/12 16:56:13 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/29 23:56:56 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/08/30 06:12:37 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,9 @@
 # include "render/scene.h"
 # include "utils/utils.h"
 
+# define ACL_ERROR "Scene must have exactly one ambient light(A), \
+one camera(C), and one light(L)"
+
 # define EPSILON 1e-6
 
 typedef struct s_img
@@ -51,6 +54,10 @@ typedef struct s_minirt
 	t_camera	camera;
 	t_light		light;
 	t_object	*object;
+
+	int			a_count;
+	int			c_count;
+	int			l_count;
 }	t_minirt;
 
 //event

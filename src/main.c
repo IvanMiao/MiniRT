@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/12 00:19:30 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/29 23:54:23 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/08/30 06:13:56 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,29 +20,6 @@ static void	init_minirt(t_minirt *rt)
 	rt->img.addr = mlx_get_data_addr(rt->img.img,
 			&rt->img.bits_per_pixel, &rt->img.line_length, &rt->img.endian);
 	init_event(rt);
-}
-
-static void	init_rt(t_minirt *rt)
-{
-	rt->mlx = NULL;
-	rt->mlx_win = NULL;
-	rt->img.img = NULL;
-	rt->img.addr = NULL;
-	rt->img.bits_per_pixel = 0;
-	rt->img.line_length = 0;
-	rt->img.endian = 0;
-	rt->ambient.ratio = -1.0;
-	rt->ambient.color.r = 0;
-	rt->ambient.color.g = 0;
-	rt->ambient.color.b = 0;
-	rt->camera.viewpoint = (t_vector){0.0, 0.0, 0.0};
-	rt->camera.direction = (t_vector){0.0, 0.0, -1.0};
-	rt->camera.fov = 0;
-	rt->camera.initialized = 0;
-	rt->light.position = (t_vector){0.0, 0.0, 0.0};
-	rt->light.ratio = 0.0;
-	rt->light.initialized = 0;
-	rt->object = NULL;
 }
 
 void print_color(const char *name, t_color color)
@@ -62,17 +39,18 @@ void print_rt_status(t_minirt *rt)
 	printf("Ambient Light:\n");
 	printf("  ratio = %.2f\n", rt->ambient.ratio);
 	print_color("  color", rt->ambient.color);
+	printf("  count = %d\n", rt->a_count);
 
 	printf("Camera:\n");
 	print_vector("  viewpoint", rt->camera.viewpoint);
 	print_vector("  direction", rt->camera.direction);
 	printf("  fov = %d\n", rt->camera.fov);
-	printf("  initialized = %d\n", rt->camera.initialized);
+	printf("  count = %d\n", rt->c_count);
 
 	printf("Light:\n");
 	print_vector("  position", rt->light.position);
 	printf("  ratio = %.2f\n", rt->light.ratio);
-	printf("  initialized = %d\n", rt->light.initialized);
+	printf("  count = %d\n", rt->l_count);
 
 	if (rt->object == NULL)
 		printf("Objects: none\n");
@@ -136,11 +114,8 @@ int	main(int argc, char **argv)
 {
 	t_minirt	rt;
 
-	// (void)argv;
-
 	if (argc != 2)
 		ft_error("input error");
-	init_rt(&rt);
 	loading_file(argv[1], &rt);
 	print_rt_status(&rt);
 	print_objects(rt.object);

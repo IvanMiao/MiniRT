@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 17:42:25 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/18 20:31:20 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/08/30 05:54:20 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ typedef struct s_camera
 	t_vector	viewpoint;
 	t_vector	direction;
 	int			fov;
-	int			initialized;
 
 	t_vector	u;
 	t_vector	v;
@@ -49,7 +48,6 @@ typedef struct s_light
 {
 	t_vector	position;
 	double		ratio;
-	int			initialized;
 }	t_light;
 
 typedef struct s_ray

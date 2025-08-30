@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 19:27:21 by jinhuang          #+#    #+#             */
-/*   Updated: 2025/08/29 23:50:41 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/08/30 06:03:54 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_vector	parse_vector(char *str)
 		ft_error("failed to allocate memory");
 	if (count_tokens(coords) != 3)
 		ft_error("wrong vector");
-	v.x = ft_atof(coords[0]);
+	v.x = ft_atof(coords[0]); // check if coords are valid numbers
 	v.y = ft_atof(coords[1]);
 	v.z = ft_atof(coords[2]);
 	//free_tokens(coords);
@@ -50,8 +50,8 @@ void	parse_camera(char **tokens, t_minirt *rt)
 
 	if (count_tokens(tokens) != 4)
 		ft_error("wrong elements");
-	if (rt->camera.initialized)
-		ft_error("Repeated elements");
+	// if (rt->camera.initialized)
+	// 	ft_error("Repeated elements");
 	rt->camera.viewpoint = parse_vector(tokens[1]);
 	rt->camera.direction = parse_vector(tokens[2]);
 	if (!is_normalized_vector(rt->camera.direction))
@@ -60,6 +60,6 @@ void	parse_camera(char **tokens, t_minirt *rt)
 	if (!in_range(fov_double, 0, 180))
 		ft_error("FOV out of range");
 	rt->camera.fov = (int)fov_double;
-	rt->camera.initialized = 1;
+	// rt->camera.initialized = 1;
 	setup_cam_coords(&rt->camera);
 }

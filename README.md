@@ -7,8 +7,9 @@ Ray tracing projet
 	- fix: empty .rt file
 	- fix: .rt file has no ACL elements
 	- fix: .rt file has several A/C/L elements
-	- fix: includes space like `\t`
+	- fix: includes space like `\t` -> ft_split_space() ? 
 	- fix: light's color is optional
+	- fix: before parse_vector() and parse_color(), we need to check if they are *numbers*
 	- add more .rt files for test
 
 2. NORM! 
