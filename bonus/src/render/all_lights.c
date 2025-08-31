@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 00:11:02 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/31 19:23:10 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/08/31 19:47:23 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static t_color	calculate_diffuse_light(t_light light, t_vector hit_point,
 	return (result);
 }
 
-static t_color	calculate_spec_color(t_minirt *rt, t_vector hit_point, t_vector normal)
+static t_color	calculate_spec_color(t_minirt *rt, t_light light, t_vector hit_point, t_vector normal)
 {
 	t_vector	light_dir;
 	t_vector	view_dir;
@@ -65,13 +65,13 @@ static t_color	calculate_spec_color(t_minirt *rt, t_vector hit_point, t_vector n
 	double		spec_intensity;
 	t_color		res;
 
-	light_dir = vector_normalize(vector_sub(rt->light.position, hit_point));
+	light_dir = vector_normalize(vector_sub(light.position, hit_point));
 	view_dir = vector_normalize(vector_sub(rt->camera.viewpoint, hit_point));
 	reflect_dir = vector_sub(vector_mult(normal, 2 * vector_dot(normal, light_dir)), light_dir);
 	spec_intensity = pow(fmax(vector_dot(view_dir, reflect_dir), 0.0), 64.0);
-	res.r = rt->light.ratio * spec_intensity;
-	res.g = res.r;
-	res.b = res.r;
+	res.r = light.ratio * spec_intensity * light.color.r;
+	res.g = light.ratio * spec_intensity * light.color.g;
+	res.b = light.ratio * spec_intensity * light.color.b;
 	return (res);
 }
 
@@ -87,25 +87,32 @@ static t_color	calculate_spec_color(t_minirt *rt, t_vector hit_point, t_vector n
 t_color	combine_light(t_minirt *rt,
 						t_vector hit_point, t_vector normal, t_color obj_color)
 {
-	t_color	ambient_color;
+	//t_color	ambient_color;
 	t_color	diffuse_color;
 	t_color	final_color;
 
 	//test sepcular reflection
 	t_color	spec_color = color_init_d(0, 0, 0);
+	int i = 0;
 
-	ambient_color = calculate_ambient_light(rt->ambient, obj_color);
-	if (!is_in_shadow(rt->object, hit_point, rt->light.position))
+	final_color = calculate_ambient_light(rt->ambient, obj_color);
+	while (i < 2)
 	{
-		diffuse_color = calculate_diffuse_light(rt->light, hit_point,
-				normal, obj_color);
-		spec_color = calculate_spec_color(rt, hit_point, normal);
+		if (!is_in_shadow(rt->object, hit_point, rt->light[i].position))
+		{
+			diffuse_color = calculate_diffuse_light(rt->light[i], hit_point,
+					normal, obj_color);
+			spec_color = calculate_spec_color(rt, rt->light[i], hit_point, normal);
+			final_color = color_add(final_color, diffuse_color);
+			final_color = color_add(final_color, spec_color);
+		}
+		// else
+		// 	diffuse_color = color_init_d(0, 0, 0);
+		// final_color.r = ambient_color.r + diffuse_color.r + spec_color.r;
+		// final_color.g = ambient_color.g + diffuse_color.g + spec_color.g;
+		// final_color.b = ambient_color.b + diffuse_color.b + spec_color.b;
+		i++;
 	}
-	else
-		diffuse_color = color_init_d(0, 0, 0);
-	final_color.r = ambient_color.r + diffuse_color.r + spec_color.r;
-	final_color.g = ambient_color.g + diffuse_color.g + spec_color.g;
-	final_color.b = ambient_color.b + diffuse_color.b + spec_color.b;
 	if (final_color.r > 1.0)
 		final_color.r = 1.0;
 	if (final_color.g > 1.0)

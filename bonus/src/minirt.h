@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/12 16:56:13 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/31 19:21:01 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/08/31 19:28:57 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ typedef struct s_minirt
 	t_img		img;
 	t_ambient	ambient;
 	t_camera	camera;
-	t_light		light;
+	t_light		light[2];
 	t_object	*object;
 
 	int			a_count;
