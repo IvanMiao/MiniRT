@@ -1,34 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/24 16:23:27 by jinhuang          #+#    #+#             */
-/*   Updated: 2025/08/31 01:15:32 by ymiao            ###   ########.fr       */
+/*   Created: 2025/08/31 03:17:29 by ymiao             #+#    #+#             */
+/*   Updated: 2025/08/31 03:30:40 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
+#ifndef PARSING_H
+# define PARSING_H
 
-int	ft_atoi(const char *str)
-{
-	int	count;
-	int	result;
+# include <stdbool.h>
+# include "../math_tool/math_tool.h"
 
-	count = 1;
-	result = 0;
-	while ((*str >= 9 && *str <= 13) || *str == ' ')
-		++str;
-	if (*str == '-')
-		count = -1;
-	if (*str == '-' || *str == '+')
-		++str;
-	while (*str && *str >= '0' && *str <= '9')
-	{
-		result = (result * 10) + *str - '0';
-		++str;
-	}
-	return (result * count);
-}
+t_color		parse_color(char *str);
+t_vector	parse_vector(char *str);
+
+void		free_tokens(char **tokens);
+double		ft_atof(const char *str);
+void		ft_error(const char *msg);
+int			count_tokens(char **tokens);
+bool		is_normalized_vector(t_vector v);
+void		trim_newline(char *str);
+
+#endif

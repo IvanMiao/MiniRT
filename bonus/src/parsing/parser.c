@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 18:57:45 by jinhuang          #+#    #+#             */
-/*   Updated: 2025/08/31 03:40:12 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/08/31 19:19:21 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,6 @@ void	loading_file(char *filename, t_minirt *rt)
 		line = get_next_line(fd);
 	}
 	close(fd);
-	if (rt->a_count != 1 || rt->c_count != 1 || rt->l_count != 1)
+	if (rt->a_count != 1 || rt->c_count != 1 || rt->l_count == 0)
 		ft_error(ACL_ERROR);
 }

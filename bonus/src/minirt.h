@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/12 16:56:13 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/26 20:33:43 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/08/31 19:28:57 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,20 @@
 # include <string.h>
 # include <X11/X.h>
 # include <X11/keysym.h>
+# include <ctype.h>
 
 # include "../mlx_linux/mlx.h"
 
 # include "math_tool/math_tool.h"
+# include "parsing/parsing.h"
 # include "objects/objects.h"
 # include "render/scene.h"
 # include "utils/utils.h"
+
+# define ACL_ERROR "Scene must have exactly one ambient light(A), \
+one camera(C), and one light(L)"
+
+# define EPSILON 1e-6
 
 typedef struct s_img
 {
@@ -46,15 +53,19 @@ typedef struct s_minirt
 	t_img		img;
 	t_ambient	ambient;
 	t_camera	camera;
-	t_light		light;
+	t_light		light[2];
 	t_object	*object;
+
+	int			a_count;
+	int			c_count;
+	int			l_count;
 }	t_minirt;
 
 //event
 void	init_event(t_minirt *rt);
 
-// render - mlx helper function
-void	put_pixel(t_img *img, int x, int y, int color);
+// render
+void	render(t_minirt *rt);
 
 // (render -- parser )setup the whole scene
 // (this func should be replaced by parser)
@@ -71,7 +82,15 @@ bool	is_in_shadow(t_object *objs, t_vector hit_point, t_vector light_pos);
 t_color	combine_light(t_minirt *rt,
 			t_vector hit_point, t_vector normal, t_color obj_color);
 
-// test for the entry point
-void	test_sphere(t_minirt *rt);
+//parsing
+void	loading_file(char *filename, t_minirt *rt);
+void	parse_line(char *line, t_minirt *rt);
+
+void	parse_ambient(char **tokens, t_minirt *rt);
+void	parse_light(char **tokens, t_minirt *rt);
+void	parse_camera(char **tokens, t_minirt *rt);
+void	parse_sphere(char **tokens, t_minirt *rt);
+void	parse_plane(char **tokens, t_minirt *rt);
+void	parse_cylinder(char **tokens, t_minirt *rt);
 
 #endif

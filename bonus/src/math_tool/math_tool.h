@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/12 16:33:28 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/27 20:36:11 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/08/29 16:47:29 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 # define WIDTH 1200
 # define HEIGHT 900
 
-# define SAMPELS_PER_PIXEL	32
-
-# define M_PI 3.14159265358979323846
+# ifndef M_PI
+#  define M_PI 3.14159265358979323846
+# endif
 
 typedef struct s_vector
 {
@@ -28,9 +28,11 @@ typedef struct s_vector
 	double	z;
 }	t_vector;
 
+// attention: elements in t_color are 3 normalized double numbers,
+// instead of 3 int numbers
+// we need initialize the color with `color_init(int r, int g, int b)`
 typedef struct s_color
 {
-	// double or int?
 	double	r;
 	double	g;
 	double	b;

@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 17:42:25 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/18 20:31:20 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/08/31 04:15:12 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define SCENE_H
 
 # include "../math_tool/math_tool.h"
-# include "../objects/objects.h"
 
 // struct for the ambient lighting
 // ratio: [0.0, 1.0]
@@ -32,7 +31,6 @@ typedef struct s_camera
 	t_vector	viewpoint;
 	t_vector	direction;
 	int			fov;
-	int			initialized;
 
 	t_vector	u;
 	t_vector	v;
@@ -49,7 +47,6 @@ typedef struct s_light
 {
 	t_vector	position;
 	double		ratio;
-	int			initialized;
 }	t_light;
 
 typedef struct s_ray
