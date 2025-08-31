@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 00:11:02 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/31 20:47:52 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/08/31 23:54:28 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
  * @param obj_color
  * @return The resulting ambient light color
  */
-static t_color	calculate_ambient_light(t_ambient ambient, t_color obj_color)
+static t_color	cal_ambient_light(t_ambient ambient, t_color obj_color)
 {
 	t_color	result;
 
@@ -38,7 +38,7 @@ static t_color	calculate_ambient_light(t_ambient ambient, t_color obj_color)
  * @param obje_color
  * @return The resulting diffuse light color
  */
-static t_color	calculate_diffuse_light(t_light light, t_vector hit_point,
+static t_color	cal_diff_light(t_light light, t_vector hit_point,
 								t_vector normal, t_color obj_color)
 {
 	t_vector	light_dir;
@@ -57,7 +57,8 @@ static t_color	calculate_diffuse_light(t_light light, t_vector hit_point,
 	return (result);
 }
 
-static t_color	calculate_spec_color(t_minirt *rt, t_light light, t_vector hit_point, t_vector normal)
+static t_color	cal_spec_color(t_minirt *rt,
+						t_light light, t_vector hit_point, t_vector normal)
 {
 	t_vector	light_dir;
 	t_vector	view_dir;
@@ -67,12 +68,23 @@ static t_color	calculate_spec_color(t_minirt *rt, t_light light, t_vector hit_po
 
 	light_dir = vector_normalize(vector_sub(light.position, hit_point));
 	view_dir = vector_normalize(vector_sub(rt->camera.viewpoint, hit_point));
-	reflect_dir = vector_sub(vector_mult(normal, 2 * vector_dot(normal, light_dir)), light_dir);
+	reflect_dir = vector_sub(
+			vector_mult(normal, 2 * vector_dot(normal, light_dir)), light_dir);
 	spec_intensity = pow(fmax(vector_dot(view_dir, reflect_dir), 0.0), 64.0);
 	res.r = light.ratio * spec_intensity * light.color.r;
 	res.g = light.ratio * spec_intensity * light.color.g;
 	res.b = light.ratio * spec_intensity * light.color.b;
 	return (res);
+}
+
+static void	check_final_color(t_color *final_color)
+{
+	if (final_color->r > 1.0)
+		final_color->r = 1.0;
+	if (final_color->g > 1.0)
+		final_color->g = 1.0;
+	if (final_color->b > 1.0)
+		final_color->b = 1.0;
 }
 
 /**
@@ -87,33 +99,26 @@ static t_color	calculate_spec_color(t_minirt *rt, t_light light, t_vector hit_po
 t_color	combine_light(t_minirt *rt,
 						t_vector hit_point, t_vector normal, t_color obj_color)
 {
-	//t_color	ambient_color;
-	t_color	diffuse_color;
+	t_color	diff_color;
 	t_color	final_color;
-
-	//test sepcular reflection
-	t_color	spec_color = color_init_d(0, 0, 0);
+	t_color	spec_color;
 	t_light	*curr_light;
 
-	final_color = calculate_ambient_light(rt->ambient, obj_color);
+	spec_color = color_init_d(0, 0, 0);
+	final_color = cal_ambient_light(rt->ambient, obj_color);
 	curr_light = rt->light;
 	while (curr_light)
 	{
 		if (!is_in_shadow(rt->object, hit_point, curr_light->position))
 		{
-			diffuse_color = calculate_diffuse_light(*curr_light, hit_point,
+			diff_color = cal_diff_light(*curr_light, hit_point,
 					normal, obj_color);
-			spec_color = calculate_spec_color(rt, *curr_light, hit_point, normal);
-			final_color = color_add(final_color, diffuse_color);
+			spec_color = cal_spec_color(rt, *curr_light, hit_point, normal);
+			final_color = color_add(final_color, diff_color);
 			final_color = color_add(final_color, spec_color);
 		}
 		curr_light = curr_light->next;
 	}
-	if (final_color.r > 1.0)
-		final_color.r = 1.0;
-	if (final_color.g > 1.0)
-		final_color.g = 1.0;
-	if (final_color.b > 1.0)
-		final_color.b = 1.0;
+	check_final_color(&final_color);
 	return (final_color);
 }

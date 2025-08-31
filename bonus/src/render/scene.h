@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 17:42:25 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/31 20:42:17 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/08/31 23:31:21 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ typedef struct s_light
 	double			ratio;
 	t_color			color;
 	struct s_light	*next;
-	
 }	t_light;
 
 typedef struct s_ray

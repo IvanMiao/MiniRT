@@ -6,14 +6,14 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 23:12:07 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/31 19:24:09 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/08/31 23:30:42 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minirt.h"
 
 /**
- * @brief Generate a ray for the pixel(x, y)
+ * @brief Generate a ray for the pixel(x, y), using maas
  * 
  * @param camera
  * @param x 0 < x < WIDTH-1
@@ -26,19 +26,15 @@
 t_ray	gen_cam_ray(t_camera *camera, int x, int y)
 {
 	t_ray		ray;
+	double		rand_nb;
 	double		screen_x;
 	double		screen_y;
 	t_vector	screen_point;
 
-	//test maas begin
-	// double rand_x = (double)rand() / (RAND_MAX + 1.0);
-    // double rand_y = (double)rand() / (RAND_MAX + 1.0);
-	// screen_x = (2.0 * (x + rand_x) / WIDTH - 1.0) * camera->half_width;
-	// screen_y = -(2.0 * (y + rand_y) / HEIGHT - 1.0) * camera->half_height;
-	//end
-
-	screen_x = (2.0 * (x + 0.5) / WIDTH - 1.0) * camera->half_width;
-	screen_y = -(2.0 * (y + 0.5) / HEIGHT - 1.0) * camera->half_height;
+	rand_nb = (double)rand() / (RAND_MAX + 1.0);
+	screen_x = (2.0 * (x + rand_nb) / WIDTH - 1.0) * camera->half_width;
+	rand_nb = (double)rand() / (RAND_MAX + 1.0);
+	screen_y = -(2.0 * (y + rand_nb) / HEIGHT - 1.0) * camera->half_height;
 	screen_point = camera->viewpoint;
 	screen_point = vector_add(screen_point, vector_mult(camera->u, screen_x));
 	screen_point = vector_add(screen_point, vector_mult(camera->v, screen_y));

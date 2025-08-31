@@ -6,12 +6,11 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 20:02:34 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/31 20:02:36 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/08/31 23:28:36 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
-
 
 static size_t	check_c(char letter)
 {

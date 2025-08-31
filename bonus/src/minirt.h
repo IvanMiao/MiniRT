@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/12 16:56:13 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/31 20:37:12 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/09/01 00:02:56 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <X11/X.h>
 # include <X11/keysym.h>
 # include <ctype.h>
+# include <time.h>
 
 # include "../mlx_linux/mlx.h"
 
@@ -66,10 +67,6 @@ void	init_event(t_minirt *rt);
 
 // render
 void	render(t_minirt *rt);
-
-// (render -- parser )setup the whole scene
-// (this func should be replaced by parser)
-void	setup_scene(t_minirt *rt);
 
 // render - camera projection
 void	setup_cam_coords(t_camera *camera);

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   light.list.c                                       :+:      :+:    :+:   */
+/*   light_list.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 20:38:07 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/31 20:41:59 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/08/31 23:29:11 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 t_light	*light_lstnew(t_vector position, double ratio, t_color color)
 {
-	t_light *new_light;
-	
+	t_light	*new_light;
+
 	new_light = mem_manager(MALLOC, sizeof(t_light), NULL);
 	new_light->position = position;
 	new_light->ratio = ratio;
@@ -27,7 +27,7 @@ t_light	*light_lstnew(t_vector position, double ratio, t_color color)
 void	light_lstadd_back(t_light **lst, t_light *new_light)
 {
 	t_light	*curr;
-	
+
 	if (!lst || !new_light)
 		return ;
 	if (!*lst)

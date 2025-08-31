@@ -6,11 +6,12 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 20:14:02 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/31 19:23:42 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/08/31 23:31:08 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minirt.h"
+#define SAMPELS_PER_PIXEL 1
 
 static void	put_pixel(t_img *img, int x, int y, int color)
 {
@@ -20,12 +21,15 @@ static void	put_pixel(t_img *img, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-/* test for Multisampling anti-aliasing(maas)
+static t_color	sample_maas(t_minirt *rt, int x, int y)
+{
+	int				s;
+	t_ray			ray;
+	t_hit_record	hit;
+	t_color			pixel_color;
 
-	t_color	pixel_color;
-
+	s = 0;
 	pixel_color = color_init_d(0, 0, 0);
-	int s = 0;
 	while (s < SAMPELS_PER_PIXEL)
 	{
 		ray = gen_cam_ray(&rt->camera, x, y);
@@ -35,16 +39,15 @@ static void	put_pixel(t_img *img, int x, int y, int color)
 					(rt, hit.point, hit.normal, hit.obj_ptr->color));
 		s++;
 	}
-
-*/
+	pixel_color = color_div(pixel_color, SAMPELS_PER_PIXEL);
+	return (pixel_color);
+}
 
 static void	main_loop(t_minirt *rt)
 {
-	int				x;
-	int				y;
-	int				pixel_color;
-	t_ray			ray;
-	t_hit_record	hit;
+	int		x;
+	int		y;
+	t_color	pixel_color;
 
 	y = 0;
 	while (y < HEIGHT)
@@ -52,14 +55,8 @@ static void	main_loop(t_minirt *rt)
 		x = 0;
 		while (x < WIDTH)
 		{
-			ray = gen_cam_ray(&rt->camera, x, y);
-			hit = trace_ray(rt->object, &ray);
-			if (hit.hit)
-				pixel_color = color_to_int(combine_light
-						(rt, hit.point, hit.normal, hit.obj_ptr->color));
-			else
-				pixel_color = 0x000000;
-			put_pixel(&rt->img, x, y, pixel_color);
+			pixel_color = sample_maas(rt, x, y);
+			put_pixel(&rt->img, x, y, color_to_int(pixel_color));
 			x++;
 		}
 		y++;
