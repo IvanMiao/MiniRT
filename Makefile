@@ -6,7 +6,7 @@
 #    By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/11 21:57:02 by ymiao             #+#    #+#              #
-#    Updated: 2025/08/31 03:04:57 by ymiao            ###   ########.fr        #
+#    Updated: 2025/08/31 03:44:36 by ymiao            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,6 @@ SRC		= main.c \
 			parsing/utils_parse.c \
 			parsing/parser.c \
 			event/event.c \
-			render/setup.c \
 			render/camera.c \
 			render/ray.c \
 			render/shadow.c \
@@ -39,6 +38,7 @@ SRC		= main.c \
 			render/render.c \
 			utils/mem_manager.c \
 			utils/ft_split.c \
+			utils/ft_split_space.c \
 			utils/ft_putstr_fd.c \
 			utils/ft_strcmp.c \
 			utils/ft_atoi.c \

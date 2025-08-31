@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 18:57:45 by jinhuang          #+#    #+#             */
-/*   Updated: 2025/08/31 02:52:41 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/08/31 03:40:12 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	parse_line(char *line, t_minirt *rt)
 {
 	char	**tokens;
 
-	tokens = ft_split(line, ' ');
+	tokens = ft_split_space(line);
 	mem_manager(FREE, 0, line);
 	if (!tokens || !tokens[0])
 		return ;

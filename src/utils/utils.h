@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 23:04:30 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/31 01:12:45 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/08/31 03:39:23 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_node
 
 void	ft_putstr_fd(char *s, int fd);
 char	**ft_split(char const *s, char c);
+char	**ft_split_space(char const *s);
 
 void	*mem_manager(int mode, size_t size, void *ptr);
 
