@@ -26,6 +26,8 @@ void	setup_cam_coords(t_camera *camera)
 
 	camera->aspect_ratio = (double)WIDTH / (double)HEIGHT;
 	world_up = vector_init(0, 1, 0);
+	if (fabs(vector_dot(camera->direction, world_up)) > 0.999)
+		world_up = vector_init(0, 0, 1);
 	camera->w = vector_mult(camera->direction, -1.0);
 	camera->w = vector_normalize(camera->w);
 	camera->u = vector_cross(world_up, camera->w);

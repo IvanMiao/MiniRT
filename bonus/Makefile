@@ -6,17 +6,17 @@
 #    By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/11 21:57:02 by ymiao             #+#    #+#              #
-#    Updated: 2025/08/27 23:29:58 by ymiao            ###   ########.fr        #
+#    Updated: 2025/08/31 19:25:09 by ymiao            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC		= clang
 CFLAG	= -Wall -Werror -Wextra
 
-NAME	= miniRT_bonus
+NAME	= miniRT
 
 SRC_DIR	= src/
-SRC		= main.c test.c \
+SRC		= main.c \
 			math_tool/vector_part1.c math_tool/vector_part2.c \
 			math_tool/color.c \
 			objects/objects_list.c \
@@ -24,8 +24,13 @@ SRC		= main.c test.c \
 			objects/plane.c \
 			objects/cylinder.c \
 			objects/hit.c \
+			parsing/assignment_amb.c \
+			parsing/assignment_obj.c \
+			parsing/assignment_cam.c \
+			parsing/utils_atof.c \
+			parsing/utils_parse.c \
+			parsing/parser.c \
 			event/event.c \
-			render/setup.c \
 			render/camera.c \
 			render/ray.c \
 			render/shadow.c \
@@ -33,7 +38,14 @@ SRC		= main.c test.c \
 			render/render.c \
 			utils/mem_manager.c \
 			utils/ft_split.c \
+			utils/ft_split_space.c \
 			utils/ft_putstr_fd.c \
+			utils/ft_strcmp.c \
+			utils/ft_atoi.c \
+			utils/ft_isspace.c \
+			utils/ft_isdigit.c \
+			utils/get_next_line.c \
+			utils/get_next_line_utils.c \
 
 OBJ_DIR	= obj/
 OBJ		= $(addprefix $(OBJ_DIR),$(SRC:.c=.o))

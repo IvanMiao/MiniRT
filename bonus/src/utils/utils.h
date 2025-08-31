@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 23:04:30 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/16 00:25:35 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/08/31 03:39:23 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,15 @@
 # include <stddef.h>
 # include <stdlib.h>
 # include <stdio.h>
+# include <fcntl.h>
 
 # define MALLOC		1
 # define FREE		2
 # define FREEALL	3
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 10
+# endif
 
 typedef struct s_node
 {
@@ -31,7 +36,20 @@ typedef struct s_node
 
 void	ft_putstr_fd(char *s, int fd);
 char	**ft_split(char const *s, char c);
+char	**ft_split_space(char const *s);
 
 void	*mem_manager(int mode, size_t size, void *ptr);
+
+int		ft_atoi(const char *str);
+int		ft_strcmp(char *s1, char *s2);
+int		ft_isspace(char c);
+int		ft_isdigit(char c);
+
+size_t	ft_strlen(const char *s);
+char	*ft_strchr(const char *s, int c);
+char	*ft_strdup(const char *s);
+char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strlcpy(const char *src, size_t size);
+char	*get_next_line(int fd);
 
 #endif

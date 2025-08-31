@@ -1,0 +1,69 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_parse.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/27 20:51:29 by jinhuang          #+#    #+#             */
+/*   Updated: 2025/08/31 01:51:38 by ymiao            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../minirt.h"
+
+void	ft_error(const char *msg)
+{
+	write(2, "Error\n", 6);
+	while (*msg)
+		write(2, msg++, 1);
+	write(2, "\n", 1);
+	mem_manager(FREEALL, 0, NULL);
+	exit(EXIT_FAILURE);
+}
+
+int	count_tokens(char **tokens)
+{
+	int	count;
+
+	count = 0;
+	while (tokens[count])
+		count++;
+	return (count);
+}
+
+bool	is_normalized_vector(t_vector v)
+{
+	double	length_squared;
+
+	length_squared = v.x * v.x + v.y * v.y + v.z * v.z;
+	return (fabs(length_squared - 1.0) < EPSILON);
+}
+
+void	free_tokens(char **tokens)
+{
+	int	i;
+
+	if (!tokens)
+		return ;
+	i = 0;
+	while (tokens[i])
+	{
+		mem_manager(FREE, 0, tokens[i]);
+		i++;
+	}
+	mem_manager(FREE, 0, tokens);
+}
+
+void	trim_newline(char *str)
+{
+	int	i;
+
+	if (!str)
+		return ;
+	i = 0;
+	while (str[i])
+		i++;
+	if (i > 0 && str[i - 1] == '\n')
+		str[i - 1] = '\0';
+}

@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 00:11:02 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/27 21:17:58 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/08/31 19:23:10 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,16 +51,14 @@ static t_color	calculate_diffuse_light(t_light light, t_vector hit_point,
 	if (light_intensity < 0.0)
 		light_intensity = 0.0;
 	light_intensity *= light.ratio;
-	result.r = light_intensity * obj_color.r;
-	result.g = light_intensity * obj_color.g;
-	result.b = light_intensity * obj_color.b;
+	result.r = light_intensity * obj_color.r * light.color.r;
+	result.g = light_intensity * obj_color.g * light.color.g;
+	result.b = light_intensity * obj_color.b * light.color.b;
 	return (result);
 }
 
-//test func
 static t_color	calculate_spec_color(t_minirt *rt, t_vector hit_point, t_vector normal)
 {
-	//test sepcular reflection
 	t_vector	light_dir;
 	t_vector	view_dir;
 	t_vector	reflect_dir;
@@ -101,8 +99,6 @@ t_color	combine_light(t_minirt *rt,
 	{
 		diffuse_color = calculate_diffuse_light(rt->light, hit_point,
 				normal, obj_color);
-
-		//test
 		spec_color = calculate_spec_color(rt, hit_point, normal);
 	}
 	else
