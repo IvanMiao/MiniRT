@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 17:42:25 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/31 19:09:30 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/08/31 20:42:17 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,11 @@ typedef struct s_camera
 // ratio: [0.0, 1.0]
 typedef struct s_light
 {
-	t_vector	position;
-	double		ratio;
-	t_color		color;
+	t_vector		position;
+	double			ratio;
+	t_color			color;
+	struct s_light	*next;
+	
 }	t_light;
 
 typedef struct s_ray
@@ -55,5 +57,8 @@ typedef struct s_ray
 	t_vector	origin;
 	t_vector	direction;
 }	t_ray;
+
+t_light	*light_lstnew(t_vector position, double ratio, t_color color);
+void	light_lstadd_back(t_light **lst, t_light *new_light);
 
 #endif

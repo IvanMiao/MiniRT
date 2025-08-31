@@ -6,14 +6,14 @@
 #    By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/11 21:57:02 by ymiao             #+#    #+#              #
-#    Updated: 2025/08/31 19:25:09 by ymiao            ###   ########.fr        #
+#    Updated: 2025/08/31 20:48:18 by ymiao            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC		= clang
 CFLAG	= -Wall -Werror -Wextra
 
-NAME	= miniRT
+NAME	= miniRT_bonus
 
 SRC_DIR	= src/
 SRC		= main.c \
@@ -34,6 +34,7 @@ SRC		= main.c \
 			render/camera.c \
 			render/ray.c \
 			render/shadow.c \
+			render/light_list.c \
 			render/all_lights.c \
 			render/render.c \
 			utils/mem_manager.c \

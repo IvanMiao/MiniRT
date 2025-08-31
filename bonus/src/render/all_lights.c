@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 00:11:02 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/31 19:47:23 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/08/31 20:47:52 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,25 +93,21 @@ t_color	combine_light(t_minirt *rt,
 
 	//test sepcular reflection
 	t_color	spec_color = color_init_d(0, 0, 0);
-	int i = 0;
+	t_light	*curr_light;
 
 	final_color = calculate_ambient_light(rt->ambient, obj_color);
-	while (i < 2)
+	curr_light = rt->light;
+	while (curr_light)
 	{
-		if (!is_in_shadow(rt->object, hit_point, rt->light[i].position))
+		if (!is_in_shadow(rt->object, hit_point, curr_light->position))
 		{
-			diffuse_color = calculate_diffuse_light(rt->light[i], hit_point,
+			diffuse_color = calculate_diffuse_light(*curr_light, hit_point,
 					normal, obj_color);
-			spec_color = calculate_spec_color(rt, rt->light[i], hit_point, normal);
+			spec_color = calculate_spec_color(rt, *curr_light, hit_point, normal);
 			final_color = color_add(final_color, diffuse_color);
 			final_color = color_add(final_color, spec_color);
 		}
-		// else
-		// 	diffuse_color = color_init_d(0, 0, 0);
-		// final_color.r = ambient_color.r + diffuse_color.r + spec_color.r;
-		// final_color.g = ambient_color.g + diffuse_color.g + spec_color.g;
-		// final_color.b = ambient_color.b + diffuse_color.b + spec_color.b;
-		i++;
+		curr_light = curr_light->next;
 	}
 	if (final_color.r > 1.0)
 		final_color.r = 1.0;

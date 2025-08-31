@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/12 00:19:30 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/31 19:37:51 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/08/31 20:46:27 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,7 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 		ft_error("input error");
 	rt.object = NULL;
+	rt.light = NULL;
 	rt.a_count = 0;
 	rt.c_count = 0;
 	rt.l_count = 0;
