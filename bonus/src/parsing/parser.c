@@ -81,6 +81,8 @@ void	parse_line(char *line, t_minirt *rt)
 		parse_plane(tokens, rt);
 	else if (ft_strcmp(tokens[0], "cy") == 0)
 		parse_cylinder(tokens, rt);
+	else if (ft_strcmp(tokens[0], "co") == 0)
+		parse_cone(tokens, rt);
 	else
 		ft_error("Invalid type");
 	free_tokens(tokens);

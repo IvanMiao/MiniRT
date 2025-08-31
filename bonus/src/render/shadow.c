@@ -20,6 +20,8 @@ static double	hit_for_shadow(t_object *obj, t_ray *ray)
 		return (hit_plane((t_plane *)obj->obj, ray));
 	if (obj->type == CYLINDER)
 		return (hit_cylinder((t_cylinder *)obj->obj, ray));
+	if (obj->type == CONE)
+		return (hit_cone((t_cone *)obj->obj, ray));
 	return (INFINITY);
 }
 

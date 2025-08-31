@@ -24,6 +24,8 @@ SRC		= main.c \
 			objects/plane.c \
 			objects/cylinder.c \
 			objects/hit.c \
+			objects/cone.c \
+			objects/cone_normal.c \
 			parsing/assignment_amb.c \
 			parsing/assignment_obj.c \
 			parsing/assignment_cam.c \

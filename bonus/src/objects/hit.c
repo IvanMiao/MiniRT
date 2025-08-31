@@ -20,6 +20,8 @@ static double	hit_obj(t_object *obj, t_ray *ray)
 		return (hit_plane((t_plane *)obj->obj, ray));
 	if (obj->type == CYLINDER)
 		return (hit_cylinder((t_cylinder *)obj->obj, ray));
+	if (obj->type == CONE)
+		return (hit_cone((t_cone *)obj->obj, ray));
 	return (INFINITY);
 }
 
@@ -34,6 +36,9 @@ static void	cal_point_and_normal(t_hit_record *record, t_ray *ray)
 		record->normal = ((t_plane *)record->obj_ptr->obj)->normal;
 	else if (record->obj_ptr->type == CYLINDER)
 		record->normal = cylinder_normal_at((t_cylinder *)record->obj_ptr->obj,
+				record->point);
+	else if (record->obj_ptr->type == CONE)
+		record->normal = cone_normal_at((t_cone *)record->obj_ptr->obj,
 				record->point);
 }
 
