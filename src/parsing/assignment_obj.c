@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 20:27:17 by jinhuang          #+#    #+#             */
-/*   Updated: 2025/08/29 23:40:57 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/08/31 03:16:53 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	parse_sphere(char **tokens, t_minirt *rt)
 	center = parse_vector(tokens[1]);
 	diameter = ft_atof(tokens[2]);
 	if (diameter < 0)
-		ft_error("wrong input of sphere");
+		ft_error("Wrong input of sphere");
 	color = parse_color(tokens[3]);
 	sphere = mem_manager(MALLOC, sizeof(t_sphere), NULL);
 	sphere->center = center;
@@ -46,21 +46,18 @@ void	parse_plane(char **tokens, t_minirt *rt)
 	pos = parse_vector(tokens[1]);
 	normal = parse_vector(tokens[2]);
 	if (!is_normalized_vector(normal))
-		ft_error("wrong input of plane");
+		ft_error("Wrong input of plane");
 	normal = vector_normalize(normal);
 	color = parse_color(tokens[3]);
 	plane = mem_manager(MALLOC, sizeof(t_plane), NULL);
-	if (!plane)
-		ft_error("failed to allocate memory");
 	plane->point = pos;
 	plane->normal = normal;
 	plane->color = color;
 	obj_lstadd_back(&rt->object, obj_lstnew(plane, PLANE, color));
 }
 
-void	parse_cylinder(char **tokens, t_minirt *rt)
+static void	parse_cylinder2(char **tokens, t_cylinder *cyl)
 {
-	t_cylinder	*cyl;
 	t_vector	center;
 	t_vector	normal;
 	double		diameter;
@@ -72,17 +69,24 @@ void	parse_cylinder(char **tokens, t_minirt *rt)
 	center = parse_vector(tokens[1]);
 	normal = parse_vector(tokens[2]);
 	if (!is_normalized_vector(normal))
-		ft_error("wrong input of cylinder");
+		ft_error("Wrong input of cylinder");
 	diameter = ft_atof(tokens[3]);
 	height = ft_atof(tokens[4]);
 	if (diameter < 0 || height < 0)
-		ft_error("diameter and height couldnt be negative");
+		ft_error("Diameter and height cannot be negative");
 	color = parse_color(tokens[5]);
-	cyl = mem_manager(MALLOC, sizeof(t_cylinder), NULL);
 	cyl->center = center;
 	cyl->normal = vector_normalize(normal);
 	cyl->diameter = diameter;
 	cyl->height = height;
 	cyl->color = color;
-	obj_lstadd_back(&rt->object, obj_lstnew(cyl, CYLINDER, color));
+}
+
+void	parse_cylinder(char **tokens, t_minirt *rt)
+{
+	t_cylinder	*cyl;
+
+	cyl = mem_manager(MALLOC, sizeof(t_cylinder), NULL);
+	parse_cylinder2(tokens, cyl);
+	obj_lstadd_back(&rt->object, obj_lstnew(cyl, CYLINDER, cyl->color));
 }

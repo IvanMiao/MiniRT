@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 20:54:23 by jinhuang          #+#    #+#             */
-/*   Updated: 2025/08/29 23:39:55 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/08/31 01:49:07 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,7 @@ double	ft_atof(const char *str)
 	str = skip_whitespace_and_sign(str, &sign);
 	int_part = parse_integer_part(&str);
 	frac_part = parse_fraction_part(&str);
+	if (*str != '\0')
+		ft_error("Invalid number format for a double number");
 	return (sign * (int_part + frac_part));
 }

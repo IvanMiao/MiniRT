@@ -6,7 +6,7 @@
 #    By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/11 21:57:02 by ymiao             #+#    #+#              #
-#    Updated: 2025/08/22 20:42:40 by ymiao            ###   ########.fr        #
+#    Updated: 2025/08/31 03:04:57 by ymiao            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CFLAG	= -Wall -Werror -Wextra
 NAME	= miniRT
 
 SRC_DIR	= src/
-SRC		= main.c test.c \
+SRC		= main.c \
 			math_tool/vector_part1.c math_tool/vector_part2.c \
 			math_tool/color.c \
 			objects/objects_list.c \
@@ -43,6 +43,7 @@ SRC		= main.c test.c \
 			utils/ft_strcmp.c \
 			utils/ft_atoi.c \
 			utils/ft_isspace.c \
+			utils/ft_isdigit.c \
 			utils/get_next_line.c \
 			utils/get_next_line_utils.c \
 

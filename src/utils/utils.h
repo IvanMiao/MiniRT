@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 23:04:30 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/29 23:45:21 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/08/31 01:12:45 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	*mem_manager(int mode, size_t size, void *ptr);
 int		ft_atoi(const char *str);
 int		ft_strcmp(char *s1, char *s2);
 int		ft_isspace(char c);
+int		ft_isdigit(char c);
 
 size_t	ft_strlen(const char *s);
 char	*ft_strchr(const char *s, int c);

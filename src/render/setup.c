@@ -6,13 +6,13 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 02:47:32 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/29 17:41:42 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/08/31 03:09:48 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minirt.h"
 
-
+/*
 #include <time.h>
 static double	random_double(double min, double max)
 {
@@ -72,9 +72,7 @@ static void	add_cylinder(t_object **objs)
 	obj_lstadd_back(objs, obj_lstnew(cy, CYLINDER, cy->color));
 }
 
-/**
- * @brief set up all the elements in the scene
- */
+
 void	setup_scene(t_minirt *rt)
 {
 	// 测试文件，待修改
@@ -111,16 +109,13 @@ void	setup_scene(t_minirt *rt)
 
 	t_object	*objs;
 	objs = NULL;
-	// objs = obj_lstnew(sphere, SPHERE, sphere->color);
 	obj_lstadd_back(&objs, obj_lstnew(sphere, SPHERE, sphere->color));
 	obj_lstadd_back(&objs, obj_lstnew(plane, PLANE, plane->color));
 	obj_lstadd_back(&objs, obj_lstnew(cylinder, CYLINDER, cylinder->color));
 	add_sphere(&objs);
-	// add_sphere(&objs);
 	add_plane(&objs);
 	add_plane2(&objs);
 	add_cylinder(&objs);
-	// add_sphere(&objs);
-	// add_sphere(&objs);
 	rt->object = objs;
 }
+*/

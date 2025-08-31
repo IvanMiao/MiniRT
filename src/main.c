@@ -6,22 +6,13 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/12 00:19:30 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/30 06:13:56 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/08/31 03:20:19 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-static void	init_minirt(t_minirt *rt)
-{
-	rt->mlx = mlx_init();
-	rt->mlx_win = mlx_new_window(rt->mlx, WIDTH, HEIGHT, "MiniRT");
-	rt->img.img = mlx_new_image(rt->mlx, WIDTH, HEIGHT);
-	rt->img.addr = mlx_get_data_addr(rt->img.img,
-			&rt->img.bits_per_pixel, &rt->img.line_length, &rt->img.endian);
-	init_event(rt);
-}
-
+/*
 void print_color(const char *name, t_color color)
 {
 	printf("%s: R=%f, G=%f, B=%f\n", name, color.r, color.g, color.b);
@@ -109,6 +100,17 @@ void print_objects(t_object *obj_list)
 		curr = curr->next;
 	}
 }
+*/
+
+static void	init_minirt(t_minirt *rt)
+{
+	rt->mlx = mlx_init();
+	rt->mlx_win = mlx_new_window(rt->mlx, WIDTH, HEIGHT, "MiniRT");
+	rt->img.img = mlx_new_image(rt->mlx, WIDTH, HEIGHT);
+	rt->img.addr = mlx_get_data_addr(rt->img.img,
+			&rt->img.bits_per_pixel, &rt->img.line_length, &rt->img.endian);
+	init_event(rt);
+}
 
 int	main(int argc, char **argv)
 {
@@ -116,10 +118,14 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 		ft_error("input error");
+	rt.object = NULL;
+	rt.a_count = 0;
+	rt.c_count = 0;
+	rt.l_count = 0;
 	loading_file(argv[1], &rt);
-	print_rt_status(&rt);
-	print_objects(rt.object);
+	// print_rt_status(&rt);
+	// print_objects(rt.object);
 	init_minirt(&rt);
-	test_sphere(&rt);
+	render(&rt);
 	return (0);
 }

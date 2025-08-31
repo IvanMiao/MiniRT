@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/12 16:56:13 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/30 06:12:37 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/08/31 03:19:03 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # include "../mlx_linux/mlx.h"
 
 # include "math_tool/math_tool.h"
+# include "parsing/parsing.h"
 # include "objects/objects.h"
 # include "render/scene.h"
 # include "utils/utils.h"
@@ -63,8 +64,8 @@ typedef struct s_minirt
 //event
 void	init_event(t_minirt *rt);
 
-// render - mlx helper function
-void	put_pixel(t_img *img, int x, int y, int color);
+// render
+void	render(t_minirt *rt);
 
 // (render -- parser )setup the whole scene
 // (this func should be replaced by parser)
@@ -81,27 +82,15 @@ bool	is_in_shadow(t_object *objs, t_vector hit_point, t_vector light_pos);
 t_color	combine_light(t_minirt *rt,
 			t_vector hit_point, t_vector normal, t_color obj_color);
 
-// test for the entry point
-void	test_sphere(t_minirt *rt);
-
 //parsing
-t_color	parse_color(char *str);
+void	loading_file(char *filename, t_minirt *rt);
+void	parse_line(char *line, t_minirt *rt);
+
 void	parse_ambient(char **tokens, t_minirt *rt);
 void	parse_light(char **tokens, t_minirt *rt);
-t_vector	parse_vector(char *str);
-bool	in_range(double val, double min, double max);
-t_vector	normalize_vector(t_vector v);
 void	parse_camera(char **tokens, t_minirt *rt);
 void	parse_sphere(char **tokens, t_minirt *rt);
 void	parse_plane(char **tokens, t_minirt *rt);
 void	parse_cylinder(char **tokens, t_minirt *rt);
-void	loading_file(char *filename, t_minirt *rt);
-bool	is_empty_or_comment(char *line);
-void	free_tokens(char **tokens);
-void	parse_line(char *line, t_minirt *rt);
-double	ft_atof(const char *str);
-void	ft_error(const char *msg);
-int	count_tokens(char **tokens);
-bool	is_normalized_vector(t_vector v);
 
 #endif
