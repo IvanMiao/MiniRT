@@ -68,7 +68,7 @@ void	parse_light(char **tokens, t_minirt *rt)
 	t_vector	position;
 	double		ratio;
 
-	if (count_tokens(tokens) != 4 || count_tokens(tokens) != 3)
+	if (count_tokens(tokens) != 4 && count_tokens(tokens) != 3)
 		ft_error("wrong format of light");
 	position = parse_vector(tokens[1]);
 	ratio = ft_atof(tokens[2]);

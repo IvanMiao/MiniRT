@@ -165,7 +165,8 @@ Normal = p - C
  
 #### cylinder normal func `cylinder_normal_at`
 
-
+###cone
+cone 格式假设是：cone <center> <normal> <height> <angle> <color>
 
 
 ### func `setup_cam_coords`

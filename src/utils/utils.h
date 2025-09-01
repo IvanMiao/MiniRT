@@ -19,6 +19,8 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <fcntl.h>
+# include <limits.h>
+# include "../minirt.h"
 
 # define MALLOC		1
 # define FREE		2

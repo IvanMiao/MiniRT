@@ -64,11 +64,15 @@ double	ft_atof(const char *str)
 	int		sign;
 	double	int_part;
 	double	frac_part;
+	double	result;
 
 	str = skip_whitespace_and_sign(str, &sign);
 	int_part = parse_integer_part(&str);
 	frac_part = parse_fraction_part(&str);
 	if (*str != '\0')
 		ft_error("Invalid number format for a double number");
-	return (sign * (int_part + frac_part));
+	result = sign * (int_part + frac_part);
+	if (!isfinite(result))
+		ft_error("Double overflow");
+	return (result);
 }
