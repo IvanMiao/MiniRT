@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 20:51:29 by jinhuang          #+#    #+#             */
-/*   Updated: 2025/08/31 01:51:38 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/09/01 18:28:30 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	ft_error(const char *msg)
 		write(2, msg++, 1);
 	write(2, "\n", 1);
 	mem_manager(FREEALL, 0, NULL);
+	mem_manager(CLOSE_FD, 0, NULL);
 	exit(EXIT_FAILURE);
 }
 

@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 19:47:41 by jinhuang          #+#    #+#             */
-/*   Updated: 2025/08/31 19:04:29 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/09/01 18:44:00 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	parse_light(char **tokens, t_minirt *rt)
 	t_vector	position;
 	double		ratio;
 
-	if (count_tokens(tokens) != 4)
+	if (count_tokens(tokens) != 4 || count_tokens(tokens) != 3)
 		ft_error("wrong format of light");
 	position = parse_vector(tokens[1]);
 	ratio = ft_atof(tokens[2]);

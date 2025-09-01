@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 18:57:45 by jinhuang          #+#    #+#             */
-/*   Updated: 2025/08/31 20:46:48 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/09/01 18:31:39 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ void	loading_file(char *filename, t_minirt *rt)
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 		ft_error("Cannot read file");
+	mem_manager(STORE_FD, (size_t)fd, NULL);
 	check_extention(filename);
 	line = get_next_line(fd);
 	while (line != NULL)

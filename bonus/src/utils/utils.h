@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 23:04:30 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/31 03:39:23 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/09/01 18:31:15 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 # define MALLOC		1
 # define FREE		2
 # define FREEALL	3
+# define STORE_FD	4
+# define CLOSE_FD	5
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 10

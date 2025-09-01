@@ -4,18 +4,11 @@ Ray tracing projet
 ## TODO
 
 1. parsing
-	- fix: empty .rt file
-	- fix: .rt file has no ACL elements
-	- fix: .rt file has several A/C/L elements
-	- fix: includes space like `\t` -> ft_split_space() ? 
-	- fix: light's color is optional
-	- fix: before parse_vector() and parse_color(), we need to check if they are *numbers*
 	- add more .rt files for test
+	- double overflow (?) - `ft_atof`
 
 2. NORM! 
 
-3. bonus: shader - specular reflection [shininess -> calculate spec_light(all_lights.c)]
-4. bonus: anti-aliasing
 
 ## Architecture
 

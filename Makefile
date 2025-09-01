@@ -6,7 +6,7 @@
 #    By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/11 21:57:02 by ymiao             #+#    #+#              #
-#    Updated: 2025/08/31 03:44:36 by ymiao            ###   ########.fr        #
+#    Updated: 2025/09/01 18:11:38 by ymiao            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,6 +67,9 @@ check_mlx:
 		rm -f ../$(MLX_TAR); \
 	fi
 
+bonus:
+	cd bonus && make
+
 $(NAME): $(OBJ)
 	$(CC) $(CFLAG) $(OBJ) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -O3 -o $(NAME)
 
@@ -79,7 +82,8 @@ clean :
 
 fclean : clean
 	rm -f $(NAME)
+	cd bonus && make fclean
 
 re : fclean all
 
-.PHONY : all clean fclean re check_mlx
+.PHONY : all clean fclean re check_mlx bonus

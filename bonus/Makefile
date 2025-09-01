@@ -6,7 +6,7 @@
 #    By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/11 21:57:02 by ymiao             #+#    #+#              #
-#    Updated: 2025/09/01 17:39:24 by ymiao            ###   ########.fr        #
+#    Updated: 2025/09/01 18:03:46 by ymiao            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,7 @@ SRC		= main.c \
 			utils/ft_isspace.c \
 			utils/ft_isdigit.c \
 			utils/get_next_line.c \
-			utils/get_next_line_utils.c \
+			utils/get_next_line_utils.c
 
 OBJ_DIR	= obj/
 OBJ		= $(addprefix $(OBJ_DIR),$(SRC:.c=.o))
