@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 02:13:08 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/31 04:19:04 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/09/01 05:24:52 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,10 @@
 # include "../math_tool/math_tool.h"
 # include "../render/scene.h"
 # include <stdbool.h>
+
+# ifndef EPISILON
+#  define EPSILON 1e-6
+# endif
 
 typedef enum e_obj_type
 {
@@ -51,12 +55,15 @@ typedef struct s_cylinder
 
 typedef struct s_cone
 {
-	t_vector center;     
-	t_vector normal;     
-	double height;       
-	double angle;
+	t_vector	center;
+	t_vector	normal;
+	double		height;
+	double		angle;
 	t_color		color;
+
+	double		cos2_a;
 }	t_cone;
+
 typedef struct s_object
 {
 	t_obj_type		type;
@@ -87,6 +94,21 @@ typedef struct s_cy_info
 	double		radius;
 	t_vector	normal;
 }	t_cy_info;
+
+typedef struct s_co_info
+{
+	double		a;
+	double		b;
+	double		c;
+	double		discr;
+	double		t1;
+	double		t2;
+	double		m1;
+	double		m2;
+	t_vector	oc;
+	double		dv;
+	double		ocv;
+}	t_co_info;
 
 // Calculate object hit/normal
 double			hit_sphere(const t_sphere *sp, const t_ray *ray);

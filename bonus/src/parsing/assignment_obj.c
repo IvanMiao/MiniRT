@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 20:27:17 by jinhuang          #+#    #+#             */
-/*   Updated: 2025/08/31 03:16:53 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/09/01 02:34:16 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,6 @@ void	parse_cone(char **tokens, t_minirt *rt)
 	t_vector	normal;
 	double		height;
 	double		angle;
-	t_color		color;
 
 	// 检查参数个数，cone 格式假设是：cone <center> <normal> <height> <angle> <color>
 	if (count_tokens(tokens) != 6)
@@ -121,14 +120,13 @@ void	parse_cone(char **tokens, t_minirt *rt)
 		ft_error("Invalid cone angle");
 	angle = angle * (M_PI / 180.0); // 角度转弧度
 
-	color = parse_color(tokens[5]);
-
 	cone = mem_manager(MALLOC, sizeof(t_cone), NULL);
 	cone->center = center;
 	cone->normal = normal;
 	cone->height = height;
 	cone->angle = angle;
-	cone->color = color;
+	cone->color = parse_color(tokens[5]);
+	cone->cos2_a = cos(angle) * cos(angle);
 
-	obj_lstadd_back(&rt->object, obj_lstnew(cone, CONE, color));
+	obj_lstadd_back(&rt->object, obj_lstnew(cone, CONE, cone->color));
 }
