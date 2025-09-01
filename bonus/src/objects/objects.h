@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 02:13:08 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/31 04:19:04 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/09/01 05:35:35 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,16 @@
 # include "../render/scene.h"
 # include <stdbool.h>
 
+# ifndef EPISILON
+#  define EPSILON 1e-6
+# endif
+
 typedef enum e_obj_type
 {
 	SPHERE,
 	PLANE,
-	CYLINDER
+	CYLINDER,
+	CONE
 }	t_obj_type;
 
 typedef struct s_sphere
@@ -47,6 +52,17 @@ typedef struct s_cylinder
 	double		height;
 	t_color		color;
 }	t_cylinder;
+
+typedef struct s_cone
+{
+	t_vector	center;
+	t_vector	normal;
+	double		height;
+	double		angle;
+	t_color		color;
+
+	double		cos2_a;
+}	t_cone;
 
 typedef struct s_object
 {
@@ -79,6 +95,17 @@ typedef struct s_cy_info
 	t_vector	normal;
 }	t_cy_info;
 
+typedef struct s_co_info
+{
+	double		a;
+	double		b;
+	double		c;
+	double		discr;
+	t_vector	oc;
+	double		dv;
+	double		ocv;
+}	t_co_info;
+
 // Calculate object hit/normal
 double			hit_sphere(const t_sphere *sp, const t_ray *ray);
 t_vector		sphere_normal_at(t_sphere *sp, t_vector p);
@@ -87,6 +114,9 @@ double			hit_plane(t_plane *plane, t_ray *ray);
 
 double			hit_cylinder(t_cylinder *cy, t_ray *ray);
 t_vector		cylinder_normal_at(t_cylinder *cy, t_vector point);
+
+double			hit_cone(t_cone *co, t_ray *ray);
+t_vector		cone_normal_at(t_cone *co, t_vector point);
 
 // Stores hit stats
 t_hit_record	trace_ray(t_object *objs, t_ray *ray);

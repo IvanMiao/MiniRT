@@ -91,5 +91,6 @@ void	parse_camera(char **tokens, t_minirt *rt);
 void	parse_sphere(char **tokens, t_minirt *rt);
 void	parse_plane(char **tokens, t_minirt *rt);
 void	parse_cylinder(char **tokens, t_minirt *rt);
+void	parse_cone(char **tokens, t_minirt *rt);
 
 #endif

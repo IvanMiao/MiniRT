@@ -6,7 +6,7 @@
 #    By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/11 21:57:02 by ymiao             #+#    #+#              #
-#    Updated: 2025/08/31 20:48:18 by ymiao            ###   ########.fr        #
+#    Updated: 2025/09/01 17:39:24 by ymiao            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ SRC		= main.c \
 			objects/plane.c \
 			objects/cylinder.c \
 			objects/hit.c \
+			objects/cone.c \
 			parsing/assignment_amb.c \
 			parsing/assignment_obj.c \
 			parsing/assignment_cam.c \
