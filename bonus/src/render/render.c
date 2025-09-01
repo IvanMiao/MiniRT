@@ -6,12 +6,11 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 20:14:02 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/31 23:31:08 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/09/01 17:35:49 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minirt.h"
-#define SAMPELS_PER_PIXEL 1
 
 static void	put_pixel(t_img *img, int x, int y, int color)
 {
