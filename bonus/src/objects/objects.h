@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 02:13:08 by ymiao             #+#    #+#             */
-/*   Updated: 2025/09/01 05:24:52 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/09/01 05:35:35 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,10 +101,6 @@ typedef struct s_co_info
 	double		b;
 	double		c;
 	double		discr;
-	double		t1;
-	double		t2;
-	double		m1;
-	double		m2;
 	t_vector	oc;
 	double		dv;
 	double		ocv;
