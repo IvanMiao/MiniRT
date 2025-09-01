@@ -251,9 +251,25 @@ ray.direction = vector_normalize(ray.direction);
 5. `is_in_shadow` 检查返回的相交距离 `t`，如果发现一个有效的遮挡物（`0 < t < dist_to_light`），就判定该点在阴影中
 
 
-### func `combine_light`
+### func `combine_light` - **Phong Reflection Model**
 
+Phong 模型：我们最终在物体表面某一点看到的颜色，是三种不同光照效果的线性叠加（也就是相加）
 
+- 环境光 (Ambient)：物体接收到的无方向的、来自环境的背景光。它给了物体一个基础的、不会全黑的底色。
+
+- 漫反射 (Diffuse)：光线照射到物体粗糙表面后，向各个方向均匀散射的光。这部分光决定了我们看到的物体本身固有的颜色。
+
+- 镜面反射 (Specular)：光线照射到物体光滑表面后，形成的高光。这部分光更多地反映了光源的颜色。
+
+1. `cal_ambient_light` 计算环境光。
+
+2. `cal_diff_light` 计算漫反射。漫反射向四周散射。运用Lambert's Cosine Law, 一个粗糙或无光泽表面接收到的光照强度，与光照方向和表面法线之间夹角的余弦成正比。由于单位向量之间的点积就是两个向量夹角的cos值，所以： (normalized 光照方向) 点积 (表面法线) 即可得到光照强度。结合物体颜色和光源颜色，可得最终`result = light_intensity * obj_color * light.color`
+
+3. `cal_spec_light` 计算镜面反射。
+	- 镜面反射沿一个特定的方向反射。当观察者正好在光线的反射路径上时，就能看到明亮的高光。
+	- 计算光线方向 L(入射光向量) 和 观察方向 V
+	- 利用法线 N 计算反射向量 `R = 2 * (N · L) * N - L`
+	- 漫反射要乘物体色，镜面反射不乘物体色。因为漫反射是物体吸收了部分光谱后反射出的颜色。而镜面反射是光源在光滑表面的镜像。
 
 ## Structs
 

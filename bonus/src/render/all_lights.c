@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 00:11:02 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/31 23:54:28 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/09/01 06:30:57 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static t_color	cal_spec_color(t_minirt *rt,
 	view_dir = vector_normalize(vector_sub(rt->camera.viewpoint, hit_point));
 	reflect_dir = vector_sub(
 			vector_mult(normal, 2 * vector_dot(normal, light_dir)), light_dir);
-	spec_intensity = pow(fmax(vector_dot(view_dir, reflect_dir), 0.0), 64.0);
+	spec_intensity = pow(fmax(vector_dot(view_dir, reflect_dir), 0.0), SHININESS);
 	res.r = light.ratio * spec_intensity * light.color.r;
 	res.g = light.ratio * spec_intensity * light.color.g;
 	res.b = light.ratio * spec_intensity * light.color.b;
