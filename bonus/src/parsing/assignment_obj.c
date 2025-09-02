@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 20:27:17 by jinhuang          #+#    #+#             */
-/*   Updated: 2025/09/01 02:34:16 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/09/02 03:36:09 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,8 @@ void	parse_cylinder(char **tokens, t_minirt *rt)
 	obj_lstadd_back(&rt->object, obj_lstnew(cyl, CYLINDER, cyl->color));
 }
 
+// code arguments: co <center> <normal> <height> <angle> <color>
+// angle input: degree -> rad
 void	parse_cone(char **tokens, t_minirt *rt)
 {
 	t_cone		*cone;
@@ -99,27 +101,20 @@ void	parse_cone(char **tokens, t_minirt *rt)
 	double		height;
 	double		angle;
 
-	// 检查参数个数，cone 格式假设是：cone <center> <normal> <height> <angle> <color>
 	if (count_tokens(tokens) != 6)
 		ft_error("Wrong format of cone");
-
 	center = parse_vector(tokens[1]);
-
 	normal = parse_vector(tokens[2]);
 	if (!is_normalized_vector(normal))
 		ft_error("Wrong input of cone normal");
 	normal = vector_normalize(normal);
-
-	height = ft_atof(tokens[3]); // 解析浮点数高度
+	height = ft_atof(tokens[3]);
 	if (height <= 0)
 		ft_error("Invalid cone height");
-
-	// angle 单位假设是度，需转换为弧度存储，或者直接传弧度
 	angle = ft_atof(tokens[4]);
 	if (angle <= 0 || angle >= 90)
 		ft_error("Invalid cone angle");
-	angle = angle * (M_PI / 180.0); // 角度转弧度
-
+	angle = angle * (M_PI / 180.0);
 	cone = mem_manager(MALLOC, sizeof(t_cone), NULL);
 	cone->center = center;
 	cone->normal = normal;
@@ -127,6 +122,5 @@ void	parse_cone(char **tokens, t_minirt *rt)
 	cone->angle = angle;
 	cone->color = parse_color(tokens[5]);
 	cone->cos2_a = cos(angle) * cos(angle);
-
 	obj_lstadd_back(&rt->object, obj_lstnew(cone, CONE, cone->color));
 }
