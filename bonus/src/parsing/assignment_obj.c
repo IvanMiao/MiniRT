@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 20:27:17 by jinhuang          #+#    #+#             */
-/*   Updated: 2025/09/02 03:36:09 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/09/02 18:56:05 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,14 +96,12 @@ void	parse_cylinder(char **tokens, t_minirt *rt)
 void	parse_cone(char **tokens, t_minirt *rt)
 {
 	t_cone		*cone;
-	t_vector	center;
 	t_vector	normal;
 	double		height;
 	double		angle;
 
 	if (count_tokens(tokens) != 6)
 		ft_error("Wrong format of cone");
-	center = parse_vector(tokens[1]);
 	normal = parse_vector(tokens[2]);
 	if (!is_normalized_vector(normal))
 		ft_error("Wrong input of cone normal");
@@ -116,10 +114,10 @@ void	parse_cone(char **tokens, t_minirt *rt)
 		ft_error("Invalid cone angle");
 	angle = angle * (M_PI / 180.0);
 	cone = mem_manager(MALLOC, sizeof(t_cone), NULL);
-	cone->center = center;
+	cone->center = parse_vector(tokens[1]);
 	cone->normal = normal;
 	cone->height = height;
-	cone->angle = angle;
+	cone->angle = angle * (M_PI / 180.0);
 	cone->color = parse_color(tokens[5]);
 	cone->cos2_a = cos(angle) * cos(angle);
 	obj_lstadd_back(&rt->object, obj_lstnew(cone, CONE, cone->color));

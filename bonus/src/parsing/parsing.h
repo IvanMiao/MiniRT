@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 03:17:29 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/31 03:30:40 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/09/02 18:57:52 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ t_vector	parse_vector(char *str);
 
 void		free_tokens(char **tokens);
 double		ft_atof(const char *str);
-void		ft_error(const char *msg);
 int			count_tokens(char **tokens);
 bool		is_normalized_vector(t_vector v);
 void		trim_newline(char *str);

@@ -6,22 +6,11 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 20:51:29 by jinhuang          #+#    #+#             */
-/*   Updated: 2025/09/02 18:29:31 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/09/02 18:53:59 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minirt.h"
-
-void	ft_error(const char *msg)
-{
-	write(2, "Error\n", 6);
-	while (*msg)
-		write(2, msg++, 1);
-	write(2, "\n", 1);
-	mem_manager(FREEALL, 0, NULL);
-	mem_manager(CLOSE_FD, 0, NULL);
-	exit(EXIT_FAILURE);
-}
 
 int	count_tokens(char **tokens)
 {

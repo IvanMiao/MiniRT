@@ -6,7 +6,7 @@
 #    By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/11 21:57:02 by ymiao             #+#    #+#              #
-#    Updated: 2025/09/01 18:11:38 by ymiao            ###   ########.fr        #
+#    Updated: 2025/09/02 19:01:54 by ymiao            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,7 @@ SRC		= main.c \
 			utils/ft_atoi.c \
 			utils/ft_isspace.c \
 			utils/ft_isdigit.c \
+			utils/ft_error.c \
 			utils/get_next_line.c \
 			utils/get_next_line_utils.c \
 

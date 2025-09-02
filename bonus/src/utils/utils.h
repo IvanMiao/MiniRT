@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 23:04:30 by ymiao             #+#    #+#             */
-/*   Updated: 2025/09/01 18:31:15 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/09/02 18:57:45 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <fcntl.h>
+# include <limits.h>
 
 # define MALLOC		1
 # define FREE		2
@@ -53,5 +54,7 @@ char	*ft_strdup(const char *s);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strlcpy(const char *src, size_t size);
 char	*get_next_line(int fd);
+
+void	ft_error(const char *msg);
 
 #endif
