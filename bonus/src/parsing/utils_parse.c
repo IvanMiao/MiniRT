@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 20:51:29 by jinhuang          #+#    #+#             */
-/*   Updated: 2025/09/01 18:31:54 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/09/02 18:29:31 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ bool	is_normalized_vector(t_vector v)
 	double	length_squared;
 
 	length_squared = v.x * v.x + v.y * v.y + v.z * v.z;
-	return (fabs(length_squared - 1.0) < EPSILON);
+	return (fabs(length_squared - 1.0) < 1e-4);
 }
 
 void	free_tokens(char **tokens)
