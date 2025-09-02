@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 16:23:27 by jinhuang          #+#    #+#             */
-/*   Updated: 2025/09/02 18:52:31 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/09/02 20:12:17 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int	ft_atoi(const char *str)
 	result_long = 0;
 	while ((*str >= 9 && *str <= 13) || *str == ' ')
 		++str;
+	if (ft_strcmp((char *)str, "-2147483648") == 0)
+		return (-2147483648);
 	if (*str == '-')
 		count = -1;
 	if (*str == '-' || *str == '+')
@@ -33,7 +35,7 @@ int	ft_atoi(const char *str)
 		result_long = (result_long * 10) + *str - '0';
 		++str;
 	}
-	if (result_long > INT_MAX || result_long < INT_MIN)
+	if (result_long * count > INT_MAX || result_long * count < INT_MIN)
 		ft_error("Integer overflow");
 	result = result_long;
 	return (result * count);
