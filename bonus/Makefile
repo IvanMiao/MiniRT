@@ -6,7 +6,7 @@
 #    By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/11 21:57:02 by ymiao             #+#    #+#              #
-#    Updated: 2025/09/02 19:00:59 by ymiao            ###   ########.fr        #
+#    Updated: 2025/09/02 19:27:59 by ymiao            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,39 +16,39 @@ CFLAG	= -Wall -Werror -Wextra
 NAME	= miniRT_bonus
 
 SRC_DIR	= src/
-SRC		= main.c \
-			math_tool/vector_part1.c math_tool/vector_part2.c \
-			math_tool/color.c \
-			objects/objects_list.c \
-			objects/sphere.c \
-			objects/plane.c \
-			objects/cylinder.c \
-			objects/hit.c \
-			objects/cone.c \
-			parsing/assignment_amb.c \
-			parsing/assignment_obj.c \
-			parsing/assignment_cam.c \
-			parsing/utils_atof.c \
-			parsing/utils_parse.c \
-			parsing/parser.c \
-			event/event.c \
-			render/camera.c \
-			render/ray.c \
-			render/shadow.c \
-			render/light_list.c \
-			render/all_lights.c \
-			render/render.c \
-			utils/mem_manager.c \
-			utils/ft_split.c \
-			utils/ft_split_space.c \
-			utils/ft_putstr_fd.c \
-			utils/ft_strcmp.c \
-			utils/ft_atoi.c \
-			utils/ft_isspace.c \
-			utils/ft_isdigit.c \
-			utils/ft_error.c \
-			utils/get_next_line.c \
-			utils/get_next_line_utils.c
+SRC		= main_bonus.c \
+			math_tool/vector_part1_bonus.c math_tool/vector_part2_bonus.c \
+			math_tool/color_bonus.c \
+			objects/objects_list_bonus.c \
+			objects/sphere_bonus.c \
+			objects/plane_bonus.c \
+			objects/cylinder_bonus.c \
+			objects/hit_bonus.c \
+			objects/cone_bonus.c \
+			parsing/assignment_amb_bonus.c \
+			parsing/assignment_obj_bonus.c \
+			parsing/assignment_cam_bonus.c \
+			parsing/utils_atof_bonus.c \
+			parsing/utils_parse_bonus.c \
+			parsing/parser_bonus.c \
+			event/event_bonus.c \
+			render/camera_bonus.c \
+			render/ray_bonus.c \
+			render/shadow_bonus.c \
+			render/light_list_bonus.c \
+			render/all_lights_bonus.c \
+			render/render_bonus.c \
+			utils/mem_manager_bonus.c \
+			utils/ft_split_bonus.c \
+			utils/ft_split_space_bonus.c \
+			utils/ft_putstr_fd_bonus.c \
+			utils/ft_strcmp_bonus.c \
+			utils/ft_atoi_bonus.c \
+			utils/ft_isspace_bonus.c \
+			utils/ft_isdigit_bonus.c \
+			utils/ft_error_bonus.c \
+			utils/get_next_line_bonus.c \
+			utils/get_next_line_utils_bonus.c
 
 OBJ_DIR	= obj/
 OBJ		= $(addprefix $(OBJ_DIR),$(SRC:.c=.o))
