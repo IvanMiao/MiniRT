@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 02:13:08 by ymiao             #+#    #+#             */
-/*   Updated: 2025/09/01 05:35:35 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/09/02 19:16:19 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,6 @@ typedef struct s_cone
 	double		height;
 	double		angle;
 	t_color		color;
-
-	double		cos2_a;
 }	t_cone;
 
 typedef struct s_object

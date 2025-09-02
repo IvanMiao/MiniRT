@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 20:19:26 by jinhuang          #+#    #+#             */
-/*   Updated: 2025/09/02 18:41:49 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/09/02 19:16:11 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,14 @@
 
 static void	fill_co_info(t_cone *co, t_ray *ray, t_co_info *info)
 {
-	info->a = info->dv * info->dv - co->cos2_a;
+	double	cos2;
+
+	cos2 = cos(co->angle) * cos(co->angle);
+	info->a = info->dv * info->dv - cos2;
 	info->b = 2 * (info->dv * info->ocv
-			- co->cos2_a * vector_dot(ray->direction, info->oc));
+			- cos2 * vector_dot(ray->direction, info->oc));
 	info->c = info->ocv * info->ocv
-		- co->cos2_a * vector_dot(info->oc, info->oc);
+		- cos2 * vector_dot(info->oc, info->oc);
 	info->discr = info->b * info->b - 4 * info->a * info->c;
 }
 

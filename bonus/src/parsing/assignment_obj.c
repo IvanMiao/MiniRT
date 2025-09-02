@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 20:27:17 by jinhuang          #+#    #+#             */
-/*   Updated: 2025/09/02 18:56:05 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/09/02 19:16:49 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,8 +117,7 @@ void	parse_cone(char **tokens, t_minirt *rt)
 	cone->center = parse_vector(tokens[1]);
 	cone->normal = normal;
 	cone->height = height;
-	cone->angle = angle * (M_PI / 180.0);
+	cone->angle = angle;
 	cone->color = parse_color(tokens[5]);
-	cone->cos2_a = cos(angle) * cos(angle);
 	obj_lstadd_back(&rt->object, obj_lstnew(cone, CONE, cone->color));
 }
