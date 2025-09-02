@@ -12,6 +12,28 @@ Ray tracing projet
 
 ## Architecture
 
+```bash
+├── bonus
+│   ├── bonus_scenes
+│   └── src
+│       ├── event
+│       ├── math_tool
+│       ├── objects
+│       ├── parsing
+│       ├── render
+│       └── utils
+├── docs
+├── scenes
+│   └── error_scenes
+└── src
+    ├── event
+    ├── math_tool
+    ├── objects
+    ├── parsing
+    ├── render
+    └── utils
+```
+
 
 ## Phases
 
@@ -43,7 +65,7 @@ Ray tracing projet
 - `P(t)`: 光线上距离起点 t 个单位长度的点的位置向量
 - `O`: 光线的起点 origin，一个位置向量
 - `D`: 光线的方向 direction，一个单位向量
-- `t`: 一个标量，表示从起点 O 沿着方向 D 移动的"距离"或"时间"。当 t>0 时， 点 P(t) 在光线的正前方。t=0, P(0) = 0，即光线起点。
+- `t`: 一个标量，表示从起点 O 沿着方向 D 移动的"距离"或"时间"。当 t>0 时， 点 P(t) 在光线的正前方。t=0, P(0) = O，即光线起点。
 
 
 ### Sphere
@@ -162,8 +184,28 @@ Normal = p - C
  - B： `B = 2 * ((D · oc_ray) - (D · V) * (oc_ray · V))`
  - C： `C = (oc_ray · oc_ray) - (oc_ray · V)^2 - r^2`
 
- 
+在在解出一元二次方程得到 t 值后，必须进行两个底面的检查：
+
+1.  计算交点 `P = O + t * D`。
+2.  计算从圆柱体底面圆心 `C` 到交点 `P` 的向量 `CP = P - C`。
+3.  将 `CP` 投影到圆柱体的轴向 `V`上，得到投影长度 `m = CP · V`。
+4.  检查这个长度是否在圆柱体的高度范围内，即 `0 <= m <= h`。如果不在，说明这个交点在无限圆柱体的侧面上，但不在我们定义的有限圆柱体上，应舍弃。
+
+**顶盖/底盖 (Caps)**: 单独计算光线和圆柱体上下两个圆形顶盖的交点。
+
+1.  每个顶盖都是一个**平面**。底盖平面定义为：点 `C`，法线 `-V`。顶盖平面定义为：点 `C_top = C + h*V`，法线 `V`。
+2.  计算光线与这两个平面的交点 `t_cap`。
+3.  得到交点后，需要判断该交点是否在圆盘**内部**。计算交点 `P_cap` 到对应圆心的距离 `d`，如果 `d <= radius`，则交点有效。
+4.  最后，比较侧面和两个顶盖所有有效交点的 `t` 值，取最小的那个正数 `t` 作为最终结果。
+
+
 #### cylinder normal func `cylinder_normal_at`
+
+法线计算分为三种情况：
+**交点在侧面**: `m = (P - C) · V`， `Normal = normalize(P - C - m*V)`。这个公式的几何意义就是从中心轴指向交点的那个垂直向量。
+**交点在顶盖**: 如果交点在顶盖，法线就是 `V`。
+**交点在底盖**: 如果交点在底盖，法线就是 `-V`。
+
 
 ### cone
 cone 格式假设是：cone <center> <normal> <height> <angle> <color>
