@@ -6,21 +6,11 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 20:19:26 by jinhuang          #+#    #+#             */
-/*   Updated: 2025/09/02 19:21:45 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/09/02 20:55:44 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "objects_bonus.h"
-
-// static void	fill_co_info(t_cone *co, t_ray *ray, t_co_info *info)
-// {
-// 	info->a = info->dv * info->dv - co->cos2_a;
-// 	info->b = 2 * (info->dv * info->ocv 
-// 		- co->cos2_a * vector_dot(ray->direction, info->oc));
-// 	info->c = info->ocv * info->ocv 
-// 	- co->cos2_a * vector_dot(info->oc, info->oc);
-// 	info->discr = info->b * info->b - 4 * info->a * info->c;
-// }
 
 static void	fill_co_info(t_cone *co, t_ray *ray, t_co_info *info)
 {
