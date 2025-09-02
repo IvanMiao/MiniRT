@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/12 16:56:13 by ymiao             #+#    #+#             */
-/*   Updated: 2025/09/02 19:24:18 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/09/02 20:32:57 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@
 one camera(C), and at least one light(L)"
 
 # define EPSILON 1e-6
-# define SAMPELS_PER_PIXEL 4
+# define SAMPELS_PER_PIXEL 2
 # define SHININESS 64.0
 
 typedef struct s_img
