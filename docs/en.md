@@ -199,6 +199,107 @@ The normal calculation is divided into three cases:
 ### cone
 The assumed format for a cone is: `cone <center> <normal> <height> <angle> <color>`
 
+
+A finite cone can be defined by the following parameters:
+
+1.  **Apex**: The tip of the cone. In your code, this is represented by `co->center`. We'll denote it as `A`.
+2.  **Axis**: A **unit vector** pointing from the apex `A` to the center of the base cap, denoted as `V`. This is represented by `co->normal`.
+3.  **Half-angle**: The angle between the axis and the cone's surface, denoted as `α`. This is represented by `co->angle`.
+4.  **Height**: The perpendicular distance from the apex `A` to the plane of the base cap, denoted as `h`.
+
+All points `P` on the surface of the cone (an infinitely extending double cone) satisfy a key geometric property: the angle between the vector from the apex `A` to the point `P` (`P - A`) and the axis vector `V` is always `α`.
+
+Using the geometric definition of the vector dot product, we can translate this property into an equation:
+
+`(P - A) · V = |P - A| * |V| * cos(α)`
+
+Since `V` is a unit vector (`|V| = 1`), the equation simplifies to:
+
+`(P - A) · V = |P - A| * cos(α)`
+
+To eliminate the magnitude `|P - A|` (which involves a square root operation), we square both sides of the equation:
+
+`((P - A) · V)^2 = |P - A|^2 * cos^2(α)`
+
+Again, using the dot product property `|v|^2 = v · v`, we get the final equation for the surface of an infinite cone:
+
+**((P - A) · V)^2 = ((P - A) · (P - A)) * cos^2(α)**
+
+#### func `hit_cone_body` & `fill_co_info`
+
+We substitute the ray equation `P(t) = O + t*D` into the infinite cone equation derived above.
+In the code, the apex `A` is `co->center`.
+Let `oc = O - A` (the vector from the cone's apex to the ray's origin).
+Then, `P - A = (O + t*D) - A = oc + t*D`.
+
+Substituting into the equation:
+`((oc + t*D) · V)^2 = ((oc + t*D) · (oc + t*D)) * cos^2(α)`
+
+Now, we need to expand this equation and rearrange it into the form of a quadratic equation in `t`: `At^2 + Bt + C = 0`.
+
+*   **Expanding the left side**:
+    `((oc · V) + t*(D · V))^2 = (oc · V)^2 + 2t(oc · V)(D · V) + t^2(D · V)^2`
+
+*   **Expanding the right side**:
+    `((oc · oc) + 2t(oc · D) + t^2(D · D)) * cos^2(α)`
+
+Moving all terms to one side and grouping by powers of `t`:
+
+*   **A (the coefficient of t^2):**
+    `(D · V)^2 - (D · D) * cos^2(α)`
+    *In ray tracing, the ray direction `D` is typically a unit vector, so `D · D = 1`.*
+    `A = (D · V)^2 - cos^2(α)`
+
+*   **B (the coefficient of t):**
+    `2(oc · V)(D · V) - 2(oc · D) * cos^2(α)`
+    `B = 2 * ((oc · V)(D · V) - (oc · D) * cos^2(α))`
+
+*   **C (the constant term):**
+    `(oc · V)^2 - (oc · oc) * cos^2(α)`
+    `C = (oc · V)^2 - (oc · oc) * cos^2(α)`
+
+```C
+info.oc = oc
+info.dv = D · V
+info.ocv = oc · V
+cos2 = cos(co->angle) * cos(co->angle)
+
+info->a = info->dv * info->dv - cos2;
+info->b = 2 * (info->dv * info->ocv - cos2 * vector_dot(ray->direction, info->oc));
+info->c = info->ocv * info->ocv - cos2 * vector_dot(info.oc, info.oc);
+// Calculate the discriminant B^2 - 4AC
+info->discr = info->b * info->b - 4 * info.a * info.c;
+
+// Solve for the two values of t
+t1 = (-info.b - sqrt(info.discr)) / (2 * info.a);
+t2 = (-info.b + sqrt(info.discr)) / (2 * info.a);
+
+// --- Height Check ---
+// For each intersection, we need to check if it lies within the finite cone's height range [0, h].
+// The height 'm' is the length of the projection of the intersection point P onto the axis V (measured from the apex A).
+// m = (P - A) · V = (oc + t*D) · V = (oc·V) + t*(D·V)
+// This corresponds exactly to the code: m = info.ocv + t * info.dv.
+
+m1 = info.ocv + t1 * info.dv;
+// Check if t1 is valid:
+// t1 <= EPSILON: The intersection is behind the ray's origin or at the origin, so it's invalid.
+// m1 < 0: The intersection is on the other side of the apex (the other half of the double cone), so it's invalid.
+// m1 > co->height: The intersection is beyond the height of the base cap, so it's invalid.
+if (t1 <= EPSILON || m1 < 0 || m1 > co->height)
+    t1 = -1.0; // Mark as invalid
+
+m2 = info.ocv + t2 * info.dv;
+if (t2 <= EPSILON || m2 < 0 || m2 > co->height)
+    t2 = -1.0; // Mark as invalid
+
+// --- Return the Closest Valid Intersection ---
+if (t1 > 0 && t2 > 0)
+    return (fmin(t1, t2)); // If both are valid, return the smaller one
+if (t1 > 0)
+    return (t1); // If only t1 is valid
+return (t2); // Return t2 (if valid) or -1.0 (if both are invalid)
+```
+
 ### func `setup_cam_coords`
 
 Camera positioning, orientation, and lens selection.

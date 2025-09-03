@@ -211,6 +211,111 @@ Normal = p - C
 cone 格式假设是：cone <center> <normal> <height> <angle> <color>
 
 
+一个有限高度的圆锥体，可以由以下参数定义：
+
+1.  **顶点 (Apex)**: 圆锥的尖端。在你的代码中，这由 `co->center` 表示。我们记作 `A`。
+2.  **轴向向量 (Axis)**: 从顶点 `A` 指向底盖圆心的**单位向量**，记作 `V`。这由 `co->normal` 表示。
+3.  **半角 (Half-angle)**: 轴向与圆锥体侧面之间的夹角，记作 `α`。这由 `co->angle` 表示。
+4.  **高度 (Height)**: 从顶点 `A` 到底盖平面的垂直距离，记作 `h`。
+
+圆锥体侧面（一个无限延伸的双向圆锥）上所有点 `P` 都满足一个关键的几何特性：从顶点 `A` 指向点 `P` 的向量 `(P - A)` 与轴向向量 `V` 之间的夹角恒为 `α`。
+
+利用向量点积的几何意义，我们可以将这个特性转化为方程：
+
+`(P - A) · V = |P - A| * |V| * cos(α)`
+
+由于 `V` 是单位向量 (`|V| = 1`)，方程简化为：
+
+`(P - A) · V = |P - A| * cos(α)`
+
+为了消除绝对值 `|P - A|` (它包含开方运算)，我们将方程两边平方：
+
+`((P - A) · V)^2 = |P - A|^2 * cos^2(α)`
+
+再次利用点积的性质 `|v|^2 = v · v`，我们得到无限圆锥体侧面的最终方程：
+
+**((P - A) · V)^2 = ((P - A) · (P - A)) * cos^2(α)**
+
+#### func `hit_cone_body` & `fill_co_info`
+
+我们将光线方程 `P(t) = O + t*D` 代入上面推导出的无限圆锥体方程。
+在代码中，顶点 `A` 就是 `co->center`。
+令 `oc = O - A` (光线起点到圆锥顶点的向量)。
+那么 `P - A = (O + t*D) - A = oc + t*D`。
+
+代入方程：
+`((oc + t*D) · V)^2 = ((oc + t*D) · (oc + t*D)) * cos^2(α)`
+
+现在，我们需要展开这个方程，整理成关于 `t` 的一元二次方程 `At^2 + Bt + C = 0`。
+
+*   **展开左边**:
+    `((oc · V) + t*(D · V))^2 = (oc · V)^2 + 2t(oc · V)(D · V) + t^2(D · V)^2`
+
+*   **展开右边**:
+    `((oc · oc) + 2t(oc · D) + t^2(D · D)) * cos^2(α)`
+
+将所有项移到一边并按 `t` 的幂次分组：
+
+*   **A (t^2 的系数):**
+    `(D · V)^2 - (D · D) * cos^2(α)`
+    *在光线追踪中，光线方向 `D` 通常是单位向量，所以 `D · D = 1`。*
+    `A = (D · V)^2 - cos^2(α)`
+
+*   **B (t 的系数):**
+    `2(oc · V)(D · V) - 2(oc · D) * cos^2(α)`
+    `B = 2 * ((oc · V)(D · V) - (oc · D) * cos^2(α))`
+
+*   **C (常数项):**
+    `(oc · V)^2 - (oc · oc) * cos^2(α)`
+    `C = (oc · V)^2 - (oc · oc) * cos^2(α)`
+
+```C
+info.oc = oc
+info.dv = D · V
+info.ocv = oc · V
+cos2 = cos(co->angle) * cos(co->angle)
+
+info->a = info->dv * info->dv - cos2;
+info->b = 2 * (info->dv * info->ocv - cos2 * vector_dot(ray->direction, info->oc));
+info->c = info->ocv * info->ocv - cos2 * vector_dot(info.oc, info.oc);
+计算判别式 B^2 - 4AC
+info->discr = info->b * info->b - 4 * info->a * info.c;
+
+// 解出两个 t 值
+t1 = (-info.b - sqrt(info.discr)) / (2 * info.a);
+t2 = (-info.b + sqrt(info.discr)) / (2 * info.a);
+
+// --- 高度检查 ---
+// 对于每个交点，我们需要检查它是否在有限圆锥的高度 [0, h] 范围内。
+// 高度 m 是交点 P 在轴线 V 上的投影长度（从顶点 A 开始计算）。
+// m = (P - A) · V = (oc + t*D) · V = (oc·V) + t*(D·V)
+// 这与代码中的 m = info.ocv + t * info.dv 完全一致。
+
+m1 = info.ocv + t1 * info.dv;
+// 检查 t1 是否有效：
+// t1 <= EPSILON: 交点在光线后方或起点，无效。
+// m1 < 0: 交点在顶点的另一侧（双锥的另一半），无效。
+// m1 > co->height: 交点超出了底盖的高度，无效。
+if (t1 <= EPSILON || m1 < 0 || m1 > co->height)
+    t1 = -1.0; // 标记为无效
+
+m2 = info.ocv + t2 * info.dv;
+if (t2 <= EPSILON || m2 < 0 || m2 > co->height)
+    t2 = -1.0; // 标记为无效
+
+// --- 返回最近的有效交点 ---
+if (t1 > 0 && t2 > 0)
+    return (fmin(t1, t2)); // 如果两个都有效，返回较小的那个
+if (t1 > 0)
+    return (t1); // 如果只有 t1 有效
+return (t2); // 返回 t2 (如果有效) 或 -1.0 (如果都无效)
+```
+
+#### func `hit_cone_cap`
+
+
+
+
 ### func `setup_cam_coords`
 
 相机的定位、定向和镜头选择
