@@ -35,6 +35,9 @@ Ray tracing project
 6.  Main loop: Calculate lighting (ambient color + diffuse color)
 7.  Main loop: Put pixel
 
+
+![ray-tracing](./ray-tracing.jpg)
+
 ## Math
 
 ### Vector
