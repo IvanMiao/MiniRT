@@ -1,0 +1,37 @@
+# A surreal forest of glowing neon trees at midnight.
+
+# Camera looking into the scene
+C 0,5,-25		0,0,-1		65
+
+# Ambient light is very dim and blue, for a nighttime feel
+A 0.1			50,70,100
+
+# Three colored point lights to create the neon effect
+L -15,10,-40	0.5			0,255,255
+L 15,10,-40		0.5			255,0,255
+L 0,15,-50		0.4			255,255,0
+
+# A dark, reflective plane for the ground, like wet pavement
+pl 0,-8,0		0,1,0		30,30,40
+
+# The "trees" and "bushes" of the forest using cylinders and cones
+# Central group
+cy 0,-8,-50		0,1,0		3 22		200,200,200
+co 0,14,-50		0,1,0		4 8			180,180,180
+
+# Left group
+cy -12,-8,-45	0,1,0		2.5 15		200,200,200
+co -12,7,-45	0,1,0		3 6			180,180,180
+
+# Right group
+cy 12,-8,-42	0,1,0		2 18		200,200,200
+co 12,10,-42	0,1,0		2.5 5		180,180,180
+
+# Background elements
+cy -8,-8,-60	0,1,0		1.5 12		200,200,200
+cy 8,-8,-58		0,1,0		1.5 14		200,200,200
+
+# Mysterious floating black spheres
+sp -5,8,-40		3			10,10,10
+sp 5,12,-48		4			10,10,10
+sp 0,2,-38		2			10,10,10

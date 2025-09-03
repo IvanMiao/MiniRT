@@ -1,0 +1,31 @@
+# A world of lost balance, composed of tilted structures.
+
+# Camera looking down into the scene
+C 0,30,-50		0,-0.447,0.894		70
+
+# Soft, cool ambient light
+A 0.2			150,180,200
+
+# 1. Key light (warm, like a sunset)
+L 15,20,-45		0.7			255,220,190
+# 2. Fill light (cool, weak, to add detail in shadows)
+L -20,10,-25	0.5			100,150,255
+# 3. Rim light (to create highlights on the edges)
+L 0,-10,-60		0.6			200,200,200
+
+pl 0,-15,0		0.2,1,0		80,90,95
+
+# A collection of tilted cylinders creating a chaotic yet structured environment
+# Central pillar color changed to a rusty terracotta
+cy 0,-15,-20	0,1,0		4	30		200,90,40
+
+# Tilted pillars' color changed to a cool grey-blue
+cy -10,-10,-25	0.707,0.707,0		3	25		140,155,160
+cy 12,-12,-30	-0.707,0.707,0		2.5	28		140,155,160
+
+# Floating tilted planes' color changed to a cool grey-blue
+pl 15,10,-35	-0.958,0.287,0		120,130,135
+pl -10,15,-45	0.880,0.440,0.176	120,130,135
+
+# Sphere color changed to a rusty terracotta
+sp -10,18,-30	5			200,90,40

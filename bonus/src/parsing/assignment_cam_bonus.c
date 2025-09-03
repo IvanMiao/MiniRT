@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 19:27:21 by jinhuang          #+#    #+#             */
-/*   Updated: 2025/09/02 19:22:22 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/09/03 05:00:38 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,17 @@ t_vector	parse_vector(char *str)
 
 void	parse_camera(char **tokens, t_minirt *rt)
 {
-	double	fov_double;
+	double		fov_double;
+	t_vector	direction;
 
 	if (count_tokens(tokens) != 4)
 		ft_error("wrong elements");
 	rt->camera.viewpoint = parse_vector(tokens[1]);
-	rt->camera.direction = parse_vector(tokens[2]);
-	if (!is_normalized_vector(rt->camera.direction))
+	direction = parse_vector(tokens[2]);
+	if (!is_normalized_vector(direction))
 		ft_error("Direction of camera should be normalized");
+	direction = vector_normalize(direction);
+	rt->camera.direction = direction;
 	fov_double = ft_atof(tokens[3]);
 	if (!in_range(fov_double, 0, 180))
 		ft_error("FOV out of range");
