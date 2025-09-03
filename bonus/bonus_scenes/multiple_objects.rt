@@ -1,0 +1,51 @@
+A 0.5 230,230,220
+C 18,6,40 -0.408248,-0.408248,-0.816497 45
+L 0,30,60 0.8 255,215,0
+
+# Ground
+pl 0,-12,0 0,1,0 200,200,200
+
+# Blue cone
+co 0,-12,0 0,1,0 4.0 45.0 60,120,200
+
+# Blue cylinder
+cy 6,-12,2 0,1,0 2.0 8.0 60,120,200
+
+# Green long cylinder
+cy 12,-12,6 0,1,0 2.0 10.0 80,180,80
+
+# Green cylinder
+cy 18,-12,8 0,1,0 2.0 8.0 80,180,80
+
+# Red cylinder
+cy -8,-12,4 0,1,0 2.0 8.0 220,60,60
+
+# Red small cylinder
+cy -12,-12,6 0,1,0 1.0 4.0 220,60,60
+
+# Yellow square (approximated by a sphere)
+sp -4,-12,8 2.0 255,220,60
+sp 8,-12,12 2.0 255,220,60
+
+# Yellow small sphere
+sp 0,-6,10 1.0 255,220,60
+
+# Red small sphere
+sp 4,-6,14 1.0 220,60,60
+
+# More blocks (can be added according to the actual picture)
+co 10,-8,0 0,-1,0 4.0 45.0 255,220,60
+sp 14,-12,18 1.5 80,180,80
+sp 18,-12,20 1.5 60,120,200
+
+# Yellow horizontal cylinder
+cy 5,-12,5 1,0,0 2.0 8.0 255,220,60
+
+# Red horizontal cylinder
+cy -10,-12,10 0,0,1 2.0 8.0 220,60,60
+
+# Blue horizontal cylinder
+cy 0,-12,15 1,0,0 2.0 8.0 60,120,200
+
+# Green horizontal cylinder
+cy 15,-12,0  0,0,1 2.0 8.0 80,180,80
