@@ -24,10 +24,10 @@ int	count_tokens(char **tokens)
 
 bool	is_normalized_vector(t_vector v)
 {
-	double	length_squared;
+	float	length_squared;
 
 	length_squared = v.x * v.x + v.y * v.y + v.z * v.z;
-	return (fabs(length_squared - 1.0) < 0.1);
+	return (fabs(length_squared - 1.0f) < 0.1f);
 }
 
 void	free_tokens(char **tokens)

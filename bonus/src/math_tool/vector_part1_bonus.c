@@ -6,14 +6,14 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/12 16:36:01 by ymiao             #+#    #+#             */
-/*   Updated: 2025/09/02 19:21:36 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/09/05 01:06:53 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "math_tool_bonus.h"
 #include <unistd.h>
 
-t_vector	vector_init(double x, double y, double z)
+t_vector	vector_init(float x, float y, float z)
 {
 	t_vector	res;
 
@@ -43,7 +43,7 @@ t_vector	vector_sub(t_vector v1, t_vector v2)
 	return (res);
 }
 
-t_vector	vector_mult(t_vector v, double scalar)
+t_vector	vector_mult(t_vector v, float scalar)
 {
 	t_vector	res;
 
@@ -53,7 +53,7 @@ t_vector	vector_mult(t_vector v, double scalar)
 	return (res);
 }
 
-t_vector	vector_div(t_vector v, double scalar)
+t_vector	vector_div(t_vector v, float scalar)
 {
 	t_vector	res;
 

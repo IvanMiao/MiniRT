@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 00:11:02 by ymiao             #+#    #+#             */
-/*   Updated: 2025/09/02 19:22:43 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/09/05 01:12:41 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,14 @@ static t_color	cal_diff_light(t_light light, t_vector hit_point,
 								t_vector normal, t_color obj_color)
 {
 	t_vector	light_dir;
-	double		light_intensity;
+	float		light_intensity;
 	t_color		result;
 
 	light_dir = vector_sub(light.position, hit_point);
 	light_dir = vector_normalize(light_dir);
 	light_intensity = vector_dot(normal, light_dir);
-	if (light_intensity < 0.0)
-		light_intensity = 0.0;
+	if (light_intensity < 0.0f)
+		light_intensity = 0.0f;
 	light_intensity *= light.ratio;
 	result.r = light_intensity * obj_color.r * light.color.r;
 	result.g = light_intensity * obj_color.g * light.color.g;
@@ -63,14 +63,14 @@ static t_color	cal_spec_color(t_minirt *rt,
 	t_vector	light_dir;
 	t_vector	view_dir;
 	t_vector	reflect_dir;
-	double		spec_intensity;
+	float		spec_intensity;
 	t_color		res;
 
 	light_dir = vector_normalize(vector_sub(light.position, hit_point));
 	view_dir = vector_normalize(vector_sub(rt->camera.viewpoint, hit_point));
 	reflect_dir = vector_sub(
 			vector_mult(normal, 2 * vector_dot(normal, light_dir)), light_dir);
-	spec_intensity = pow(fmax(vector_dot(view_dir, reflect_dir), 0.0),
+	spec_intensity = powf(fmax(vector_dot(view_dir, reflect_dir), 0.0f),
 			SHININESS);
 	res.r = light.ratio * spec_intensity * light.color.r;
 	res.g = light.ratio * spec_intensity * light.color.g;
@@ -80,12 +80,12 @@ static t_color	cal_spec_color(t_minirt *rt,
 
 static void	check_final_color(t_color *final_color)
 {
-	if (final_color->r > 1.0)
-		final_color->r = 1.0;
-	if (final_color->g > 1.0)
-		final_color->g = 1.0;
-	if (final_color->b > 1.0)
-		final_color->b = 1.0;
+	if (final_color->r > 1.0f)
+		final_color->r = 1.0f;
+	if (final_color->g > 1.0f)
+		final_color->g = 1.0f;
+	if (final_color->b > 1.0f)
+		final_color->b = 1.0f;
 }
 
 /**

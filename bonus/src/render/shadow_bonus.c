@@ -6,13 +6,13 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 03:07:10 by ymiao             #+#    #+#             */
-/*   Updated: 2025/09/02 19:23:02 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/09/05 01:06:53 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minirt_bonus.h"
 
-static double	hit_for_shadow(t_object *obj, t_ray *ray)
+static float	hit_for_shadow(t_object *obj, t_ray *ray)
 {
 	if (obj->type == SPHERE)
 		return (hit_sphere((t_sphere *)obj->obj, ray));
@@ -28,13 +28,13 @@ static double	hit_for_shadow(t_object *obj, t_ray *ray)
 bool	is_in_shadow(t_object *objs, t_vector hit_point, t_vector light_pos)
 {
 	t_ray		shadow_ray;
-	double		dist_to_light;
+	float		dist_to_light;
 	t_object	*curr_obj;
-	double		t;
+	float		t;
 
 	shadow_ray.direction = vector_normalize(vector_sub(light_pos, hit_point));
 	shadow_ray.origin = vector_add(hit_point,
-			vector_mult(shadow_ray.direction, 1e-4));
+			vector_mult(shadow_ray.direction, EPSILON));
 	dist_to_light = vector_length(vector_sub(light_pos, hit_point));
 	curr_obj = objs;
 	while (curr_obj)

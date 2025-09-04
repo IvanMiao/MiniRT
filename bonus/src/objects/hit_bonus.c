@@ -12,7 +12,7 @@
 
 #include "objects_bonus.h"
 
-static double	hit_obj(t_object *obj, t_ray *ray)
+static float	hit_obj(t_object *obj, t_ray *ray)
 {
 	if (obj->type == SPHERE)
 		return (hit_sphere((t_sphere *)obj->obj, ray));
@@ -46,7 +46,7 @@ t_hit_record	trace_ray(t_object *objs, t_ray *ray)
 {
 	t_hit_record	record;
 	t_object		*curr_obj;
-	double			t;
+	float			t;
 
 	record.hit = false;
 	record.t = INFINITY;

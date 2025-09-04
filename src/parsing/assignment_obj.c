@@ -16,7 +16,7 @@ void	parse_sphere(char **tokens, t_minirt *rt)
 {
 	t_sphere	*sphere;
 	t_vector	center;
-	double		diameter;
+	float		diameter;
 	t_color		color;
 
 	if (count_tokens(tokens) != 4)
@@ -28,7 +28,7 @@ void	parse_sphere(char **tokens, t_minirt *rt)
 	color = parse_color(tokens[3]);
 	sphere = mem_manager(MALLOC, sizeof(t_sphere), NULL);
 	sphere->center = center;
-	sphere->radius = diameter / 2.0;
+	sphere->radius = diameter / 2.0f;
 	sphere->diameter = diameter;
 	sphere->color = color;
 	obj_lstadd_back(&rt->object, obj_lstnew(sphere, SPHERE, color));
@@ -60,8 +60,8 @@ static void	parse_cylinder2(char **tokens, t_cylinder *cyl)
 {
 	t_vector	center;
 	t_vector	normal;
-	double		diameter;
-	double		height;
+	float		diameter;
+	float		height;
 	t_color		color;
 
 	if (count_tokens(tokens) != 6)

@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 17:42:25 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/31 04:15:12 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/09/05 01:06:53 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 // ratio: [0.0, 1.0]
 typedef struct s_ambient
 {
-	double		ratio;
+	float		ratio;
 	t_color		color;
 }	t_ambient;
 
@@ -36,9 +36,9 @@ typedef struct s_camera
 	t_vector	v;
 	t_vector	w;
 
-	double		aspect_ratio;
-	double		half_width;
-	double		half_height;
+	float		aspect_ratio;
+	float		half_width;
+	float		half_height;
 }	t_camera;
 
 // srtuct for the light
@@ -46,7 +46,7 @@ typedef struct s_camera
 typedef struct s_light
 {
 	t_vector	position;
-	double		ratio;
+	float		ratio;
 }	t_light;
 
 typedef struct s_ray

@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 02:13:08 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/31 04:19:04 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/09/05 01:06:53 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,10 @@
 # include "../math_tool/math_tool.h"
 # include "../render/scene.h"
 # include <stdbool.h>
+
+# ifndef EPSILON
+#  define EPSILON 1e-3f
+# endif
 
 typedef enum e_obj_type
 {
@@ -27,8 +31,8 @@ typedef enum e_obj_type
 typedef struct s_sphere
 {
 	t_vector	center;
-	double		diameter;
-	double		radius;
+	float		diameter;
+	float		radius;
 	t_color		color;
 }	t_sphere;
 
@@ -43,8 +47,8 @@ typedef struct s_cylinder
 {
 	t_vector	center;
 	t_vector	normal;
-	double		diameter;
-	double		height;
+	float		diameter;
+	float		height;
 	t_color		color;
 }	t_cylinder;
 
@@ -61,7 +65,7 @@ typedef struct s_hit_record
 {
 	bool		hit;
 	t_object	*obj_ptr;
-	double		t;
+	float		t;
 	t_vector	point;
 	t_vector	normal;
 	t_color		obj_color;
@@ -71,21 +75,21 @@ typedef struct s_hit_record
 typedef struct s_cy_info
 {
 	t_vector	oc;
-	double		a;
-	double		b;
-	double		c;
-	double		discri;
-	double		radius;
+	float		a;
+	float		b;
+	float		c;
+	float		discri;
+	float		radius;
 	t_vector	normal;
 }	t_cy_info;
 
 // Calculate object hit/normal
-double			hit_sphere(const t_sphere *sp, const t_ray *ray);
+float			hit_sphere(const t_sphere *sp, const t_ray *ray);
 t_vector		sphere_normal_at(t_sphere *sp, t_vector p);
 
-double			hit_plane(t_plane *plane, t_ray *ray);
+float			hit_plane(t_plane *plane, t_ray *ray);
 
-double			hit_cylinder(t_cylinder *cy, t_ray *ray);
+float			hit_cylinder(t_cylinder *cy, t_ray *ray);
 t_vector		cylinder_normal_at(t_cylinder *cy, t_vector point);
 
 // Stores hit stats

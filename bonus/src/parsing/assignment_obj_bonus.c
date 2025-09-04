@@ -16,7 +16,7 @@ void	parse_sphere(char **tokens, t_minirt *rt)
 {
 	t_sphere	*sphere;
 	t_vector	center;
-	double		diameter;
+	float		diameter;
 	t_color		color;
 
 	if (count_tokens(tokens) != 4)
@@ -28,7 +28,7 @@ void	parse_sphere(char **tokens, t_minirt *rt)
 	color = parse_color(tokens[3]);
 	sphere = mem_manager(MALLOC, sizeof(t_sphere), NULL);
 	sphere->center = center;
-	sphere->radius = diameter / 2.0;
+	sphere->radius = diameter / 2.0f;
 	sphere->diameter = diameter;
 	sphere->color = color;
 	obj_lstadd_back(&rt->object, obj_lstnew(sphere, SPHERE, color));
@@ -60,8 +60,8 @@ static void	parse_cylinder2(char **tokens, t_cylinder *cyl)
 {
 	t_vector	center;
 	t_vector	normal;
-	double		diameter;
-	double		height;
+	float		diameter;
+	float		height;
 	t_color		color;
 
 	if (count_tokens(tokens) != 6)
@@ -97,8 +97,8 @@ void	parse_cone(char **tokens, t_minirt *rt)
 {
 	t_cone		*cone;
 	t_vector	normal;
-	double		height;
-	double		angle;
+	float		height;
+	float		angle;
 
 	if (count_tokens(tokens) != 6)
 		ft_error("Wrong format of cone");
@@ -112,7 +112,7 @@ void	parse_cone(char **tokens, t_minirt *rt)
 	angle = ft_atof(tokens[4]);
 	if (angle <= 0 || angle >= 90)
 		ft_error("Invalid cone angle");
-	angle = angle * (M_PI / 180.0);
+	angle = angle * (M_PI / 180.0f);
 	cone = mem_manager(MALLOC, sizeof(t_cone), NULL);
 	cone->center = parse_vector(tokens[1]);
 	cone->normal = normal;

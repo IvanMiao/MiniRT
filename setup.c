@@ -14,9 +14,9 @@
 
 /*
 #include <time.h>
-static double	random_double(double min, double max)
+static float	random_double(float min, float max)
 {
-	return (min + ((double)rand() / RAND_MAX) * (max - min));
+	return (min + ((float)rand() / RAND_MAX) * (max - min));
 }
 
 static void	add_sphere(t_object **objs)
@@ -27,12 +27,12 @@ static void	add_sphere(t_object **objs)
 	// sp->center = vector_init(random_double(-50, 30),
 	// 						random_double(-5, 20),
 	// 						random_double(-100, -30));
-	sp->radius = random_double(0.5, 1.5);
+	sp->radius = random_double(0.5f, 1.5f);
 	// sp->color = color_init_d(random_double(0, 1),
 	// 						random_double(0, 1),
 	// 						random_double(0, 1));
 	sp->center = vector_init(3, -5, -25);
-	sp->color = color_init_d(0.7, 0.75, 0.7);
+	sp->color = color_init_d(0.7f, 0.75f, 0.7f);
 	obj_lstadd_back(objs, obj_lstnew(sp, SPHERE, sp->color));
 }
 
@@ -44,7 +44,7 @@ static void	add_plane(t_object **objs)
 	pl = mem_manager(MALLOC, sizeof(t_plane), NULL);
 	pl->point = vector_init(0, 10, 0);
 	pl->normal = vector_init(0, -1, 0);
-	pl->color = color_init_d(0.85, 0.82, 0.78);
+	pl->color = color_init_d(0.85f, 0.82f, 0.78f);
 	obj_lstadd_back(objs, obj_lstnew(pl, PLANE, pl->color));
 }
 
@@ -55,7 +55,7 @@ static void	add_plane2(t_object **objs)
 	pl = mem_manager(MALLOC, sizeof(t_plane), NULL);
 	pl->point = vector_init(0, 0, -50);
 	pl->normal = vector_init(0, 0, 1);
-	pl->color = color_init_d(0.65, 0.82, 0.78);
+	pl->color = color_init_d(0.65f, 0.82f, 0.78f);
 	obj_lstadd_back(objs, obj_lstnew(pl, PLANE, pl->color));
 }
 
@@ -68,7 +68,7 @@ static void	add_cylinder(t_object **objs)
 	cy->normal = vector_init(0, 1, 0);
 	cy->diameter = 5;
 	cy->height = 20;
-	cy->color = color_init_d(0.6, 0.7, 0.6);
+	cy->color = color_init_d(0.6f, 0.7f, 0.6f);
 	obj_lstadd_back(objs, obj_lstnew(cy, CYLINDER, cy->color));
 }
 
@@ -87,25 +87,25 @@ void	setup_scene(t_minirt *rt)
 
 	sphere->center = vector_init(0, 0, -40);
 	sphere->radius = 3;
-	sphere->color = color_init_d(0.7, 0.75, 0.7);
+	sphere->color = color_init_d(0.7f, 0.75f, 0.7f);
 
 	plane->point = vector_init(0, -10, 0);
 	plane->normal = vector_init(0, 1, 0);
-	plane->color = color_init_d(0.85, 0.82, 0.78);
+	plane->color = color_init_d(0.85f, 0.82f, 0.78f);
 
 	cylinder->center = vector_init(12, -10, -30);
 	cylinder->normal = vector_init(0, 1, 0);
 	cylinder->diameter = 5;
 	cylinder->height = 20;
-	cylinder->color = color_init_d(0.8, 0.6, 0.5);
+	cylinder->color = color_init_d(0.8f, 0.6f, 0.5f);
 
 	rt->camera.viewpoint = vector_init(0, 0, 0);
 	rt->camera.direction = vector_init(0, 0, -1);
 	rt->camera.fov = 50;
-	rt->ambient.ratio = 0.15;
-	rt->ambient.color = color_init_d(1.0, 1.0, 1.0);
+	rt->ambient.ratio = 0.15f;
+	rt->ambient.color = color_init_d(1.0f, 1.0f, 1.0f);
 	rt->light.position = vector_init(0, 8, -30);
-	rt->light.ratio = 0.6;
+	rt->light.ratio = 0.6f;
 
 	t_object	*objs;
 	objs = NULL;

@@ -12,7 +12,7 @@
 
 #include "../minirt_bonus.h"
 
-static bool	in_range(double val, double min, double max)
+static bool	in_range(float val, float min, float max)
 {
 	return (val >= min && val <= max);
 }
@@ -36,7 +36,7 @@ t_vector	parse_vector(char *str)
 
 void	parse_camera(char **tokens, t_minirt *rt)
 {
-	double		fov_double;
+	float		fov_double;
 	t_vector	direction;
 
 	if (count_tokens(tokens) != 4)

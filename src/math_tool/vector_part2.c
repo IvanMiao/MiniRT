@@ -6,24 +6,24 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 01:42:45 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/21 22:18:31 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/09/05 01:06:53 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "math_tool.h"
 
 // calculate the length/module
-double	vector_length(t_vector v)
+float	vector_length(t_vector v)
 {
-	double	res;
+	float	res;
 
-	res = sqrt(v.x * v.x + v.y * v.y + v.z * v.z);
+	res = sqrtf(v.x * v.x + v.y * v.y + v.z * v.z);
 	return (res);
 }
 
-double	vector_length_sq(t_vector v)
+float	vector_length_sq(t_vector v)
 {
-	double	res;
+	float	res;
 
 	res = v.x * v.x + v.y * v.y + v.z * v.z;
 	return (res);
@@ -33,7 +33,7 @@ double	vector_length_sq(t_vector v)
 t_vector	vector_normalize(t_vector v)
 {
 	t_vector	res;
-	double		v_length;
+	float		v_length;
 
 	v_length = vector_length(v);
 	if (v_length == 0)
@@ -43,9 +43,9 @@ t_vector	vector_normalize(t_vector v)
 }
 
 // calculate the dot product of two vectors
-double	vector_dot(t_vector v1, t_vector v2)
+float	vector_dot(t_vector v1, t_vector v2)
 {
-	double	res;
+	float	res;
 
 	res = (v1.x * v2.x) + (v1.y * v2.y) + (v1.z * v2.z);
 	return (res);

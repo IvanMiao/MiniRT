@@ -58,7 +58,7 @@ void	parse_ambient(char **tokens, t_minirt *rt)
 	if (count_tokens(tokens) != 3)
 		ft_error("wrong elements");
 	rt->ambient.ratio = ft_atof(tokens[1]);
-	if (rt->ambient.ratio < 0.0 || rt->ambient.ratio > 1.0)
+	if (rt->ambient.ratio < 0.0f || rt->ambient.ratio > 1.0f)
 		ft_error("Ambient out of range");
 	rt->ambient.color = parse_color(tokens[2]);
 }
@@ -66,13 +66,13 @@ void	parse_ambient(char **tokens, t_minirt *rt)
 void	parse_light(char **tokens, t_minirt *rt)
 {
 	t_vector	position;
-	double		ratio;
+	float		ratio;
 
 	if (count_tokens(tokens) != 4 && count_tokens(tokens) != 3)
 		ft_error("wrong format of light");
 	position = parse_vector(tokens[1]);
 	ratio = ft_atof(tokens[2]);
-	if (ratio < 0.0 || ratio > 1.0)
+	if (ratio < 0.0f || ratio > 1.0f)
 		ft_error("Light ratio out of range");
 	rt->light.position = position;
 	rt->light.ratio = ratio;

@@ -6,12 +6,12 @@
 #    By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/11 21:57:02 by ymiao             #+#    #+#              #
-#    Updated: 2025/09/02 19:01:54 by ymiao            ###   ########.fr        #
+#    Updated: 2025/09/05 01:04:23 by ymiao            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC		= clang
-CFLAG	= -Wall -Werror -Wextra
+CFLAG	= -Wall -Werror -Wextra -O3
 
 NAME	= miniRT
 
@@ -72,7 +72,7 @@ bonus:
 	cd bonus && make
 
 $(NAME): $(OBJ)
-	$(CC) $(CFLAG) $(OBJ) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -O3 -o $(NAME)
+	$(CC) $(CFLAG) $(OBJ) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@mkdir -p $(dir $@)

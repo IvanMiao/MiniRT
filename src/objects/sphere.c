@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 18:07:27 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/17 04:20:39 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/09/05 01:06:53 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,25 +20,33 @@
  * @return	If the ray intersects the sphere, 
  * 			it returns the smallest positive 't', representing the distance 
  * 			from the ray's origin to the closest intersection point.
- * 			If no intersection, it returns -1.0.
+ * 			If no intersection, it returns -1.0f.
 */
-double	hit_sphere(const t_sphere *sp, const t_ray *ray)
+float	hit_sphere(const t_sphere *sp, const t_ray *ray)
 {
 	t_vector	oc;
-	double		a;
-	double		b;
-	double		c;
-	double		discriminant;
+	float		a;
+	float		b;
+	float		c;
+	float		discriminant;
 
 	oc = vector_sub(ray->origin, sp->center);
 	a = vector_dot(ray->direction, ray->direction);
-	b = 2.0 * vector_dot(oc, ray->direction);
+	b = 2.0f * vector_dot(oc, ray->direction);
 	c = vector_dot(oc, oc) - sp->radius * sp->radius;
 	discriminant = b * b - 4 * a * c;
 	if (discriminant < 0)
-		return (-1.0);
+		return (-1.0f);
 	else
-		return ((-b - sqrt(discriminant)) / (2.0 * a));
+	{
+		float t = (-b - sqrtf(discriminant)) / (2.0f * a);
+		if (t > EPSILON)
+			return (t);
+		t = (-b + sqrtf(discriminant)) / (2.0f * a);
+		if (t > EPSILON)
+			return (t);
+		return (-1.0f);
+	}
 }
 
 /**

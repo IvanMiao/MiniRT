@@ -6,13 +6,13 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 19:27:21 by jinhuang          #+#    #+#             */
-/*   Updated: 2025/08/31 03:00:43 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/09/05 01:06:53 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minirt.h"
 
-static bool	in_range(double val, double min, double max)
+static bool	in_range(float val, float min, float max)
 {
 	return (val >= min && val <= max);
 }
@@ -36,7 +36,7 @@ t_vector	parse_vector(char *str)
 
 void	parse_camera(char **tokens, t_minirt *rt)
 {
-	double	fov_double;
+	float	fov_float;
 
 	if (count_tokens(tokens) != 4)
 		ft_error("wrong elements");
@@ -44,9 +44,9 @@ void	parse_camera(char **tokens, t_minirt *rt)
 	rt->camera.direction = parse_vector(tokens[2]);
 	if (!is_normalized_vector(rt->camera.direction))
 		ft_error("Direction of camera should be normalized");
-	fov_double = ft_atof(tokens[3]);
-	if (!in_range(fov_double, 0, 180))
+	fov_float = ft_atof(tokens[3]);
+	if (!in_range(fov_float, 0, 180))
 		ft_error("FOV out of range");
-	rt->camera.fov = (int)fov_double;
+	rt->camera.fov = (int)fov_float;
 	setup_cam_coords(&rt->camera);
 }

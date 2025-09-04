@@ -6,13 +6,13 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 00:55:02 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/21 22:29:59 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/09/05 00:57:52 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "objects.h"
 
-static double	hit_obj(t_object *obj, t_ray *ray)
+static float	hit_obj(t_object *obj, t_ray *ray)
 {
 	if (obj->type == SPHERE)
 		return (hit_sphere((t_sphere *)obj->obj, ray));
@@ -41,7 +41,7 @@ t_hit_record	trace_ray(t_object *objs, t_ray *ray)
 {
 	t_hit_record	record;
 	t_object		*curr_obj;
-	double			t;
+	float			t;
 
 	record.hit = false;
 	record.t = INFINITY;
@@ -49,7 +49,7 @@ t_hit_record	trace_ray(t_object *objs, t_ray *ray)
 	while (curr_obj)
 	{
 		t = hit_obj(curr_obj, ray);
-		if (t > 1e-6 && t < record.t)
+		if (t > EPSILON && t < record.t)
 		{
 			record.hit = true;
 			record.t = t;

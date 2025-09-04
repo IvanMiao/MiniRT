@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 02:13:08 by ymiao             #+#    #+#             */
-/*   Updated: 2025/09/02 19:29:06 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/09/05 00:50:59 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 # include "../render/scene_bonus.h"
 # include <stdbool.h>
 
-# ifndef EPISILON
-#  define EPSILON 1e-6
+# ifndef EPSILON
+#  define EPSILON 1e-2f
 # endif
 
 typedef enum e_obj_type
@@ -32,8 +32,8 @@ typedef enum e_obj_type
 typedef struct s_sphere
 {
 	t_vector	center;
-	double		diameter;
-	double		radius;
+	float		diameter;
+	float		radius;
 	t_color		color;
 }	t_sphere;
 
@@ -48,8 +48,8 @@ typedef struct s_cylinder
 {
 	t_vector	center;
 	t_vector	normal;
-	double		diameter;
-	double		height;
+	float		diameter;
+	float		height;
 	t_color		color;
 }	t_cylinder;
 
@@ -57,8 +57,8 @@ typedef struct s_cone
 {
 	t_vector	center;
 	t_vector	normal;
-	double		height;
-	double		angle;
+	float		height;
+	float		angle;
 	t_color		color;
 }	t_cone;
 
@@ -75,7 +75,7 @@ typedef struct s_hit_record
 {
 	bool		hit;
 	t_object	*obj_ptr;
-	double		t;
+	float		t;
 	t_vector	point;
 	t_vector	normal;
 	t_color		obj_color;
@@ -85,35 +85,35 @@ typedef struct s_hit_record
 typedef struct s_cy_info
 {
 	t_vector	oc;
-	double		a;
-	double		b;
-	double		c;
-	double		discri;
-	double		radius;
+	float		a;
+	float		b;
+	float		c;
+	float		discri;
+	float		radius;
 	t_vector	normal;
 }	t_cy_info;
 
 typedef struct s_co_info
 {
-	double		a;
-	double		b;
-	double		c;
-	double		discr;
+	float		a;
+	float		b;
+	float		c;
+	float		discr;
 	t_vector	oc;
-	double		dv;
-	double		ocv;
+	float		dv;
+	float		ocv;
 }	t_co_info;
 
 // Calculate object hit/normal
-double			hit_sphere(const t_sphere *sp, const t_ray *ray);
+float hit_sphere(const t_sphere *sp, const t_ray *ray);
 t_vector		sphere_normal_at(t_sphere *sp, t_vector p);
 
-double			hit_plane(t_plane *plane, t_ray *ray);
+float hit_plane(t_plane *plane, t_ray *ray);
 
-double			hit_cylinder(t_cylinder *cy, t_ray *ray);
+float hit_cylinder(t_cylinder *cy, t_ray *ray);
 t_vector		cylinder_normal_at(t_cylinder *cy, t_vector point);
 
-double			hit_cone(t_cone *co, t_ray *ray);
+float hit_cone(t_cone *co, t_ray *ray);
 t_vector		cone_normal_at(t_cone *co, t_vector point);
 
 // Stores hit stats

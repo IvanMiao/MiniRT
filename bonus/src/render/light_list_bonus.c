@@ -12,7 +12,7 @@
 
 #include "../minirt_bonus.h"
 
-t_light	*light_lstnew(t_vector position, double ratio, t_color color)
+t_light	*light_lstnew(t_vector position, float ratio, t_color color)
 {
 	t_light	*new_light;
 
