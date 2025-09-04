@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 20:36:39 by ymiao             #+#    #+#             */
-/*   Updated: 2025/09/05 01:06:53 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/09/05 01:19:40 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static float	hit_caps(t_cylinder *cy, t_ray *ray, t_cy_info *info)
 	return (t2);
 }
 
-float hit_cylinder(t_cylinder *cy, t_ray *ray)
+float	hit_cylinder(t_cylinder *cy, t_ray *ray)
 {
 	t_cy_info	info;
 	float		side_t;

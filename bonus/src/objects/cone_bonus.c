@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 20:19:26 by jinhuang          #+#    #+#             */
-/*   Updated: 2025/09/05 01:06:53 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/09/05 01:20:56 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	fill_co_info(t_cone *co, t_ray *ray, t_co_info *info)
 	info->discr = info->b * info->b - 4 * info->a * info->c;
 }
 
-static float hit_cone_body(t_cone *co, t_ray *ray)
+static float	hit_cone_body(t_cone *co, t_ray *ray)
 {
 	float		t1;
 	float		t2;
@@ -54,7 +54,7 @@ static float hit_cone_body(t_cone *co, t_ray *ray)
 	return (t2);
 }
 
-static float hit_cone_cap(t_cone *co, t_ray *ray)
+static float	hit_cone_cap(t_cone *co, t_ray *ray)
 {
 	t_plane		cap;
 	t_vector	base;
@@ -77,7 +77,7 @@ static float hit_cone_cap(t_cone *co, t_ray *ray)
 	return (-1.0f);
 }
 
-float hit_cone(t_cone *co, t_ray *ray)
+float	hit_cone(t_cone *co, t_ray *ray)
 {
 	float	t_body;
 	float	t_cap;

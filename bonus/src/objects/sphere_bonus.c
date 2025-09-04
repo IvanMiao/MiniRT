@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 18:07:27 by ymiao             #+#    #+#             */
-/*   Updated: 2025/09/05 01:06:53 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/09/05 01:21:51 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
  * 			from the ray's origin to the closest intersection point.
  * 			If no intersection, it returns -1.0f.
 */
-float hit_sphere(const t_sphere *sp, const t_ray *ray)
+float	hit_sphere(const t_sphere *sp, const t_ray *ray)
 {
 	t_vector	oc;
 	float		a;

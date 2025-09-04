@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 02:13:08 by ymiao             #+#    #+#             */
-/*   Updated: 2025/09/05 00:50:59 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/09/05 01:21:28 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,15 +105,15 @@ typedef struct s_co_info
 }	t_co_info;
 
 // Calculate object hit/normal
-float hit_sphere(const t_sphere *sp, const t_ray *ray);
+float			hit_sphere(const t_sphere *sp, const t_ray *ray);
 t_vector		sphere_normal_at(t_sphere *sp, t_vector p);
 
-float hit_plane(t_plane *plane, t_ray *ray);
+float			hit_plane(t_plane *plane, t_ray *ray);
 
-float hit_cylinder(t_cylinder *cy, t_ray *ray);
+float			hit_cylinder(t_cylinder *cy, t_ray *ray);
 t_vector		cylinder_normal_at(t_cylinder *cy, t_vector point);
 
-float hit_cone(t_cone *co, t_ray *ray);
+float			hit_cone(t_cone *co, t_ray *ray);
 t_vector		cone_normal_at(t_cone *co, t_vector point);
 
 // Stores hit stats
