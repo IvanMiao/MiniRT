@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 23:12:07 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/29 17:29:36 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/09/05 04:06:48 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,15 @@
 t_ray	gen_cam_ray(t_camera *camera, int x, int y)
 {
 	t_ray		ray;
+	float		rand_nb;
 	float		screen_x;
 	float		screen_y;
 	t_vector	screen_point;
 
-	screen_x = (2.0f * (x + 0.5f) / WIDTH - 1.0f) * camera->half_width;
-	screen_y = -(2.0f * (y + 0.5f) / HEIGHT - 1.0f) * camera->half_height;
+	rand_nb = (float)rand() / ((float)RAND_MAX + 1.0f);
+	screen_x = (2.0f * (x + rand_nb) / WIDTH - 1.0f) * camera->half_width;
+	rand_nb = (float)rand() / ((float)RAND_MAX + 1.0f);
+	screen_y = -(2.0f * (y + rand_nb) / HEIGHT - 1.0f) * camera->half_height;
 	screen_point = camera->viewpoint;
 	screen_point = vector_add(screen_point, vector_mult(camera->u, screen_x));
 	screen_point = vector_add(screen_point, vector_mult(camera->v, screen_y));
