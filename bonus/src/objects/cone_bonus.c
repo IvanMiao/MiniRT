@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 20:19:26 by jinhuang          #+#    #+#             */
-/*   Updated: 2025/09/05 01:20:56 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/09/05 01:51:38 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,27 @@ float	hit_cone(t_cone *co, t_ray *ray)
 	return (t_cap);
 }
 
+static t_vector	cone_normal_2(t_cone *co, t_vector oc, t_vector v, float m)
+{
+	t_vector	radial;
+	t_vector	unit_radial;
+	float		cos_angle;
+	float		sin_angle;
+	t_vector	normal;
+
+	radial = vector_sub(oc, vector_mult(v, m));
+	if (vector_length_sq(radial) < EPSILON * EPSILON)
+		return (vector_init(1, 0, 0));
+	unit_radial = vector_normalize(radial);
+	cos_angle = cosf(co->angle);
+	sin_angle = sinf(co->angle);
+	normal = vector_add(
+		vector_mult(unit_radial, sin_angle),
+		vector_mult(v, -cos_angle)
+	);
+	return (vector_normalize(normal));
+}
+
 t_vector	cone_normal_at(t_cone *co, t_vector point)
 {
 	t_vector	v;
@@ -103,8 +124,10 @@ t_vector	cone_normal_at(t_cone *co, t_vector point)
 	if (fabsf(m - co->height) < EPSILON)
 		return (v);
 	k = tanf(co->angle);
+	if (m < EPSILON)
+		return (cone_normal_2(co, oc, v, m));
 	normal = vector_sub(oc, vector_mult(v, m * (1 + k * k)));
-	if (vector_length_sq(normal) < EPSILON)
-		return (vector_mult(v, -1));
+	// if (vector_length_sq(normal) < EPSILON)
+	// 	return (vector_mult(v, -1));
 	return (vector_normalize(normal));
 }

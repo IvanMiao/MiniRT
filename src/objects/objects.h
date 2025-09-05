@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 02:13:08 by ymiao             #+#    #+#             */
-/*   Updated: 2025/09/05 01:06:53 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/09/05 01:51:49 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <stdbool.h>
 
 # ifndef EPSILON
-#  define EPSILON 1e-3f
+#  define EPSILON 1e-2f
 # endif
 
 typedef enum e_obj_type

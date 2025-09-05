@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 00:55:02 by ymiao             #+#    #+#             */
-/*   Updated: 2025/09/02 19:21:49 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/09/05 01:35:09 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ t_hit_record	trace_ray(t_object *objs, t_ray *ray)
 	while (curr_obj)
 	{
 		t = hit_obj(curr_obj, ray);
-		if (t > 1e-6 && t < record.t)
+		if (t > 1e-2f && t < record.t)
 		{
 			record.hit = true;
 			record.t = t;

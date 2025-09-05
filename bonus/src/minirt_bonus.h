@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/12 16:56:13 by ymiao             #+#    #+#             */
-/*   Updated: 2025/09/05 01:06:53 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/09/05 01:53:17 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,10 @@
 # define ACL_ERROR "Scene must have exactly one ambient light(A), \
 one camera(C), and at least one light(L)"
 
-# define EPSILON 1e-2f
-# define SAMPELS_PER_PIXEL 2
+# ifndef EPSILON
+#  define EPSILON 1e-2f
+# endif
+# define SAMPELS_PER_PIXEL 32
 # define SHININESS 64.0f
 
 typedef struct s_img
