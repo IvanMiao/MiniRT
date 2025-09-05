@@ -6,11 +6,12 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/12 00:19:30 by ymiao             #+#    #+#             */
-/*   Updated: 2025/09/02 19:23:59 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/09/05 07:42:50 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt_bonus.h"
+#include "render/render_cuda.h"
 
 /*
 void print_color(const char *name, t_color color)
@@ -112,12 +113,24 @@ static void	init_minirt(t_minirt *rt)
 	init_event(rt);
 }
 
+static bool check_cuda_flag(int argc, char **argv)
+{
+	if (argc == 3 && strcmp(argv[2], "--cuda") == 0)
+	{
+		printf("CUDA rendering enabled.\n");
+		return (true);
+	}
+	return (false);
+}
+
 int	main(int argc, char **argv)
 {
 	t_minirt	rt;
+	bool		use_cuda;
 
-	if (argc != 2)
-		ft_error("input error");
+	if (argc < 2 || argc > 3)
+		ft_error("Usage: ./miniRT <scene.rt> [--cuda]");
+	use_cuda = check_cuda_flag(argc, argv);
 	rt.object = NULL;
 	rt.light = NULL;
 	rt.a_count = 0;
@@ -127,6 +140,17 @@ int	main(int argc, char **argv)
 	// print_rt_status(&rt);
 	// print_objects(rt.object);
 	init_minirt(&rt);
-	render(&rt);
+	if (use_cuda)
+	{
+		printf("GPU CUDA rendering enabled.\n");
+		render_with_cuda(&rt);
+		mlx_put_image_to_window(rt.mlx, rt.mlx_win, rt.img.img, 0, 0);
+		mlx_loop(rt.mlx);
+	}
+	else
+	{
+		printf("CPU rendering enabled.\n");
+		render(&rt);
+	}
 	return (0);
 }

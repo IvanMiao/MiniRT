@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 01:57:04 by ymiao             #+#    #+#             */
-/*   Updated: 2025/08/22 20:49:21 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/09/05 04:32:46 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,17 @@ t_object	*obj_lstlsat(t_object *lst)
 	return (curr);
 }
 
-void	obj_lstadd_back(t_object **lst, t_object *new)
+void	obj_lstadd_back(t_object **lst, t_object *new_obj)
 {
 	t_object	*last;
 
-	if (!lst || !new)
+	if (!lst || !new_obj)
 		return ;
 	if (!*lst)
 	{
-		*lst = new;
+		*lst = new_obj;
 		return ;
 	}
 	last = obj_lstlsat(*lst);
-	last->next = new;
+	last->next = new_obj;
 }

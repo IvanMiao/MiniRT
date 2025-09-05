@@ -6,11 +6,12 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/12 00:19:30 by ymiao             #+#    #+#             */
-/*   Updated: 2025/09/01 18:47:58 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/09/05 05:59:49 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+#include "render/render_cuda.h"
 
 /*
 void print_color(const char *name, t_color color)
@@ -102,6 +103,50 @@ void print_objects(t_object *obj_list)
 }
 */
 
+/*
+static void	prepare_gpu(t_minirt *rt, t_minirt_gpu *host, t_minirt_gpu *device)
+{
+	t_object	*curr;
+
+	host->ambient = rt->ambient;
+	host->camera = rt->camera;
+	host->light = rt->light;
+
+	host->num_sp = 0;
+	host->num_pl = 0;
+	host->num_cy = 0;
+
+	curr = rt->object;
+	while (curr)
+	{
+		if (curr->type == SPHERE) host->num_sp++;
+		else if (curr->type == PLANE) host->num_pl++;
+		else if (curr->type == CYLINDER) host->num_cy++;
+		curr = curr->next;
+	}
+	t_sphere* spheres_h = mem_manager(MALLOC, sizeof(t_sphere) * host->num_sp, NULL);
+	t_plane* planes_h = mem_manager(MALLOC, sizeof(t_plane) * host->num_pl, NULL);
+	t_cylinder* cylinders_h = mem_manager(MALLOC, sizeof(t_cylinder) * host->num_cy, NULL);
+
+	int sp_idx = 0, pl_idx = 0, cy_idx = 0;
+	curr = rt->object;
+	while (curr)
+	{
+		if (curr->type == SPHERE) spheres_h[sp_idx++] = *(t_sphere*)curr->obj;
+		if (curr->type == PLANE) planes_h[pl_idx++] = *(t_plane*)curr->obj;
+		if (curr->type == CYLINDER) cylinders_h[cy_idx++] = *(t_cylinder*)curr->obj;
+		curr = curr->next;
+	}
+	CUDA_CHECK(cudaMemcpy(device->spheres, spheres_h, sizeof(t_sphere) * host->num_sp, cudaMemcpyHostToDevice));
+	CUDA_CHECK(cudaMemcpy(device->planes, planes_h, sizeof(t_plane) * host->num_pl, cudaMemcpyHostToDevice));
+	CUDA_CHECK(cudaMemcpy(device->cylinders, cylinders_h, sizeof(t_cylinder) * host->num_cy, cudaMemcpyHostToDevice));
+
+	mem_manager(FREE, 0, spheres_h);
+	mem_manager(FREE, 0, planes_h);
+	mem_manager(FREE, 0, cylinders_h);
+}
+*/
+
 static void	init_minirt(t_minirt *rt)
 {
 	rt->mlx = mlx_init();
@@ -112,12 +157,24 @@ static void	init_minirt(t_minirt *rt)
 	init_event(rt);
 }
 
+static bool check_cuda_flag(int argc, char **argv)
+{
+	if (argc == 3 && strcmp(argv[2], "--cuda") == 0)
+	{
+		printf("CUDA rendering enabled.\n");
+		return (true);
+	}
+	return (false);
+}
+
 int	main(int argc, char **argv)
 {
 	t_minirt	rt;
+	bool		use_cuda;
 
-	if (argc != 2)
-		ft_error("input error");
+	if (argc < 2 || argc > 3)
+		ft_error("Usage: ./miniRT <scene.rt> [--cuda]");
+	use_cuda = check_cuda_flag(argc, argv);
 	rt.object = NULL;
 	rt.a_count = 0;
 	rt.c_count = 0;
@@ -126,6 +183,17 @@ int	main(int argc, char **argv)
 	// print_rt_status(&rt);
 	// print_objects(rt.object);
 	init_minirt(&rt);
-	render(&rt);
+	if (use_cuda)
+	{
+		printf("GPU CUDA rendering enabled.\n");
+		render_with_cuda(&rt);
+		mlx_put_image_to_window(rt.mlx, rt.mlx_win, rt.img.img, 0, 0);
+		mlx_loop(rt.mlx);
+	}
+	else
+	{
+		printf("CPU rendering enabled.\n");
+		render(&rt);
+	}
 	return (0);
 }

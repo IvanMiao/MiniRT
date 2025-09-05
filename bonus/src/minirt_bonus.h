@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/12 16:56:13 by ymiao             #+#    #+#             */
-/*   Updated: 2025/09/05 01:53:17 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/09/05 06:43:14 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,24 @@ typedef struct s_minirt
 	int			c_count;
 	int			l_count;
 }	t_minirt;
+
+typedef struct s_minirt_gpu
+{
+	t_ambient	ambient;
+	t_camera	camera;
+	void		*lights;  // 指向 t_light_gpu 数组
+	
+	t_sphere	*spheres;
+	t_plane		*planes;
+	t_cylinder	*cylinders;
+	t_cone		*cones;
+
+	int			num_sp;
+	int			num_pl;
+	int			num_cy;
+	int			num_co;
+	int			num_lights;
+}	t_minirt_gpu;
 
 //event
 void	init_event(t_minirt *rt);

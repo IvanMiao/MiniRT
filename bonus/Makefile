@@ -6,12 +6,15 @@
 #    By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/11 21:57:02 by ymiao             #+#    #+#              #
-#    Updated: 2025/09/05 01:05:30 by ymiao            ###   ########.fr        #
+#    Updated: 2025/09/05 06:55:39 by ymiao            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC		= clang
 CFLAG	= -Wall -Werror -Wextra -O3
+
+NVCC	= nvcc
+NVFLAGS = -O3 -arch=sm_75
 
 NAME	= miniRT_bonus
 
@@ -50,11 +53,22 @@ SRC		= main_bonus.c \
 			utils/get_next_line_bonus.c \
 			utils/get_next_line_utils_bonus.c
 
+SRC_CU	= render/render_cuda.cu
+
 OBJ_DIR	= obj/
 OBJ		= $(addprefix $(OBJ_DIR),$(SRC:.c=.o))
+OBJ_CU	= $(addprefix $(OBJ_DIR),$(SRC_CU:.cu=.o))
+
+CUDA_LIB_NAME = libcuda_render.a
+CUDA_LIB = $(OBJ_DIR)$(CUDA_LIB_NAME)
 
 MLX_URL	= https://cdn.intra.42.fr/document/document/34994/minilibx-linux.tgz
 MLX_TAR	= mlx.tar.gz
+
+MLX_LIBS = -Lmlx_linux -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz
+CUDA_RUNTIME_LIBS = -lcudart
+MY_LIBS = -L$(OBJ_DIR) -lcuda_render
+INCLUDES = -I/usr/include -Imlx_linux -I$(SRC_DIR)
 
 all : check_mlx $(NAME)
 
@@ -70,12 +84,19 @@ check_mlx:
 		rm -f ../$(MLX_TAR); \
 	fi
 
-$(NAME): $(OBJ)
-	$(CC) $(CFLAG) $(OBJ) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
+$(NAME): $(OBJ) $(CUDA_LIB)
+	$(CC) $(CFLAG) -o $(NAME) $(OBJ) $(MLX_LIBS) $(MY_LIBS) $(CUDA_RUNTIME_LIBS)
+
+$(CUDA_LIB): $(OBJ_CU)
+	$(NVCC) $(NVFLAGS) -lib -o $@ $(OBJ_CU)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAG) -I/usr/include -Imlx_linux -c $< -o $@
+
+$(OBJ_DIR)%.o: $(SRC_DIR)%.cu
+	@mkdir -p $(dir $@)
+	$(NVCC) $(NVFLAGS) $(INCLUDES) -c $< -o $@
 
 clean :
 	rm -rf $(OBJ_DIR)

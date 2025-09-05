@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 02:13:08 by ymiao             #+#    #+#             */
-/*   Updated: 2025/09/05 01:51:49 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/09/05 05:11:37 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,9 @@ typedef struct s_hit_record
 	t_vector	point;
 	t_vector	normal;
 	t_color		obj_color;
+
+	t_obj_type	type;
+	int			obj_idx;
 }	t_hit_record;
 
 // helper struct, just for cylinder.c
@@ -98,6 +101,6 @@ t_hit_record	trace_ray(t_object *objs, t_ray *ray);
 // object linked list
 t_object		*obj_lstnew(void *obj, t_obj_type type, t_color color);
 t_object		*obj_lstlsat(t_object *lst);
-void			obj_lstadd_back(t_object **lst, t_object *new);
+void			obj_lstadd_back(t_object **lst, t_object *new_obj);
 
 #endif

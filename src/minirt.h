@@ -63,6 +63,21 @@ typedef struct s_minirt
 	int			l_count;
 }	t_minirt;
 
+typedef struct s_minirt_gpu
+{
+	t_ambient	ambient;
+	t_camera	camera;
+	t_light		light;
+	
+	t_sphere	*spheres;
+	t_plane		*planes;
+	t_cylinder	*cylinders;
+
+	int			num_sp;
+	int			num_pl;
+	int			num_cy;
+}	t_minirt_gpu;
+
 //event
 void	init_event(t_minirt *rt);
 

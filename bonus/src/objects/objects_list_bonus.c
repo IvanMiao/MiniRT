@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 01:57:04 by ymiao             #+#    #+#             */
-/*   Updated: 2025/09/02 19:22:09 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/09/05 07:39:03 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 
 t_object	*obj_lstnew(void *obj, t_obj_type type, t_color color)
 {
-	t_object	*new;
+	t_object	*new_obj;
 
-	new = (t_object *)mem_manager(MALLOC, sizeof(t_object), NULL);
-	new->obj = obj;
-	new->type = type;
-	new->color = color;
-	new->next = NULL;
-	return (new);
+	new_obj = (t_object *)mem_manager(MALLOC, sizeof(t_object), NULL);
+	new_obj->obj = obj;
+	new_obj->type = type;
+	new_obj->color = color;
+	new_obj->next = NULL;
+	return (new_obj);
 }
 
 t_object	*obj_lstlsat(t_object *lst)
@@ -37,17 +37,17 @@ t_object	*obj_lstlsat(t_object *lst)
 	return (curr);
 }
 
-void	obj_lstadd_back(t_object **lst, t_object *new)
+void	obj_lstadd_back(t_object **lst, t_object *new_obj)
 {
 	t_object	*last;
 
-	if (!lst || !new)
+	if (!lst || !new_obj)
 		return ;
 	if (!*lst)
 	{
-		*lst = new;
+		*lst = new_obj;
 		return ;
 	}
 	last = obj_lstlsat(*lst);
-	last->next = new;
+	last->next = new_obj;
 }
