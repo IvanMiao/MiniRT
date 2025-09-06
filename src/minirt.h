@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/12 16:56:13 by ymiao             #+#    #+#             */
-/*   Updated: 2025/09/05 01:06:53 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/09/06 19:24:24 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 # include "parsing/parsing.h"
 # include "objects/objects.h"
 # include "render/scene.h"
+# include "render/opencl_render.h"
 # include "utils/utils.h"
 
 # define ACL_ERROR "Scene must have exactly one ambient light(A), \
@@ -50,17 +51,18 @@ typedef struct s_img
 
 typedef struct s_minirt
 {
-	void		*mlx;
-	void		*mlx_win;
-	t_img		img;
-	t_ambient	ambient;
-	t_camera	camera;
-	t_light		light;
-	t_object	*object;
+	void			*mlx;
+	void			*mlx_win;
+	t_img			img;
+	t_ambient		ambient;
+	t_camera		camera;
+	t_light			light;
+	t_object		*object;
+	t_opencl_ctx	opencl_ctx;
 
-	int			a_count;
-	int			c_count;
-	int			l_count;
+	int				a_count;
+	int				c_count;
+	int				l_count;
 }	t_minirt;
 
 //event
@@ -72,6 +74,7 @@ void	render(t_minirt *rt);
 // render - camera projection
 void	setup_cam_coords(t_camera *camera);
 t_ray	gen_cam_ray(t_camera *camera, int x, int y);
+t_ray	gen_cam_ray_msaa(t_camera *camera, int x, int y, double offset_x, double offset_y);
 
 // render - calculate shadows
 bool	is_in_shadow(t_object *objs, t_vector hit_point, t_vector light_pos);

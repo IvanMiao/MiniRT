@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/12 16:33:28 by ymiao             #+#    #+#             */
-/*   Updated: 2025/09/05 01:06:52 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/09/06 19:17:52 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,18 @@
 # define MATH_TOOL_H
 
 # include <math.h>
-# define WIDTH 1200
-# define HEIGHT 900
+# include <stdlib.h>
+# include <time.h>
+# define WIDTH 1600
+# define HEIGHT 1200
+
+// MSAA settings - default value, can be overridden
+# ifndef MSAA_SAMPLES
+#  define MSAA_SAMPLES 256
+# endif
+
+// Global variable for runtime MSAA configuration
+extern int g_msaa_samples;
 
 # ifndef M_PI
 #  define M_PI 3.14159265358979323846
@@ -49,6 +59,10 @@ float		vector_length_sq(t_vector v);
 t_vector	vector_normalize(t_vector v);
 float		vector_dot(t_vector v1, t_vector v2);
 t_vector	vector_cross(t_vector v1, t_vector v2);
+
+// Random number generation for MSAA
+double		random_double(void);
+double		random_double_range(double min, double max);
 
 t_color		color_init(int r, int g, int b);
 t_color		color_init_d(float r, float g, float b);

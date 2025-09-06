@@ -6,7 +6,7 @@
 /*   By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/12 00:19:30 by ymiao             #+#    #+#             */
-/*   Updated: 2025/09/01 18:47:58 by ymiao            ###   ########.fr       */
+/*   Updated: 2025/09/04 21:24:29 by ymiao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,13 @@ static void	init_minirt(t_minirt *rt)
 	rt->img.img = mlx_new_image(rt->mlx, WIDTH, HEIGHT);
 	rt->img.addr = mlx_get_data_addr(rt->img.img,
 			&rt->img.bits_per_pixel, &rt->img.line_length, &rt->img.endian);
+	
+	// Initialize OpenCL
+	printf("Initializing OpenCL...\n");
+	if (!init_opencl(&rt->opencl_ctx)) {
+		printf("OpenCL initialization failed, will use CPU rendering\n");
+	}
+	
 	init_event(rt);
 }
 
@@ -122,10 +129,14 @@ int	main(int argc, char **argv)
 	rt.a_count = 0;
 	rt.c_count = 0;
 	rt.l_count = 0;
+	memset(&rt.opencl_ctx, 0, sizeof(t_opencl_ctx));
 	loading_file(argv[1], &rt);
 	// print_rt_status(&rt);
 	// print_objects(rt.object);
 	init_minirt(&rt);
 	render(&rt);
+	
+	// Cleanup
+	cleanup_opencl(&rt.opencl_ctx);
 	return (0);
 }

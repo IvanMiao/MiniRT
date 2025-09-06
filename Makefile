@@ -6,7 +6,7 @@
 #    By: ymiao <ymiao@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/11 21:57:02 by ymiao             #+#    #+#              #
-#    Updated: 2025/09/05 01:04:23 by ymiao            ###   ########.fr        #
+#    Updated: 2025/09/06 19:24:34 by ymiao            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ SRC_DIR	= src/
 SRC		= main.c \
 			math_tool/vector_part1.c math_tool/vector_part2.c \
 			math_tool/color.c \
+			math_tool/random.c \
 			objects/objects_list.c \
 			objects/sphere.c \
 			objects/plane.c \
@@ -36,6 +37,7 @@ SRC		= main.c \
 			render/shadow.c \
 			render/all_lights.c \
 			render/render.c \
+			render/opencl_render.c \
 			utils/mem_manager.c \
 			utils/ft_split.c \
 			utils/ft_split_space.c \
@@ -72,7 +74,7 @@ bonus:
 	cd bonus && make
 
 $(NAME): $(OBJ)
-	$(CC) $(CFLAG) $(OBJ) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
+	$(CC) $(CFLAG) $(OBJ) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -L/tmp -lOpenCL -O3 -o $(NAME)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@mkdir -p $(dir $@)
